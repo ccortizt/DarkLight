@@ -11,6 +11,8 @@ public class DarkPlayerController : MonoBehaviour
     bool isInCoolDown;
     float flashCoolDownCount;
 
+    Rigidbody rb;
+
 
     void Start()
     {
