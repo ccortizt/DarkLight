@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DarkPlayerController : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class DarkPlayerController : MonoBehaviour
     bool isInCoolDown;
     float flashCoolDownCount;
 
-    float moveSpeed =5;
+    float moveSpeed = 6;
+    float teleportEnergy = 5;
+
 
     Rigidbody rb;
 
@@ -26,6 +29,13 @@ public class DarkPlayerController : MonoBehaviour
 
     void Update()
     {
+
+
+        if (isInCoolDown)
+            GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/SkillPanel/Teleport").GetComponent<Image>().color = Color.grey;
+        else
+            GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/SkillPanel/Teleport").GetComponent<Image>().color = Color.green;
+
 
         if (flashCoolDownCount > 0 && isInCoolDown)
         {
@@ -43,11 +53,13 @@ public class DarkPlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
             {
                 transform.position = transform.position - teleportDistance * transform.right;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
                 SetCoolDown();
             }
             else
             {
                 rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
+                GetComponent<PlayerEnergyController>().DecreaseEnergy();
             }
 
 
@@ -59,11 +71,13 @@ public class DarkPlayerController : MonoBehaviour
             {
 
                 transform.position = transform.position + teleportDistance * transform.right;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
                 SetCoolDown();
             }
             else
             {
                 rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
+                GetComponent<PlayerEnergyController>().DecreaseEnergy();
             }
 
 
@@ -74,11 +88,13 @@ public class DarkPlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
             {
                 transform.position = transform.position + teleportDistance * transform.forward;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
                 SetCoolDown();
             }
             else
             {
                 rb.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
+                GetComponent<PlayerEnergyController>().DecreaseEnergy();
             }
 
 
@@ -89,11 +105,13 @@ public class DarkPlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
             {
                 transform.position = transform.position - teleportDistance * transform.forward;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
                 SetCoolDown();
             }
             else
             {
                 rb.MovePosition(transform.position - transform.forward * Time.deltaTime * moveSpeed);
+                GetComponent<PlayerEnergyController>().DecreaseEnergy();
             }
 
         }

@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class PlayerEnergyController : MonoBehaviour {
 
 
-    private int energyLevel;
-    private int initialEnergyLevel = 100;
+    private float energyLevel;
+    private float initialEnergyLevel = 100;
 
     private Image energyBar;
 
 	void Start () {
 
-        energyBar = GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/EneryPanel/Panel/Energy").GetComponent<Image>();
+        energyBar = GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/EnergyPanel/Panel/Energy").GetComponent<Image>();
         energyLevel = initialEnergyLevel;
 	}
 
@@ -30,7 +30,7 @@ public class PlayerEnergyController : MonoBehaviour {
         }
     }
 
-    public void DecreaseEnergy(int quantity)
+    public void DecreaseEnergy(float quantity = 0.1f)
     {
         if (energyLevel > 0)
         {
@@ -47,7 +47,7 @@ public class PlayerEnergyController : MonoBehaviour {
 
     }
 
-    public int GetEnergyLevel()
+    public float GetEnergyLevel()
     {
         return energyLevel;
     }
