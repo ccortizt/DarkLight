@@ -17,7 +17,7 @@ public class PlayerEnergyController : MonoBehaviour {
         energyLevel = initialEnergyLevel;
 	}
 
-    public void AddEnergy(int quantity)
+    public void AddEnergy(float quantity)
     {
         if (energyLevel < initialEnergyLevel)
         {
