@@ -30,7 +30,7 @@ public class PlayerEnergyController : MonoBehaviour {
         }
     }
 
-    public void DecreaseEnergy(float quantity = 0.1f)
+    public void DecreaseEnergy(float quantity = 0.08f)
     {
         if (energyLevel > 0)
         {

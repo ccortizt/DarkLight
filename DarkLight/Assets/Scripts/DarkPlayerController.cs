@@ -12,7 +12,7 @@ public class DarkPlayerController : MonoBehaviour
     bool isInCoolDown;
     float flashCoolDownCount;
 
-    float moveSpeed = 6;
+    float moveSpeed = 7;
     float teleportEnergy = 5;
 
 
