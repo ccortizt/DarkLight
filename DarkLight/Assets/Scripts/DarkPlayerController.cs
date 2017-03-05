@@ -46,75 +46,79 @@ public class DarkPlayerController : MonoBehaviour
             isInCoolDown = false;
         }
 
-
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (GetComponent<PlayerEnergyController>().GetEnergyLevel() > 0)
         {
-
-            if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.position = transform.position - teleportDistance * transform.right;
-                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                SetCoolDown();
+
+                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
+                {
+                    transform.position = transform.position - teleportDistance * transform.right;
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
+                    SetCoolDown();
+                }
+                else
+                {
+                    rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                }
+
+
             }
-            else
+
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
-                GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
+                {
+
+                    transform.position = transform.position + teleportDistance * transform.right;
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
+                    SetCoolDown();
+                }
+                else
+                {
+                    rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                }
+
+
             }
 
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
+                {
+                    transform.position = transform.position + teleportDistance * transform.forward;
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
+                    SetCoolDown();
+                }
+                else
+                {
+                    rb.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                }
 
+
+            }
+
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
+                {
+                    transform.position = transform.position - teleportDistance * transform.forward;
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
+                    SetCoolDown();
+                }
+                else
+                {
+                    rb.MovePosition(transform.position - transform.forward * Time.deltaTime * moveSpeed);
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                }
+
+            }
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
-            {
 
-                transform.position = transform.position + teleportDistance * transform.right;
-                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                SetCoolDown();
-            }
-            else
-            {
-                rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
-                GetComponent<PlayerEnergyController>().DecreaseEnergy();
-            }
-
-
-        }
-
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
-            {
-                transform.position = transform.position + teleportDistance * transform.forward;
-                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                SetCoolDown();
-            }
-            else
-            {
-                rb.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
-                GetComponent<PlayerEnergyController>().DecreaseEnergy();
-            }
-
-
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
-            {
-                transform.position = transform.position - teleportDistance * transform.forward;
-                GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                SetCoolDown();
-            }
-            else
-            {
-                rb.MovePosition(transform.position - transform.forward * Time.deltaTime * moveSpeed);
-                GetComponent<PlayerEnergyController>().DecreaseEnergy();
-            }
-
-        }
 
     }
 
