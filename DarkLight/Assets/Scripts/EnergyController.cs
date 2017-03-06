@@ -11,12 +11,15 @@ public class EnergyController: MonoBehaviour{
         if (coll.gameObject.name.Contains("Player"))
         {
             coll.gameObject.GetComponent<PlayerEnergyController>().AddEnergy(energy);
-            Debug.Log(transform.position);
-            var eff = (GameObject)Instantiate(effect, transform.position, transform.rotation);
-            Debug.Log(eff.gameObject.transform.position);
-            Destroy(eff, 2);    
-            Destroy(gameObject);
-            
+            InstantiateTakenEnergyEffect();            
         }
+    }
+
+    private void InstantiateTakenEnergyEffect()
+    {
+        var eff = (GameObject)Instantiate(effect, transform.position, transform.rotation);
+
+        Destroy(eff, 2);
+        Destroy(gameObject);
     }
 }

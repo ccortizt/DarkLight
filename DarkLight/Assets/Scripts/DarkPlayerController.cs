@@ -15,12 +15,17 @@ public class DarkPlayerController : MonoBehaviour
     float moveSpeed = 7;
     float teleportEnergy = 5;
 
+    private float energyConsume;
+    private float defaultEnergyConsume = 0.08f;
+    private float debuffEnergyConsume = 0.8f;
+
 
     Rigidbody rb;
 
 
     void Start()
     {
+        energyConsume = defaultEnergyConsume;
         rb = GetComponent<Rigidbody>();
         flashCoolDownCount = 0;
         teleportDistance = 4;
@@ -60,7 +65,7 @@ public class DarkPlayerController : MonoBehaviour
                 else
                 {
                     rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
                 }
 
 
@@ -78,7 +83,7 @@ public class DarkPlayerController : MonoBehaviour
                 else
                 {
                     rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
                 }
 
 
@@ -95,7 +100,7 @@ public class DarkPlayerController : MonoBehaviour
                 else
                 {
                     rb.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
                 }
 
 
@@ -112,7 +117,7 @@ public class DarkPlayerController : MonoBehaviour
                 else
                 {
                     rb.MovePosition(transform.position - transform.forward * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy();
+                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
                 }
 
             }
@@ -127,6 +132,11 @@ public class DarkPlayerController : MonoBehaviour
         flashCoolDownCount = flashCoolDown;
         isInCoolDown = true;
 
+    }
+
+    public void PunishmentEnergyConsumption()
+    {
+        GetComponent<PlayerEnergyController>().DecreaseEnergy(GetComponent<PlayerEnergyController>().GetEnergyLevel() / 100 * 75);
     }
 
 }
