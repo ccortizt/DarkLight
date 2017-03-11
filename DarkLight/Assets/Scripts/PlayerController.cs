@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DarkPlayerController : MonoBehaviour
-{
-
+public class PlayerController: MonoBehaviour{
+ 
     int teleportDistance;
 
     float flashCoolDown = 3;
@@ -38,8 +37,10 @@ public class DarkPlayerController : MonoBehaviour
 
         if (isInCoolDown)
             GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.gray;
+        //GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/SkillPanel/Teleport").GetComponent<Image>().color = Color.gray;
         else
             GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.green;
+            //GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/SkillPanel/Teleport").GetComponent<Image>().color = Color.green;
 
 
         if (flashCoolDownCount > 0 && isInCoolDown)
@@ -122,9 +123,7 @@ public class DarkPlayerController : MonoBehaviour
 
             }
         }
-
-
-
+        
     }
 
     private void SetCoolDown()
@@ -140,3 +139,4 @@ public class DarkPlayerController : MonoBehaviour
     }
 
 }
+
