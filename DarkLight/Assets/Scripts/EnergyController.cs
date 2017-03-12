@@ -8,7 +8,7 @@ public class EnergyController: MonoBehaviour{
 
     public void OnCollisionEnter(Collision coll)
     {
-        if (coll.gameObject.name.Contains("Player"))
+        if (coll.gameObject.tag.Equals("Player"))
         {
             coll.gameObject.GetComponent<PlayerEnergyController>().AddEnergy(energy);
             InstantiateTakenEnergyEffect();            
@@ -19,7 +19,7 @@ public class EnergyController: MonoBehaviour{
     {
         var eff = (GameObject)Instantiate(effect, transform.position, transform.rotation);
 
-        Destroy(eff, 2);
+        Destroy(eff, 3);
         Destroy(gameObject);
     }
 }
