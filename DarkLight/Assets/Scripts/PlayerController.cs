@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController: MonoBehaviour{
- 
-    int teleportDistance;
+public class PlayerController : MonoBehaviour
+{
 
-    float flashCoolDown = 3;
-    bool isInCoolDown;
-    float flashCoolDownCount;
+    public int teleportDistance;
+    float teleportCoolDown = 3;
+    bool isTeleportInCooldown;
+    float teleportCooldownCount;
+
+    float maxDistanceTeleportedX = 4.2f;
 
     float moveSpeed = 7;
-    float teleportEnergy = 5;
+    private float moveVelocity;
 
+    public float jumpHeight;
+
+    private bool isPlayerGrounded;
+    public LayerMask whatIsGround;
+    float heightOffset = 0.25f;
+    public float groundedHeight = 0.5f;
+
+
+    private float teleportEnergy = 5;
     private float energyConsume;
     private float defaultEnergyConsume = 0.08f;
     private float debuffEnergyConsume = 0.8f;
@@ -21,121 +32,127 @@ public class PlayerController: MonoBehaviour{
 
     Rigidbody rb;
 
-
     void Start()
     {
+
         energyConsume = defaultEnergyConsume;
         rb = GetComponent<Rigidbody>();
-        flashCoolDownCount = 0;
-        teleportDistance = 4;
-        isInCoolDown = false;
+        teleportCooldownCount = 0;
+        isTeleportInCooldown = false;
+
+    }
+
+    void FixedUpdate()
+    {
+
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, whatIsGround))
+        {
+            isPlayerGrounded = true;
+        }
+        else
+        {
+            isPlayerGrounded = false;
+        }
+
     }
 
     void Update()
     {
 
+        moveVelocity = 0f;
 
-        if (isInCoolDown)
-            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.gray;
-        //GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/SkillPanel/Teleport").GetComponent<Image>().color = Color.gray;
-        else
-            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.green;
-            //GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/SkillPanel/Teleport").GetComponent<Image>().color = Color.green;
+        SetTeleportCooldownIndicator();
 
+        UpdateTeleportCooldown();
 
-        if (flashCoolDownCount > 0 && isInCoolDown)
+        if (PlayerHasEnoughEnergy())
         {
-            flashCoolDownCount -= Time.deltaTime;
-        }
-        else if (flashCoolDownCount <= 0)
-        {
-            isInCoolDown = false;
-        }
-
-        if (GetComponent<PlayerEnergyController>().GetEnergyLevel() > 0)
-        {
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-
-                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
-                {
-                    transform.position = transform.position - teleportDistance * transform.right;
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                    SetCoolDown();
-                }
-                else
-                {
-                    rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
-                }
-
-
-            }
-
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
-                {
-
-                    transform.position = transform.position + teleportDistance * transform.right;
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                    SetCoolDown();
-                }
-                else
-                {
-                    rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
-                }
-
-
+                moveVelocity = moveSpeed;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
             }
 
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
-                {
-                    transform.position = transform.position + teleportDistance * transform.forward;
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                    SetCoolDown();
-                }
-                else
-                {
-                    rb.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
-                }
-
-
+                moveVelocity = -moveSpeed;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
             }
 
-            if (Input.GetKey(KeyCode.DownArrow))
+            GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
+
+            if (Input.GetKey(KeyCode.UpArrow) && isPlayerGrounded)
             {
-                if (Input.GetKey(KeyCode.Space) && !isInCoolDown)
+
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpHeight, 0f);
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+
+            }
+
+
+            if (Input.GetKey(KeyCode.Space) && !isTeleportInCooldown)
+            {
+                //Debug.Log(transform.position.x + rb.velocity.normalized.x * teleportDistance);
+                if (!PlayerExceedLimits())
                 {
-                    transform.position = transform.position - teleportDistance * transform.forward;
+
+                    if (rb.velocity.normalized.y < 0)
+                    {
+                        transform.position += new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;
+                    }
+                    else
+                    {
+                        transform.position += new Vector3(rb.velocity.normalized.x, rb.velocity.normalized.y, 0f) * teleportDistance;
+                    }
+
+                    rb.velocity = Vector3.zero;
+
                     GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
                     SetCoolDown();
-                }
-                else
-                {
-                    rb.MovePosition(transform.position - transform.forward * Time.deltaTime * moveSpeed);
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+
                 }
 
             }
+
         }
-        
+
     }
 
     private void SetCoolDown()
     {
-        flashCoolDownCount = flashCoolDown;
-        isInCoolDown = true;
+        teleportCooldownCount = teleportCoolDown;
+        isTeleportInCooldown = true;
 
     }
-
-    public void PunishmentEnergyConsumption()
+    
+    private void UpdateTeleportCooldown()
     {
-        GetComponent<PlayerEnergyController>().DecreaseEnergy(GetComponent<PlayerEnergyController>().GetEnergyLevel() / 100 * 75);
+        if (teleportCooldownCount > 0 && isTeleportInCooldown)
+        {
+            teleportCooldownCount -= Time.deltaTime;
+        }
+        else if (teleportCooldownCount <= 0)
+        {
+            isTeleportInCooldown = false;
+        }
+    }
+
+    private void SetTeleportCooldownIndicator()
+    {
+        if (isTeleportInCooldown)
+            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.gray;
+        else
+            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.green;
+    }
+
+    private bool PlayerHasEnoughEnergy()
+    {
+        return GetComponent<PlayerEnergyController>().GetEnergyLevel() > 0;
+    }
+
+    private bool PlayerExceedLimits()
+    {
+        return transform.position.x + rb.velocity.normalized.x * teleportDistance < -maxDistanceTeleportedX || transform.position.x + rb.velocity.normalized.x * teleportDistance > maxDistanceTeleportedX;
     }
 
 }
