@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     bool isTeleportInCooldown;
     float teleportCooldownCount;
 
-    float maxDistanceTeleportedX = 4.2f;
+    float maxDistanceTeleportedX = 4.65f;
 
     float moveSpeed = 7;
     private float moveVelocity;
