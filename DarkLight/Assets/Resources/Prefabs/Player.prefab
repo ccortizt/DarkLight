@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114381651922482434}
   - component: {fileID: 114429137467081688}
   - component: {fileID: 114614144172621226}
+  - component: {fileID: 114073576763815828}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -175,6 +176,18 @@ Light:
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114073576763815828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942985068590736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2f8f0ce485f274eb4279f165769c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIsCrushed: 0
 --- !u!114 &114381651922482434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,7 +223,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportDistance: 4
   jumpHeight: 8
+  canJump: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  destroyWall:
+    serializedVersion: 2
+    m_Bits: 512
   groundedHeight: 0.5

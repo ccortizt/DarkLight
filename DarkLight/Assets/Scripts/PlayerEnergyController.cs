@@ -10,8 +10,7 @@ public class PlayerEnergyController : MonoBehaviour {
     private float initialEnergyLevel = 100;
 
     private Image energyBar;
-
-    
+     
 
 	void Start () {
 

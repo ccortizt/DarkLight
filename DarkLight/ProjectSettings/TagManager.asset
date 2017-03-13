@@ -8,6 +8,8 @@ TagManager:
   - Teleport
   - Multiple
   - Spark
+  - Message
+  - Restart
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
+  - CrushWall
+  - Wall
   - 
   - 
   - 

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +17,11 @@ public class PlayerController : MonoBehaviour
     private float moveVelocity;
 
     public float jumpHeight;
+    public bool canJump;
 
     private bool isPlayerGrounded;
     public LayerMask whatIsGround;
+    public LayerMask destroyWall;
     float heightOffset = 0.25f;
     public float groundedHeight = 0.5f;
 
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        canJump = true;
         energyConsume = defaultEnergyConsume;
         rb = GetComponent<Rigidbody>();
         teleportCooldownCount = 0;
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, whatIsGround))
+        if (CheckPlayerIsGrounded())
         {
             isPlayerGrounded = true;
         }
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
             GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
 
-            if (Input.GetKey(KeyCode.UpArrow) && isPlayerGrounded)
+            if (Input.GetKey(KeyCode.UpArrow) && isPlayerGrounded && canJump)
             {
 
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpHeight, 0f);
@@ -106,6 +108,8 @@ public class PlayerController : MonoBehaviour
                     }
 
                     rb.velocity = Vector3.zero;
+                    canJump = false;
+                    StartCoroutine(SetCanJump());
 
                     GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
                     SetCoolDown();
@@ -114,6 +118,11 @@ public class PlayerController : MonoBehaviour
 
             }
 
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "Sin energia";
+            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
         }
 
     }
@@ -153,6 +162,31 @@ public class PlayerController : MonoBehaviour
     private bool PlayerExceedLimits()
     {
         return transform.position.x + rb.velocity.normalized.x * teleportDistance < -maxDistanceTeleportedX || transform.position.x + rb.velocity.normalized.x * teleportDistance > maxDistanceTeleportedX;
+    }
+
+    public IEnumerator SetCanJump()
+    {
+        yield return new WaitForFixedUpdate();
+        canJump = true;
+
+    }
+
+    public bool CheckPlayerIsGrounded()
+    {
+
+        Vector3 leftSide = new Vector3(transform.position.x - 0.3f, transform.position.y + heightOffset, transform.position.z);
+        Vector3 rightSide = new Vector3(transform.position.x + 0.3f, transform.position.y + heightOffset, transform.position.z);
+        Vector3 midSide = new Vector3(transform.position.x , transform.position.y + heightOffset, transform.position.z);
+
+        if (Physics.Raycast(leftSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(rightSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(midSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(leftSide, Vector3.down, groundedHeight + heightOffset, destroyWall) || Physics.Raycast(rightSide, Vector3.down, groundedHeight + heightOffset, destroyWall) || Physics.Raycast(midSide, Vector3.down, groundedHeight + heightOffset, destroyWall))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
 }

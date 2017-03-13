@@ -5,17 +5,70 @@ using UnityEngine.UI;
 public class PlayerCollisionController: MonoBehaviour{
 
 
-    string punishmentMesagge = "No parece ser buena idea intentar cruzar los muros externos";
-    public void OnCollisionEnter(Collision coll)
+    public bool playerIsCrushed;
+
+    private bool staticWallChecked;
+    private bool dynamicWallChecked;
+
+    void Start()
     {
-        if (coll.gameObject.name.Equals("DarkGround"))
+        staticWallChecked = false;
+        dynamicWallChecked = false;
+    }
+    void Update()
+    {
+        if (CheckCrushed())
         {
-            GetComponent<DarkPlayerController>().PunishmentEnergyConsumption();
-            GameObject.Find("PlayerHUD").transform.FindChild("VisionPanel/Text").gameObject.GetComponent<Text>().text = punishmentMesagge;
-            //bad idea
+            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "Aplastado!";
+            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);// = true;
+            GetComponent<PlayerController>().enabled = false;
+        }
+    }
+   
+
+    public void OnCollisionStay(Collision coll)
+    {
+        if (coll.gameObject.layer==10)
+        {
+            if (coll.impulse.x != 0)
+            {
+                staticWallChecked = true;
+            }          
+
+            //Debug.Log("wall" + coll.impulse);
         }
 
-       
-       
+        if (coll.gameObject.layer == 9)
+        {
+            if (coll.impulse.x != 0)
+            {
+                dynamicWallChecked = true;
+            }
+            
+            //Debug.Log("dynamicwall"+ coll.impulse);
+        }
+
+    }
+
+    void OnCollisionExit(Collision coll)
+    {
+        
+        if (coll.gameObject.layer == 10)
+        {
+            //Debug.Log("notwall");
+            staticWallChecked = false;
+        }
+
+        if (coll.gameObject.layer == 9)
+        {
+            //Debug.Log("notdynamicwall");
+            dynamicWallChecked = false;
+        }
+
+    }
+
+
+    public bool CheckCrushed(){
+        return dynamicWallChecked && staticWallChecked;
     }
 }
