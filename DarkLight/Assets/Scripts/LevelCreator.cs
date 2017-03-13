@@ -6,6 +6,10 @@ public class LevelCreator: MonoBehaviour{
     public GameObject prefabPlatform;
     public GameObject prefabDoublePlatform;
     public GameObject prefabDestroyPlatform;
+    public GameObject prefabDoubleDestroyPlatform;
+    public GameObject prefabEnergy;
+    public GameObject prefabEnemy;
+    public GameObject prefabDoor;
 
     private float minBaseValueX = 4.35f;
     private float maxBaseValueX = 4.55f;
@@ -29,7 +33,22 @@ public class LevelCreator: MonoBehaviour{
     {
         InitializePlatformMap();
         FillMap();
+        AddEnergyPrefabs();
+        PutDoor();
         StartCoroutine(DestroyMap());
+    }
+
+    private void PutDoor()
+    {
+        Instantiate(prefabDoor, new Vector3(Random.Range(0, 10) - RandomPositionX(), 55.9f, 0f),Quaternion.identity);
+    }
+
+    private void AddEnergyPrefabs()
+    {
+        for (int i = 7; i < 50; i += (int)Random.Range(3,6)*2)
+        {
+            Instantiate(prefabEnergy, new Vector3(Random.Range(0,10) - RandomPositionX(), i + RandomPositionY(),0f), Quaternion.identity);
+        }
     }
 
     private void InitializePlatformMap()

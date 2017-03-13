@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnergyController: MonoBehaviour{
 
     public GameObject effect;
-    float energy = 15;
+    float energy = 10;
 
     public void OnCollisionEnter(Collision coll)
     {

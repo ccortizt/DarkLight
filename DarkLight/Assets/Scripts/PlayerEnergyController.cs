@@ -14,7 +14,6 @@ public class PlayerEnergyController : MonoBehaviour {
 
 	void Start () {
 
-        //energyBar = GameObject.Find("PlayerHUD").transform.FindChild("LifePanel/EnergyPanel/Panel/Energy").GetComponent<Image>();
         energyBar = GameObject.FindGameObjectWithTag("EnergyBar").GetComponent<Image>();
         energyLevel = initialEnergyLevel;
 	}

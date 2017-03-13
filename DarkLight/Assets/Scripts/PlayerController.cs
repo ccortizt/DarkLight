@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 
     public int teleportDistance;
-    float teleportCoolDown = 3;
+    float teleportCoolDown = 5;
     bool isTeleportInCooldown;
     float teleportCooldownCount;
 
@@ -26,10 +26,10 @@ public class PlayerController : MonoBehaviour
     public float groundedHeight = 0.5f;
 
 
-    private float teleportEnergy = 5;
+    private float teleportEnergy = 7f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.08f;
-    private float debuffEnergyConsume = 0.8f;
+    private float defaultEnergyConsume = 0.1f;
+    //private float debuffEnergyConsume = 0.8f;
 
 
     Rigidbody rb;

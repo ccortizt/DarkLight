@@ -48,6 +48,11 @@ public class PlayerCollisionController: MonoBehaviour{
             //Debug.Log("dynamicwall"+ coll.impulse);
         }
 
+        if (coll.gameObject.name.Equals("Door"))
+        {
+            Debug.Log("dooooor");
+        }
+
     }
 
     void OnCollisionExit(Collision coll)
