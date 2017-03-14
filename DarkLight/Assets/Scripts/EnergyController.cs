@@ -17,7 +17,7 @@ public class EnergyController: MonoBehaviour{
 
     private void InstantiateTakenEnergyEffect()
     {
-        var eff = (GameObject)Instantiate(effect, transform.position, transform.rotation);
+        var eff = (GameObject)Instantiate(effect, transform.position, Quaternion.Euler(-90,0,0));
 
         Destroy(eff, 3);
         Destroy(gameObject);
