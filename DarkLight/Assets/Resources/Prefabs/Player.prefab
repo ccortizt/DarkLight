@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportDistance: 4
-  jumpHeight: 8
+  jumpHeight: 6.5
   canJump: 0
   whatIsGround:
     serializedVersion: 2
@@ -230,4 +230,5 @@ MonoBehaviour:
   destroyWall:
     serializedVersion: 2
     m_Bits: 512
-  groundedHeight: 0.5
+  heightOffset: 0.25
+  groundedHeight: 0.25

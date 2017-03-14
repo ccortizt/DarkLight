@@ -35,7 +35,7 @@ public class LevelCreator: MonoBehaviour{
         FillMap();
         AddEnergyPrefabs();
         PutDoor();
-        StartCoroutine(DestroyMap());
+        //StartCoroutine(DestroyMap());
     }
 
     private void PutDoor()

@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     private bool isPlayerGrounded;
     public LayerMask whatIsGround;
     public LayerMask destroyWall;
-    float heightOffset = 0.25f;
-    public float groundedHeight = 0.5f;
+    public float heightOffset = 0.25f;
+    public float groundedHeight = 0.25f; //0.5f
 
 
     private float teleportEnergy = 7f;
@@ -94,25 +94,34 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space) && !isTeleportInCooldown)
             {
-                //Debug.Log(transform.position.x + rb.velocity.normalized.x * teleportDistance);
+                
+                Vector3 aux;
                 if (!PlayerExceedLimits())
                 {
-
+                    
+                    //Debug.Log("initial: "+transform.position);
+                    
                     if (rb.velocity.normalized.y < 0)
                     {
-                        transform.position += new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;
+                        aux = new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;     
+                        transform.position += new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;                        
                     }
                     else
                     {
+                        aux = new Vector3(rb.velocity.normalized.x, rb.velocity.normalized.y, 0f) * teleportDistance;
                         transform.position += new Vector3(rb.velocity.normalized.x, rb.velocity.normalized.y, 0f) * teleportDistance;
                     }
+                    //Debug.Log("final: " + transform.position);                    
 
-                    rb.velocity = Vector3.zero;
-                    canJump = false;
-                    StartCoroutine(SetCanJump());
+                    if (aux != Vector3.zero)
+                    {
+                        rb.velocity = Vector3.zero;
+                        canJump = false;
+                        StartCoroutine(SetCanJump());
 
-                    GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
-                    SetCoolDown();
+                        GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
+                        SetCoolDown();
+                    }                    
 
                 }
 
@@ -166,7 +175,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator SetCanJump()
     {
-        yield return new WaitForFixedUpdate();
+        //yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.5f);
         canJump = true;
 
     }
