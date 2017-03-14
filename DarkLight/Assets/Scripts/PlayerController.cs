@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
 
-    public int teleportDistance;
-    float teleportCoolDown = 5;
+    public float teleportDistance;
+    float teleportCoolDown = 4;
     bool isTeleportInCooldown;
     float teleportCooldownCount;
 
-    float maxDistanceTeleportedX = 4.65f;
+    float maxDistanceTeleportedX = 4.75f;
 
-    float moveSpeed = 7;
+    float moveSpeed = 6;
     private float moveVelocity;
 
     public float jumpHeight;
@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour
     public float groundedHeight = 0.25f; //0.5f
 
 
-    private float teleportEnergy = 7f;
+    private float teleportEnergy = 3.5f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.1f;
+    private float defaultEnergyConsume = 0.09f;
     //private float debuffEnergyConsume = 0.8f;
 
 
@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         teleportCooldownCount = 0;
         isTeleportInCooldown = false;
-
     }
 
     void FixedUpdate()
@@ -98,7 +97,6 @@ public class PlayerController : MonoBehaviour
                 Vector3 aux;
                 if (!PlayerExceedLimits())
                 {
-                    
                     //Debug.Log("initial: "+transform.position);
                     
                     if (rb.velocity.normalized.y < 0)
@@ -175,8 +173,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator SetCanJump()
     {
-        //yield return new WaitForFixedUpdate();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForEndOfFrame();
         canJump = true;
 
     }

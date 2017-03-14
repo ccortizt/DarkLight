@@ -16,6 +16,7 @@ public class PlayerEnergyController : MonoBehaviour {
 
         energyBar = GameObject.FindGameObjectWithTag("EnergyBar").GetComponent<Image>();
         energyLevel = initialEnergyLevel;
+        UpdateEnergyBar();
 	}
 
     public void AddEnergy(float quantity)

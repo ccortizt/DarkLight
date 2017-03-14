@@ -18,6 +18,8 @@ public class LevelProgressController: MonoBehaviour{
         }
         else
         {
+            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "";
+            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
             Destroy(gameObject);
         }   
     }

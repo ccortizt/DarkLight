@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class DontDestroy: MonoBehaviour{
 
     private static bool hudExists;
@@ -14,6 +15,8 @@ public class DontDestroy: MonoBehaviour{
         }
         else
         {
+            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "";
+            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

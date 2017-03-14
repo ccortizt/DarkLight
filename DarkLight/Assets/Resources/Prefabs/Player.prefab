@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c7d67802ef59344a81a4213e30d0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportDistance: 4
+  teleportDistance: 2.5
   jumpHeight: 6.5
   canJump: 0
   whatIsGround:

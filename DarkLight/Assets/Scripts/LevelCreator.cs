@@ -26,43 +26,33 @@ public class LevelCreator: MonoBehaviour{
 
     private float waitDestroyTime = 3;
 
-    private bool[,] platformMap = new bool[50, 10];
-
-
     void Start()
     {
-        InitializePlatformMap();
+        
         FillMap();
         AddEnergyPrefabs();
         PutDoor();
-        //StartCoroutine(DestroyMap());
+        StartCoroutine(DestroyMap());
     }
 
     private void PutDoor()
     {
-        Instantiate(prefabDoor, new Vector3(Random.Range(0, 10) - RandomPositionX(), 55.9f, 0f),Quaternion.identity);
+        Instantiate(prefabDoor, new Vector3(Random.Range(0, 10) - RandomPositionX(), 55.3f, 0f),Quaternion.identity);
     }
 
     private void AddEnergyPrefabs()
     {
-        for (int i = 7; i < 50; i += (int)Random.Range(3,6)*2)
+        for (int i = 7; i < 50; i += (int)Random.Range(2,5)*2)
         {
             Instantiate(prefabEnergy, new Vector3(Random.Range(0,10) - RandomPositionX(), i + RandomPositionY(),0f), Quaternion.identity);
         }
-    }
-
-    private void InitializePlatformMap()
-    {
-        for (int i = 0; i < 50; i++)
-            for (int j = 0; j < 10; j++)
-                platformMap[i, j] = false;
     }
 
     private void FillMap()
     {
         int numberPlatformsY;
 
-        for (int i = 0; i < 50; i+=2)
+        for (int i = 0; i < 52; i+=2)
         {
             numberPlatformsY = RandomNumberPlatformAxisY();
             
