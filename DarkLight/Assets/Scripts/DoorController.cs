@@ -8,6 +8,7 @@ public class DoorController: MonoBehaviour{
          
          if (coll.gameObject.tag.Equals("Player"))
          {
+             Debug.Log("player up");
              GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().LevelUp();
              //transition nedeed
              SceneManager.LoadScene(0);

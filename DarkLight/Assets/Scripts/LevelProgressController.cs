@@ -4,22 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LevelProgressController: MonoBehaviour{
 
-    public int levelCount;
+    private int levelCount;
+    private static bool levelProgressExists;
 
     void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        if (!levelProgressExists)
+        {
+            levelProgressExists = true;
+            DontDestroyOnLoad(transform.gameObject);
+            levelCount = 1;
+            UpdateLevelIndicator();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }   
     }
 
-    void Start()
-    {
-        levelCount = 1;
-        UpdateLevelIndicator();
-    }
 
     public void LevelUp()
     {
-        levelCount++;
+        this.levelCount++;
         UpdateLevelIndicator();
 
     }
