@@ -231,4 +231,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   heightOffset: 0.25
-  groundedHeight: 0.25
+  groundedHeight: 0.26

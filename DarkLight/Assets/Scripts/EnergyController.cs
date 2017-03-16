@@ -4,7 +4,8 @@ using UnityEngine;
 public class EnergyController: MonoBehaviour{
 
     public GameObject effect;
-    float energy = 10;
+    private float particleEffectDuration = 1.5f;
+    float energy = 12;
 
     public void OnCollisionEnter(Collision coll)
     {
@@ -19,7 +20,7 @@ public class EnergyController: MonoBehaviour{
     {
         var eff = (GameObject)Instantiate(effect, transform.position, Quaternion.Euler(-90,0,0));
 
-        Destroy(eff, 3);
+        Destroy(eff, particleEffectDuration);
         Destroy(gameObject);
     }
 }

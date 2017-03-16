@@ -35,6 +35,7 @@ public class LevelProgressController: MonoBehaviour{
     private void UpdateLevelIndicator()
     {
         GameObject.FindGameObjectWithTag("Level").GetComponent<Text>().text = "Lv. " + levelCount;
+        GetComponent<LevelDifficultyController>().SetDifficultyProportions(levelCount);
     }
 
     public int GetLevel()

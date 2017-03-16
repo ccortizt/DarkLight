@@ -1,7 +1,7 @@
 ﻿
 using System.Collections;
 using UnityEngine;
-public class LevelCreator: MonoBehaviour{
+public class LevelCreator: MonoBehaviour {
     
     public GameObject prefabPlatform;
     public GameObject prefabDoublePlatform;
@@ -11,13 +11,16 @@ public class LevelCreator: MonoBehaviour{
     public GameObject prefabEnemy;
     public GameObject prefabDoor;
 
+    private int levelYSize = 52;
+    private int levelXSize = 10;
+
     private float minBaseValueX = 4.35f;
     private float maxBaseValueX = 4.55f;
 
-    private int minPlatformsPerY = 2;
-    private int maxPlatformsPerY = 6;
+    //private int minPlatformsPerY = 2;
+    //private int maxPlatformsPerY = 6;
 
-    //private float baseValueX = 4.5f;
+    private float yAxisDoorPosition = 55.3f;
 
     private float minBaseValueY = 0.4f;
     private float maxBaseValueY = 0.7f;
@@ -26,37 +29,61 @@ public class LevelCreator: MonoBehaviour{
 
     private float waitDestroyTime = 3;
 
+    int minEnergyRange;
+    int maxEnergyRange;
+    int minPlatformRange;
+    int maxPlatformRange;
+    int destroyWallPercentage;
+    float destroyWallVelocityProportion;
+
     void Start()
     {
-        
+        minEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinEnergyRange;
+        maxEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxEnergyRange;
+        minPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinPlatformRange;
+        maxPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxPlatformRange;
+        destroyWallPercentage = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallPercentage;
+            
         FillMap();
         AddEnergyPrefabs();
         PutDoor();
         StartCoroutine(DestroyMap());
     }
-
-    private void PutDoor()
-    {
-        Instantiate(prefabDoor, new Vector3(Random.Range(0, 10) - RandomPositionX(), 55.3f, 0f),Quaternion.identity);
-    }
+    
 
     private void AddEnergyPrefabs()
     {
-        for (int i = 7; i < 50; i += (int)Random.Range(2,5)*2)
+        int basePosY = 7;
+
+        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minEnergyRange,maxEnergyRange) * 2)
         {
-            Instantiate(prefabEnergy, new Vector3(Random.Range(0,10) - RandomPositionX(), i + RandomPositionY(),0f), Quaternion.identity);
+            Instantiate(prefabEnergy, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), i + RandomPositionY(), 0f), Quaternion.identity);
         }
+    }
+
+    public IEnumerator DestroyMap()
+    {
+        if (destroyWallPercentage != 0)
+        {
+            for (int i = 0; i < levelYSize; i += (2 * destroyWallPercentage))
+            {
+                yield return new WaitForSeconds(waitDestroyTime * destroyWallPercentage);
+                var p = (GameObject)Instantiate(prefabDestroyPlatform, new Vector3(RandomDestroyPlatformSide() * 10, i , 0), Quaternion.identity);
+                p.GetComponent<PlatformDestroyController>().SetProportion(destroyWallPercentage);
+            }
+        }
+        
     }
 
     private void FillMap()
     {
         int numberPlatformsY;
 
-        for (int i = 0; i < 52; i+=2)
+        for (int i = 0; i < levelYSize; i+=2)
         {
             numberPlatformsY = RandomNumberPlatformAxisY();
             
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < levelXSize; j++)
             {
                 if(Random.Range(0,10) < numberPlatformsY)
                     if(RandomPlatformSize())
@@ -68,13 +95,9 @@ public class LevelCreator: MonoBehaviour{
         }
     }
 
-    public IEnumerator DestroyMap()
+    private void PutDoor()
     {
-        for (int i = 1; i < 50; i+=2)
-        {
-            yield return new WaitForSeconds(waitDestroyTime);
-            Instantiate(prefabDestroyPlatform, new Vector3(RandomDestroyPlatformSide() * 10, i - 1f, 0), Quaternion.identity);
-        }
+        Instantiate(prefabDoor, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), yAxisDoorPosition, 0f), Quaternion.identity);
     }
 
     private float RandomPositionY()
@@ -89,7 +112,7 @@ public class LevelCreator: MonoBehaviour{
 
     private int RandomNumberPlatformAxisY()
     {
-        return Random.Range(minPlatformsPerY, maxPlatformsPerY);
+        return Random.Range(minPlatformRange, maxPlatformRange);
     }
 
     private bool RandomPlatformSize()

@@ -5,11 +5,13 @@ public class PlatformDestroyController: MonoBehaviour{
 
     public bool positiveSide;
 
-    private float proportion = 0.02f;
+    private float defaultProportion = 0.02f;
+    private float proportion;
 
     private bool stop;
     void Start()
     {
+        proportion = defaultProportion;
         stop = false;
         if (transform.position.x > 0)
         {
@@ -34,7 +36,7 @@ public class PlatformDestroyController: MonoBehaviour{
 
     private void CheckStop()
     {
-        if (transform.position.x >= -0.005 && transform.position.x <= 0.005)
+        if (transform.position.x >= -0.001 && transform.position.x <= 0.001)
         {
             stop = true;
         }
@@ -51,5 +53,10 @@ public class PlatformDestroyController: MonoBehaviour{
         {
             transform.position += new Vector3(proportion, 0, 0);
         }
+    }
+
+    public void SetProportion(float p)
+    {
+        proportion += proportion * p;
     }
 }

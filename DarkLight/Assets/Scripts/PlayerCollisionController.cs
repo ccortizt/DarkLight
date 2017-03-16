@@ -10,6 +10,9 @@ public class PlayerCollisionController: MonoBehaviour{
     private bool staticWallChecked;
     private bool dynamicWallChecked;
 
+    private int dynamicWallLayer = 9;
+    private int staticWallLayer = 10;
+
     void Start()
     {
         staticWallChecked = false;
@@ -28,29 +31,22 @@ public class PlayerCollisionController: MonoBehaviour{
 
     public void OnCollisionStay(Collision coll)
     {
-        if (coll.gameObject.layer==10)
+        if (coll.gameObject.layer == staticWallLayer)
         {
             if (coll.impulse.x != 0)
             {
                 staticWallChecked = true;
             }          
 
-            //Debug.Log("wall" + coll.impulse);
         }
 
-        if (coll.gameObject.layer == 9)
+        if (coll.gameObject.layer == dynamicWallLayer)
         {
             if (coll.impulse.x != 0)
             {
                 dynamicWallChecked = true;
             }
             
-            //Debug.Log("dynamicwall"+ coll.impulse);
-        }
-
-        if (coll.gameObject.name.Equals("Door"))
-        {
-            Debug.Log("dooooor");
         }
 
     }
@@ -58,15 +54,13 @@ public class PlayerCollisionController: MonoBehaviour{
     void OnCollisionExit(Collision coll)
     {
         
-        if (coll.gameObject.layer == 10)
-        {
-            //Debug.Log("notwall");
+        if (coll.gameObject.layer == staticWallLayer)
+        {   
             staticWallChecked = false;
         }
 
-        if (coll.gameObject.layer == 9)
+        if (coll.gameObject.layer == dynamicWallLayer)
         {
-            //Debug.Log("notdynamicwall");
             dynamicWallChecked = false;
         }
 

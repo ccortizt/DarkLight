@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    
+    float moveSpeed = 6;
+    private float moveVelocity;
 
     public float teleportDistance;
     float teleportCoolDown = 4;
@@ -13,9 +16,6 @@ public class PlayerController : MonoBehaviour
 
     float maxDistanceTeleportedX = 4.75f;
 
-    float moveSpeed = 6;
-    private float moveVelocity;
-
     public float jumpHeight;
     public bool canJump;
 
@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     public LayerMask destroyWall;
     public float heightOffset = 0.25f;
-    public float groundedHeight = 0.25f; //0.5f
+    public float groundedHeight = 0.26f; //0.5f
 
 
     private float teleportEnergy = 3.5f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.09f;
+    private float defaultEnergyConsume = 0.095f;
     //private float debuffEnergyConsume = 0.8f;
 
 
@@ -36,9 +36,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        canJump = true;
-        energyConsume = defaultEnergyConsume;
+
         rb = GetComponent<Rigidbody>();
+        energyConsume = defaultEnergyConsume;
+        canJump = true;
         teleportCooldownCount = 0;
         isTeleportInCooldown = false;
     }
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
             }
 
             GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
-
+            
             if (Input.GetKey(KeyCode.UpArrow) && isPlayerGrounded && canJump)
             {
 
@@ -95,10 +96,10 @@ public class PlayerController : MonoBehaviour
             {
                 
                 Vector3 aux;
+
                 if (!PlayerExceedLimits())
                 {
-                    //Debug.Log("initial: "+transform.position);
-                    
+                    //Debug.Log("initial: "+transform.position);                    
                     if (rb.velocity.normalized.y < 0)
                     {
                         aux = new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;     
@@ -128,8 +129,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "Sin energia";
-            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
+            EndGame();
         }
 
     }
@@ -138,7 +138,6 @@ public class PlayerController : MonoBehaviour
     {
         teleportCooldownCount = teleportCoolDown;
         isTeleportInCooldown = true;
-
     }
     
     private void UpdateTeleportCooldown()
@@ -194,6 +193,12 @@ public class PlayerController : MonoBehaviour
             return false;
         }
 
+    }
+
+    private void EndGame()
+    {
+        GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "Sin energia";
+        GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
     }
 
 }
