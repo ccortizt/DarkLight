@@ -28,3 +28,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+DarkLight/Temp/StagingArea/libs/armeabi-v7a/libunity.so
+DarkLight/Temp/StagingArea/libs/x86/libunity.so
+*.zip

@@ -11,6 +11,10 @@ TagManager:
   - Message
   - Restart
   - Level
+  - TeleportButton
+  - LeftButton
+  - RightButton
+  - UpButton
   layers:
   - Default
   - TransparentFX

@@ -19,5 +19,10 @@ public class DontDestroy: MonoBehaviour{
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
             Destroy(gameObject);
         }
+
+#if !UNITY_ANDROID
+        GameObject.Find("LeftController").SetActive(false);
+        GameObject.Find("RightController").SetActive(false);
+#endif
     }
 }

@@ -22,9 +22,7 @@ public class PlayerCollisionController: MonoBehaviour{
     {
         if (CheckCrushed())
         {
-            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "Aplastado!";
-            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);// = true;
-            GetComponent<PlayerController>().enabled = false;
+            EndGame("Fuiste Aplastado");
         }
     }
    
@@ -69,5 +67,12 @@ public class PlayerCollisionController: MonoBehaviour{
 
     public bool CheckCrushed(){
         return dynamicWallChecked && staticWallChecked;
+    }
+
+    public void EndGame(string endGameText)
+    {
+        GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText;
+        GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
+        GetComponent<PlayerController>().enabled = false;
     }
 }

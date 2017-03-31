@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
     private float defaultEnergyConsume = 0.095f;
     //private float debuffEnergyConsume = 0.8f;
 
+    public VirtualButton teleportButton;
+    public VirtualButton rightButton;
+    public VirtualButton leftButton;
+    public VirtualButton upButton;
+
 
     Rigidbody rb;
 
@@ -42,6 +47,20 @@ public class PlayerController : MonoBehaviour
         canJump = true;
         teleportCooldownCount = 0;
         isTeleportInCooldown = false;
+        try
+        {
+            teleportButton = GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>();
+            rightButton = GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>();
+            leftButton = GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>();
+            upButton = GameObject.FindGameObjectWithTag("UpButton").GetComponent<VirtualButton>();
+        }
+        catch (System.Exception e)
+        {
+            //GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "cant load joypad";
+        }
+        
+
+
     }
 
     void FixedUpdate()
@@ -69,6 +88,67 @@ public class PlayerController : MonoBehaviour
 
         if (PlayerHasEnoughEnergy())
         {
+
+#if UNITY_ANDROID
+            
+            if (rightButton.isPressed)
+            {
+                moveVelocity = moveSpeed;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+            }
+
+            if (leftButton.isPressed)
+            {
+                moveVelocity = -moveSpeed;
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+            }
+
+            GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
+
+            if (upButton.isPressed && isPlayerGrounded && canJump)
+            {
+
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpHeight, 0f);
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+
+            }
+
+
+            if (teleportButton.isPressed && !isTeleportInCooldown)
+            {
+
+                Vector3 aux;
+
+                if (!PlayerExceedLimits())
+                {
+                    //Debug.Log("initial: "+transform.position);                    
+                    if (rb.velocity.normalized.y < 0)
+                    {
+                        aux = new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;
+                        transform.position += new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;
+                    }
+                    else
+                    {
+                        aux = new Vector3(rb.velocity.normalized.x, rb.velocity.normalized.y, 0f) * teleportDistance;
+                        transform.position += new Vector3(rb.velocity.normalized.x, rb.velocity.normalized.y, 0f) * teleportDistance;
+                    }
+                    //Debug.Log("final: " + transform.position);                    
+
+                    if (aux != Vector3.zero)
+                    {
+                        rb.velocity = Vector3.zero;
+                        canJump = false;
+                        StartCoroutine(SetCanJump());
+
+                        GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
+                        SetCoolDown();
+                    }
+
+                }
+
+            }
+#else
+
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 moveVelocity = moveSpeed;
@@ -125,11 +205,11 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
-
+#endif
         }
         else
         {
-            EndGame();
+            GetComponent<PlayerCollisionController>().EndGame("Sin energía");
         }
 
     }
@@ -193,12 +273,6 @@ public class PlayerController : MonoBehaviour
             return false;
         }
 
-    }
-
-    private void EndGame()
-    {
-        GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "Sin energia";
-        GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
     }
 
 }
