@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 public class LevelProgressController: MonoBehaviour{
@@ -29,6 +29,10 @@ public class LevelProgressController: MonoBehaviour{
     {
         this.levelCount++;
         UpdateLevelIndicator();
+        GameObject.FindGameObjectWithTag("LeftButton").SetActive(false);
+        GameObject.FindGameObjectWithTag("RightButton").SetActive(false);
+        GameObject.FindGameObjectWithTag("UpButton").SetActive(false);
+        StartCoroutine(EnablePlayer());
 
     }
 
@@ -41,5 +45,14 @@ public class LevelProgressController: MonoBehaviour{
     public int GetLevel()
     {
         return levelCount;
+    }
+
+    private IEnumerator EnablePlayer()
+    {
+        yield return new WaitForSeconds(0.0001f);
+        GameObject.Find("ButtonsContainer").transform.FindChild("Left").gameObject.SetActive(true);
+        GameObject.Find("ButtonsContainer").transform.FindChild("Right").gameObject.SetActive(true);
+        GameObject.Find("ButtonsContainer").transform.FindChild("Up").gameObject.SetActive(true);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().AccessToJoyPad();
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     
-    float moveSpeed = 6;
+    public float moveSpeed = 6;
     private float moveVelocity;
 
     public float teleportDistance;
@@ -41,12 +41,20 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        
         rb = GetComponent<Rigidbody>();
         energyConsume = defaultEnergyConsume;
         canJump = true;
         teleportCooldownCount = 0;
         isTeleportInCooldown = false;
+        AccessToJoyPad();
+        
+
+
+    }
+
+    public void AccessToJoyPad()
+    {
         try
         {
             teleportButton = GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>();
@@ -56,11 +64,8 @@ public class PlayerController : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            //GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "cant load joypad";
+            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "cant load joypad";
         }
-        
-
-
     }
 
     void FixedUpdate()
@@ -104,7 +109,7 @@ public class PlayerController : MonoBehaviour
             }
 
             GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
-
+            
             if (upButton.isPressed && isPlayerGrounded && canJump)
             {
 
