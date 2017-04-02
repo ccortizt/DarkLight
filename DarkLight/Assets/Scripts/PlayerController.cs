@@ -39,17 +39,18 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
+
     void Start()
     {
-        
+
+        ResetButtons();
+
         rb = GetComponent<Rigidbody>();
         energyConsume = defaultEnergyConsume;
         canJump = true;
         teleportCooldownCount = 0;
         isTeleportInCooldown = false;
-        AccessToJoyPad();
-        
-
+        AccessToJoyPad();      
 
     }
 
@@ -278,6 +279,12 @@ public class PlayerController : MonoBehaviour
             return false;
         }
 
+    }
+
+    private void ResetButtons()
+    {
+        GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>().ButtonOff();
+        GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>().ButtonOff();
     }
 
 }

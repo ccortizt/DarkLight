@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LevelDifficultyController: MonoBehaviour{
 
-    int courrentlevelDifficulty;
-
     int minEnergyRange;
 
     public int MinEnergyRange

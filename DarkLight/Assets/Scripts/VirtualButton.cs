@@ -3,19 +3,27 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class VirtualButton : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class VirtualButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     private Image buttonImage;
     public bool isPressed;
 
-    public void OnStart()
+
+    public void Start()
+    {
+        isPressed = false;       
+    }
+
+    public void ButtonOff()
     {
         isPressed = false;
     }
-    public virtual void OnDrag(PointerEventData ped)
+
+    public void OnStart()
     {
-        OnPointerDown(ped);
-    }
+        isPressed = false;
+        
+    }   
 
     public virtual void OnPointerDown(PointerEventData ped)
     {

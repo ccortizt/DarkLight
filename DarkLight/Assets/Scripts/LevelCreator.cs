@@ -11,6 +11,8 @@ public class LevelCreator: MonoBehaviour {
     public GameObject prefabEnemy;
     public GameObject prefabDoor;
 
+   
+
     private int levelYSize = 52;
     private int levelXSize = 10;
 
@@ -37,7 +39,7 @@ public class LevelCreator: MonoBehaviour {
     float destroyWallVelocityProportion;
 
     void Start()
-    {
+    {        
         minEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinEnergyRange;
         maxEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxEnergyRange;
         minPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinPlatformRange;
@@ -127,6 +129,6 @@ public class LevelCreator: MonoBehaviour {
             return -1;
         } else 
             return 1;
-    }
+    }    
 
 }
