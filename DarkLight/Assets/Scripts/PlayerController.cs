@@ -11,12 +11,16 @@ public class PlayerController : MonoBehaviour
 
     public float teleportDistance;
     float teleportCoolDown = 4;
+    float teleportSparkCoolDown = 35;
     bool isTeleportInCooldown;
     float teleportCooldownCount;
+    bool isSparkInCooldown;
+    float sparkCooldownCount;
 
     float maxDistanceTeleportedX = 4.75f;
 
     public float jumpHeight;
+    public float escapeJumpHeight;
     public bool canJump;
 
     private bool isPlayerGrounded;
@@ -26,15 +30,18 @@ public class PlayerController : MonoBehaviour
     public float groundedHeight = 0.26f; //0.5f
 
 
-    private float teleportEnergy = 3.5f;
+    private float teleportEnergy = 3.8f;
+    private float sparkEscapeEnergy = 40f;
     private float energyConsume;
     private float defaultEnergyConsume = 0.095f;
     //private float debuffEnergyConsume = 0.8f;
 
     public VirtualButton teleportButton;
+    public VirtualButton escapeJumpButton;
     public VirtualButton rightButton;
     public VirtualButton leftButton;
     public VirtualButton upButton;
+    
 
 
     Rigidbody rb;
@@ -49,7 +56,9 @@ public class PlayerController : MonoBehaviour
         energyConsume = defaultEnergyConsume;
         canJump = true;
         teleportCooldownCount = 0;
+        sparkCooldownCount = 0;
         isTeleportInCooldown = false;
+        isSparkInCooldown = false;
         AccessToJoyPad();      
 
     }
@@ -59,13 +68,14 @@ public class PlayerController : MonoBehaviour
         try
         {
             teleportButton = GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>();
+            escapeJumpButton = GameObject.FindGameObjectWithTag("EscapeButton").GetComponent<VirtualButton>();
             rightButton = GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>();
             leftButton = GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>();
             upButton = GameObject.FindGameObjectWithTag("UpButton").GetComponent<VirtualButton>();
         }
         catch (System.Exception e)
         {
-            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "cant load joypad";
+            //GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "cant load joypad";
         }
     }
 
@@ -89,8 +99,10 @@ public class PlayerController : MonoBehaviour
         moveVelocity = 0f;
 
         SetTeleportCooldownIndicator();
-
+        SetSparkCooldownIndicator();
+        
         UpdateTeleportCooldown();
+        UpdateSparkCooldown();
 
         if (PlayerHasEnoughEnergy())
         {
@@ -153,6 +165,14 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+           
+            if (escapeJumpButton.isPressed && HasEnoughSparkEnergy() && !isSparkInCooldown)
+            {
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(sparkEscapeEnergy);
+                transform.position += new Vector3(0, escapeJumpHeight, 0);
+                SetSparkCoolDown();
+            }
+
 #else
 
             if (Input.GetKey(KeyCode.RightArrow))
@@ -211,13 +231,40 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+
+            if (Input.GetKeyDown(KeyCode.V) && HasEnoughSparkEnergy() && !isSparkInCooldown)
+            {
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(sparkEscapeEnergy);
+                transform.position += new Vector3(0, escapeJumpHeight, 0);
+                SetSparkCoolDown();
+            }
 #endif
+
         }
         else
         {
             GetComponent<PlayerCollisionController>().EndGame("Sin energía");
         }
 
+    }
+
+    private void UpdateSparkCooldown()
+    {
+        if (sparkCooldownCount > 0 && isSparkInCooldown)
+        {
+            sparkCooldownCount -= Time.deltaTime;
+        }
+        else if (sparkCooldownCount <= 0)
+        {
+            isSparkInCooldown = false;
+        }
+    }
+
+
+    private void SetSparkCoolDown()
+    {
+        sparkCooldownCount = teleportSparkCoolDown;
+        isSparkInCooldown = true;
     }
 
     private void SetCoolDown()
@@ -246,6 +293,19 @@ public class PlayerController : MonoBehaviour
             GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.green;
     }
 
+    private void SetSparkCooldownIndicator()
+    {
+        if (HasEnoughSparkEnergy() && !isSparkInCooldown)
+            GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = Color.yellow;
+        else
+            GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = Color.grey;
+    }
+
+    private bool HasEnoughSparkEnergy()
+    {
+        return GetComponent<PlayerEnergyController>().GetEnergyLevel() > 30;
+    }
+
     private bool PlayerHasEnoughEnergy()
     {
         return GetComponent<PlayerEnergyController>().GetEnergyLevel() > 0;
@@ -260,7 +320,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         canJump = true;
-
     }
 
     public bool CheckPlayerIsGrounded()
@@ -283,9 +342,17 @@ public class PlayerController : MonoBehaviour
 
     private void ResetButtons()
     {
-        GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>().ButtonOff();
-        GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>().ButtonOff();
+        try
+        {
+            GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>().ButtonOff();
+            GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>().ButtonOff();
+        }
+        catch (System.Exception e)
+        {
+        }
+        
     }
 
 }
+
 

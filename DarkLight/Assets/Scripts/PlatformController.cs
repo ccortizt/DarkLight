@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlatformController: MonoBehaviour{
 
     private bool isStable;
-    private float stabilityTime = 3.0f; 
+    private float stabilityTime = 3.0f;
+    public Material mat;
 
     void Start()
     {
@@ -56,9 +57,9 @@ public class PlatformController: MonoBehaviour{
 
     void OnCollisionEnter(Collision coll)
     {
-        if (coll.gameObject.name.Contains("Player"))
+        if (coll.gameObject.name.Contains("Player") && !isStable)
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.black;
+            gameObject.GetComponent<Renderer>().material = mat;
             Destroy(gameObject, stabilityTime);
         }
     }

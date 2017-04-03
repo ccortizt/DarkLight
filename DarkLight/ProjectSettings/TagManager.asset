@@ -15,6 +15,7 @@ TagManager:
   - LeftButton
   - RightButton
   - UpButton
+  - EscapeButton
   layers:
   - Default
   - TransparentFX
