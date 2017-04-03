@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlatformController: MonoBehaviour{
 
     private bool isStable;
-    private float stabilityTime = 3.0f;
+    private float stabilityTime = 2.5f;
     public Material mat;
 
     void Start()
@@ -27,31 +27,48 @@ public class PlatformController: MonoBehaviour{
     {
         if (lvl < 3)
         {
-            stabilityTime = 3f;
+            stabilityTime = 2.5f;
             return 97;
         }
 
         if (lvl >= 3 && lvl < 5)
         {
-            stabilityTime = 2.8f;
-            return 92;
+            stabilityTime = 2.2f;
+            return 86;
         }
 
         if (lvl >= 5 && lvl < 7)
         {
-            stabilityTime = 2.6f;
-            return 85;
+            stabilityTime = 2f;
+            return 74;
         }
 
         if (lvl >= 7 && lvl < 10)
         {
-            stabilityTime = 2f;
-            return 75;
+            stabilityTime = 1.7f;
+            return 66;
+        }
+
+        if (lvl >= 10 && lvl < 12)
+        {
+            stabilityTime = 1.2f;
+            return 52;
+        }
+
+        if (lvl >= 12 && lvl < 13)
+        {
+            stabilityTime = 0.8f;
+            return 38;
+        }
+        if (lvl >= 13 && lvl < 14)
+        {
+            stabilityTime = 0.5f;
+            return 25;
         }
         else
         {
-            stabilityTime = 1.5f;
-            return 62;
+            stabilityTime = 0.2f;
+            return 10;
         }
     }
 

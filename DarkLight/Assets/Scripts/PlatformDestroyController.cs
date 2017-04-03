@@ -5,7 +5,7 @@ public class PlatformDestroyController: MonoBehaviour{
 
     public bool positiveSide;
 
-    private float defaultProportion = 0.02f;
+    private float defaultProportion = 0.04f;
     private float proportion;
 
     private bool stop;
@@ -57,6 +57,6 @@ public class PlatformDestroyController: MonoBehaviour{
 
     public void SetProportion(float p)
     {
-        proportion += proportion * p;
+        proportion += defaultProportion * p;
     }
 }

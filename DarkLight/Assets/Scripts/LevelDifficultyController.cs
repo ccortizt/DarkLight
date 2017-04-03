@@ -41,12 +41,30 @@ public class LevelDifficultyController: MonoBehaviour{
         set { destroyWallPercentage = value; }
     }
 
+    float destroyWallWaitTime;
+
+    public float DestroyWallWaitTime
+    {
+        get { return destroyWallWaitTime; }
+        set { destroyWallWaitTime = value; }
+    }
+
     float destroyWallVelocityProportion;
 
     public float DestroyWallVelocityProportion
     {
         get { return destroyWallVelocityProportion; }
         set { destroyWallVelocityProportion = value; }
+    }
+
+
+
+    float platformSizePercentage;
+
+    public float PlatformSizePercentage
+    {
+        get { return platformSizePercentage; }
+        set { platformSizePercentage = value; }
     }
 
     int enemyProportion;
@@ -66,73 +84,140 @@ public class LevelDifficultyController: MonoBehaviour{
                 SetEnergyRange(0);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(0);
+                SetDestroyWallWaitTime(1);
                 SetDestroyWallVelocityProp(0);
+                SetPlatformSizePercentage(1);
                 
                 break;
             case 2:
                 SetEnergyRange(1);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(1);
-                SetDestroyWallVelocityProp(0);                
+                SetDestroyWallWaitTime(1);
+                SetDestroyWallVelocityProp(1);
+                SetPlatformSizePercentage(-1);
                 break;
             case 3:
                 SetEnergyRange(1);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(2);
-                SetDestroyWallVelocityProp(0);                
+                SetDestroyWallWaitTime(-1);
+                SetDestroyWallVelocityProp(1);
+                SetPlatformSizePercentage(2);
                 break;
             case 4:
                 SetEnergyRange(1);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(3);
-                SetDestroyWallVelocityProp(0);
+                SetDestroyWallWaitTime(-1);
+                SetDestroyWallVelocityProp(1);
+                SetPlatformSizePercentage(2);
                 break;
             case 5:
                 SetEnergyRange(0);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(4);
-                SetDestroyWallVelocityProp(0);
+                SetDestroyWallWaitTime(2);
+                SetDestroyWallVelocityProp(2);
+                SetPlatformSizePercentage(3);
                 break;
             case 6:
                 SetEnergyRange(1);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(4);
-                SetDestroyWallVelocityProp(0);
+                SetDestroyWallWaitTime(2);
+                SetDestroyWallVelocityProp(2);
+                SetPlatformSizePercentage(3);
                 //enemy
                 break;
             case 7:
                 SetEnergyRange(0);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
-                SetDestroyWallVelocityProp(1);
+                SetDestroyWallWaitTime(3);
+                SetDestroyWallVelocityProp(2);
+                SetPlatformSizePercentage(3);
                 //enemy
                 break;
             case 8:
                 SetEnergyRange(0);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
-                SetDestroyWallVelocityProp(2);
+                SetDestroyWallWaitTime(3);
+                SetDestroyWallVelocityProp(3);
+                SetPlatformSizePercentage(3);
                 //enemy
                 break;
             case 9:
                 SetEnergyRange(0);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
+                SetDestroyWallWaitTime(3);
                 SetDestroyWallVelocityProp(3);
+                SetPlatformSizePercentage(4);
                 //enemy
                 break;
             case 10:
                 SetEnergyRange(0);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
+                SetDestroyWallWaitTime(4);
                 SetDestroyWallVelocityProp(4);
+                SetPlatformSizePercentage(4);
+                //enemy
+                break;
+            case 11:
+                SetEnergyRange(0);
+                SetPlatformRange(1);
+                SetDestroyWallProportion(4);
+                SetDestroyWallWaitTime(4);
+                SetDestroyWallVelocityProp(4);
+                SetPlatformSizePercentage(4);
+                //enemy
+                break;
+            case 12:
+                SetEnergyRange(0);
+                SetPlatformRange(1);
+                SetDestroyWallProportion(4);
+                SetDestroyWallWaitTime(4);
+                SetDestroyWallVelocityProp(5);
+                SetPlatformSizePercentage(4);
+                //enemy
+                break;
+            case 13:
+                SetEnergyRange(0);
+                SetPlatformRange(1);
+                SetDestroyWallProportion(4);
+                SetDestroyWallWaitTime(4);
+                SetDestroyWallVelocityProp(5);
+                SetPlatformSizePercentage(4);
+                //enemy
+                break;
+            case 14:
+                SetEnergyRange(0);
+                SetPlatformRange(1);
+                SetDestroyWallProportion(4);
+                SetDestroyWallWaitTime(5);
+                SetDestroyWallVelocityProp(6);
+                SetPlatformSizePercentage(4);
+                //enemy
+                break;
+            case 15:
+                SetEnergyRange(0);
+                SetPlatformRange(1);
+                SetDestroyWallProportion(4);
+                SetDestroyWallWaitTime(5);
+                SetDestroyWallVelocityProp(7);
+                SetPlatformSizePercentage(4);
                 //enemy
                 break;
             default:
                 SetEnergyRange(0);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(-1);
-                SetDestroyWallVelocityProp(2);                
+                SetDestroyWallWaitTime(-1);
+                SetDestroyWallVelocityProp(2);
+                SetPlatformSizePercentage(-1);
                 break;
         }
 
@@ -225,8 +310,70 @@ public class LevelDifficultyController: MonoBehaviour{
             case 4:
                 destroyWallVelocityProportion = 0.7f;
                 break;
+            case 5:
+                destroyWallVelocityProportion = 1f;
+                break;
+            case 6:
+                destroyWallVelocityProportion = 1.5f;
+                break;
+            case 7:
+                destroyWallVelocityProportion = 1.8f;
+                break;
             default:
                 destroyWallVelocityProportion = 0;
+                break;
+        }
+    }
+
+    private void SetDestroyWallWaitTime(int proportion)
+    {
+
+        switch (proportion)
+        {
+
+            case 1:
+                destroyWallWaitTime = 3.5f;
+                break;
+            case 2:
+                destroyWallWaitTime = 2.8f;
+                break;
+            case 3:
+                destroyWallWaitTime = 2.4f;
+                break;
+            case 4:
+                destroyWallWaitTime = 2f;
+                break;
+            case 5:
+                destroyWallWaitTime = 2.5f;
+                break;
+          
+            default:
+                destroyWallWaitTime = 3;
+                break;
+        }
+    }
+
+
+    private void SetPlatformSizePercentage(int proportion)
+    {
+
+        switch (proportion)
+        {
+
+            case 1:
+                platformSizePercentage = 4.5f;
+                break;
+            case 2:
+                platformSizePercentage = 3f;
+                break;
+            case 3:
+                platformSizePercentage = 3.5f;
+                break;
+            case 4:
+                platformSizePercentage = 2f;
+                break;
+            default:
+                platformSizePercentage = 4;
                 break;
         }
     }

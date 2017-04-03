@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     public float teleportDistance;
     float teleportCoolDown = 4;
-    float teleportSparkCoolDown = 35;
+    float teleportSparkCoolDown = 30;
     bool isTeleportInCooldown;
     float teleportCooldownCount;
     bool isSparkInCooldown;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
 
     private float teleportEnergy = 3.8f;
-    private float sparkEscapeEnergy = 40f;
+    private float sparkEscapeEnergy = 15f;
     private float energyConsume;
     private float defaultEnergyConsume = 0.095f;
     //private float debuffEnergyConsume = 0.8f;
