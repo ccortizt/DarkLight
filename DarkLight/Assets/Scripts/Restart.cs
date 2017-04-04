@@ -8,4 +8,11 @@ public class Restart: MonoBehaviour{
     {
         SceneManager.LoadScene(0);
     }
+
+    public void RestartAllGame()
+    {
+        GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().RestartAllGame();
+        SceneManager.LoadScene(0);
+
+    }
 }

@@ -6,6 +6,7 @@ public class LevelProgressController: MonoBehaviour{
 
     private int levelCount;
     private static bool levelProgressExists;
+    private int playerContinues = 3;
 
     void Awake()
     {
@@ -27,9 +28,36 @@ public class LevelProgressController: MonoBehaviour{
 
     public void LevelUp()
     {
-        this.levelCount++;
-        UpdateLevelIndicator();
+        if (levelCount <= 15)
+        {
+            this.levelCount++;
+            UpdateLevelIndicator();
+        }
+        else
+        {
+            GameObject.Find("BigMessageCanvas").SetActive(true);
+            GameObject.Find("BigMessageCanvas").transform.FindChild("Panel/VictoryText").gameObject.SetActive(true);
+            GameObject.Find("BigMessageCanvas").transform.FindChild("Panel/DefeatText").gameObject.SetActive(false);
+        }
+        
 
+    }
+
+    public void RestartAllGame()
+    {
+        this.levelCount = 1;
+        UpdateLevelIndicator();
+        playerContinues = 3;
+    }
+
+    public void ChangeLives(int lives)
+    {
+        playerContinues = playerContinues + lives;
+    }
+
+    public int GetLives()
+    {
+        return playerContinues;
     }
 
     private void UpdateLevelIndicator()

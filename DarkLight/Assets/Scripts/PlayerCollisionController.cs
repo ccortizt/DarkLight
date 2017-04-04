@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerCollisionController: MonoBehaviour{
 
+    
 
     public bool playerIsCrushed;
 
@@ -71,7 +72,16 @@ public class PlayerCollisionController: MonoBehaviour{
 
     public void EndGame(string endGameText)
     {
-        GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText;
+        string continuar = "";
+        GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().ChangeLives(-1);
+        if(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives() <= 0){
+            GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);            
+        }
+        else
+        {
+            continuar = "Continuar x " + GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives();
+        }
+        GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText +" "+continuar  ;
         GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
         GetComponent<PlayerController>().enabled = false;
     }
