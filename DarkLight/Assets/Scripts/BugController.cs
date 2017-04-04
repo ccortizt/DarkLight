@@ -16,15 +16,22 @@ public class BugController: MonoBehaviour{
 
     void Update()
     {
-        GetComponent<Rigidbody>().velocity = -transform.forward * moveSpeed;
+        GetComponent<Rigidbody>().velocity = ((-transform.forward + new Vector3(0, GetComponent<Rigidbody>().velocity.y, 0)) * moveSpeed);
+        
+    }
+
+    public void SetVelocity(float vel)
+    {
+        moveSpeed = vel;
     }
 
     void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.name.Contains("Player"))
         {
-            coll.gameObject.GetComponent<PlayerEnergyController>().DecreaseEnergy(energyDrainAmount);
-            coll.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 10f, 0);
+            coll.gameObject.GetComponent<PlayerEnergyController>().DecreaseEnergy(energyDrainAmount);          
+            coll.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 8f, 0);
+          
         }
 
         if (coll.gameObject.name.Contains("left"))
@@ -35,6 +42,24 @@ public class BugController: MonoBehaviour{
         if (coll.gameObject.name.Contains("right"))
         {
             transform.rotation = Quaternion.Euler(0, -270, 0);
+        }
+
+        if (coll.gameObject.name.Contains("Platform") || coll.gameObject.name.Contains("Bug"))
+        {
+            if (transform.rotation.y == -270)
+            {
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, -270, 0);                
+            }
+            
+        }
+
+        if (coll.gameObject.name.Contains("PlatformDestroy"))
+        {
+            Destroy(gameObject);
         }
     }
 }

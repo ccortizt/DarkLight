@@ -346,6 +346,8 @@ public class PlayerController : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>().ButtonOff();
             GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>().ButtonOff();
+            GameObject.FindGameObjectWithTag("UpButton").GetComponent<VirtualButton>().ButtonOff();
+            GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>().ButtonOff();
         }
         catch (System.Exception e)
         {

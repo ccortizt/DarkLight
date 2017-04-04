@@ -14,8 +14,11 @@ public class PlayerCollisionController: MonoBehaviour{
     private int dynamicWallLayer = 9;
     private int staticWallLayer = 10;
 
+    private bool dontCheck;
+
     void Start()
     {
+        dontCheck = false;
         staticWallChecked = false;
         dynamicWallChecked = false;
     }
@@ -23,7 +26,9 @@ public class PlayerCollisionController: MonoBehaviour{
     {
         if (CheckCrushed())
         {
+            dontCheck = true;
             EndGame("Fuiste Aplastado");
+            //Debug.Log("APLASTADO");
         }
     }
    
@@ -34,6 +39,7 @@ public class PlayerCollisionController: MonoBehaviour{
         {
             if (coll.impulse.x != 0)
             {
+                //Debug.Log(coll.impulse+ " s");
                 staticWallChecked = true;
             }          
 
@@ -43,6 +49,7 @@ public class PlayerCollisionController: MonoBehaviour{
         {
             if (coll.impulse.x != 0)
             {
+                //Debug.Log(coll.impulse+ " d");
                 dynamicWallChecked = true;
             }
             
@@ -67,13 +74,17 @@ public class PlayerCollisionController: MonoBehaviour{
 
 
     public bool CheckCrushed(){
-        return dynamicWallChecked && staticWallChecked;
+        if (!dontCheck)
+            return dynamicWallChecked && staticWallChecked;
+        else
+            return false;
     }
 
     public void EndGame(string endGameText)
     {
         string continuar = "";
         GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().ChangeLives(-1);
+        Debug.Log(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives()+ " VIDAS");
         if(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives() <= 0){
             GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);            
         }

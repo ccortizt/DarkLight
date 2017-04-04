@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4515162340094532}
   - component: {fileID: 198122066408306140}
   - component: {fileID: 199858959708005676}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4528061511473214}
   - component: {fileID: 198809815869802554}
   - component: {fileID: 199290888493784700}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4379328139070922}
   - component: {fileID: 198405183520856536}
   - component: {fileID: 199974077276014800}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4329405083827312}
   - component: {fileID: 198425603614193340}
   - component: {fileID: 199907341721995678}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4925570107113748}
   - component: {fileID: 198572985730568640}
   - component: {fileID: 199513691787245452}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4158193355398360}
   - component: {fileID: 198592430526985362}
   - component: {fileID: 199298525953082196}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4519778234879722}
   - component: {fileID: 198957597904987088}
   - component: {fileID: 199597169280916406}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4292632322030498}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FireTaken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

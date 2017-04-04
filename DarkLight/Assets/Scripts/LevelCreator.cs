@@ -8,7 +8,7 @@ public class LevelCreator: MonoBehaviour {
     public GameObject prefabDestroyPlatform;
     public GameObject prefabDoubleDestroyPlatform;
     public GameObject prefabEnergy;
-    public GameObject prefabEnemy;
+    public GameObject prefabEnemyBug;
     public GameObject prefabDoor;
 
    
@@ -37,6 +37,8 @@ public class LevelCreator: MonoBehaviour {
     int maxPlatformRange;
     int destroyWallPercentage;
     float destroyWallVelocityProportion;
+    int numberOfEnemyBugs;
+    float enemyBugVelocity;
 
     void Start()
     {        
@@ -45,11 +47,25 @@ public class LevelCreator: MonoBehaviour {
         minPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinPlatformRange;
         maxPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxPlatformRange;
         destroyWallPercentage = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallPercentage;
-        platformSizePercentageChooser = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().PlatformSizePercentage;            
+        platformSizePercentageChooser = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().PlatformSizePercentage;
+        numberOfEnemyBugs = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugProportion;
+        enemyBugVelocity = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugVelocity;  
+
         FillMap();
         AddEnergyPrefabs();
+        StartCoroutine(AddEnemyBugs());
         PutDoor();
         StartCoroutine(DestroyMap());
+    }
+
+    private IEnumerator AddEnemyBugs()
+    {
+        for (int i = 0; i < numberOfEnemyBugs; i++)
+        {    
+            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-4,4), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 50), 0), Quaternion.identity);
+            b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
+            yield return new WaitForSeconds(10);
+        }
     }
     
 

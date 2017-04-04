@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 198026393613210190}
   - component: {fileID: 199691630128427954}
   - component: {fileID: 114988938768734748}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnergyFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

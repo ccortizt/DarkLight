@@ -59,4 +59,5 @@ public class PlatformDestroyController: MonoBehaviour{
     {
         proportion += defaultProportion * p;
     }
+
 }
