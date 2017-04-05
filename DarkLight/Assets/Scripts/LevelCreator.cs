@@ -39,6 +39,7 @@ public class LevelCreator: MonoBehaviour {
     float destroyWallVelocityProportion;
     int numberOfEnemyBugs;
     float enemyBugVelocity;
+    float enemyBugDrain;
 
     void Start()
     {        
@@ -49,7 +50,8 @@ public class LevelCreator: MonoBehaviour {
         destroyWallPercentage = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallPercentage;
         platformSizePercentageChooser = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().PlatformSizePercentage;
         numberOfEnemyBugs = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugProportion;
-        enemyBugVelocity = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugVelocity;  
+        enemyBugVelocity = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugVelocity;
+        enemyBugDrain = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugEnergyDrain;  
 
         FillMap();
         AddEnergyPrefabs();
@@ -62,9 +64,11 @@ public class LevelCreator: MonoBehaviour {
     {
         for (int i = 0; i < numberOfEnemyBugs; i++)
         {    
-            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-4,4), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 50), 0), Quaternion.identity);
+            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-4,4), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 15), 0), Quaternion.identity);
             b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
-            yield return new WaitForSeconds(10);
+            b.GetComponent<BugController>().SetEnergyDrain(enemyBugVelocity);
+            b.name = b.name + " " + i;
+            yield return new WaitForSeconds(6);
         }
     }
     

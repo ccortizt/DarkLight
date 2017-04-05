@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerCollisionController: MonoBehaviour{
@@ -82,18 +82,29 @@ public class PlayerCollisionController: MonoBehaviour{
 
     public void EndGame(string endGameText)
     {
-        string continuar = "";
+        string continuar = "Sin vidas restantes";
         GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().ChangeLives(-1);
-        Debug.Log(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives()+ " VIDAS");
+        
         if(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives() <= 0){
-            GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);            
+            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText + " " + continuar;
+            
+            StartCoroutine(ShowFullLose());            
         }
         else
         {
             continuar = "Continuar x " + GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives();
+            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
         }
         GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText +" "+continuar  ;
-        GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
+        
         GetComponent<PlayerController>().enabled = false;
+    }
+
+    private IEnumerator ShowFullLose()
+    {
+        yield return new WaitForSeconds(2);
+        GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "";
+        GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);            
     }
 }

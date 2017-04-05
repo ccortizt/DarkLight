@@ -83,6 +83,13 @@ public class LevelDifficultyController : MonoBehaviour
         set { enemyBugVelocity = value; }
     }
 
+    float enemyBugEnergyDrain;
+    public float EnemyBugEnergyDrain
+    {
+        get { return enemyBugEnergyDrain; }
+        set { enemyBugEnergyDrain = value; }
+    }
+
 
     void Start()
     {
@@ -102,6 +109,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(1);
                 SetNumberOfBugEnemy(1);
                 SetVelocityOfEnemyBug(-1);
+                SetDrainEnergyOfEnemyBug(-1);
 
                 break;
             case 2:
@@ -113,6 +121,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(-1);
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
+                SetDrainEnergyOfEnemyBug(-1);
                 break;
             case 3:
                 SetEnergyRange(1);
@@ -123,6 +132,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(2);
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
+                SetDrainEnergyOfEnemyBug(-1);
                 break;
             case 4:
                 SetEnergyRange(1);
@@ -133,6 +143,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(2);
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
+                SetDrainEnergyOfEnemyBug(-1);
                 break;
             case 5:
                 SetEnergyRange(0);
@@ -143,6 +154,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(1);
+                SetDrainEnergyOfEnemyBug(1);
                 break;
             case 6:
                 SetEnergyRange(1);
@@ -153,6 +165,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(2);
+                SetDrainEnergyOfEnemyBug(1);
 
                 break;
             case 7:
@@ -164,6 +177,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(2);
+                SetDrainEnergyOfEnemyBug(2);
                 
                 break;
             case 8:
@@ -175,6 +189,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(2);
+                SetDrainEnergyOfEnemyBug(2);
                 
                 break;
             case 9:
@@ -186,6 +201,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(3);
+                SetDrainEnergyOfEnemyBug(3);
                 break;
             case 10:
                 SetEnergyRange(0);
@@ -196,6 +212,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(3);
+                SetDrainEnergyOfEnemyBug(3);
                 
                 break;
             case 11:
@@ -207,6 +224,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(3);
+                SetDrainEnergyOfEnemyBug(3);
                 
                 break;
             case 12:
@@ -229,6 +247,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(3);
+                SetDrainEnergyOfEnemyBug(4);
                 
                 break;
             case 14:
@@ -240,6 +259,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(4);
+                SetDrainEnergyOfEnemyBug(4);
                 
                 break;
             case 15:
@@ -251,6 +271,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(4);
+                SetDrainEnergyOfEnemyBug(4);
                 
                 break;
             default:
@@ -262,6 +283,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(-1);
                 SetNumberOfBugEnemy(1);
                 SetVelocityOfEnemyBug(-1);
+                SetDrainEnergyOfEnemyBug(-1);
                 break;
         }
 
@@ -427,19 +449,19 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                enemyBugQuantity = 3;
+                enemyBugQuantity = 6;//3
                 break;
             case 2:
-                enemyBugQuantity = 5;
+                enemyBugQuantity = 9;
                 break;
             case 3:
-                enemyBugQuantity = 8;
+                enemyBugQuantity = 12;
                 break;
             case 4:
-                enemyBugQuantity = 10;
+                enemyBugQuantity = 17;
                 break;
             default:
-                enemyBugQuantity = 4;
+                enemyBugQuantity = 6;
                 break;
         }
     }
@@ -468,4 +490,28 @@ public class LevelDifficultyController : MonoBehaviour
         }
     }
 
+    private void SetDrainEnergyOfEnemyBug(int percentage)
+    {
+
+        switch (percentage)
+        {
+
+            case 1:
+                enemyBugEnergyDrain = 0.5f;
+                break;
+            case 2:
+                enemyBugEnergyDrain = 1;
+                break;
+            case 3:
+                enemyBugEnergyDrain = 1.5f;
+                break;
+            case 4:
+                enemyBugEnergyDrain = 2.5f;
+                break;
+            default:
+                enemyBugEnergyDrain = 0;
+                break;
+        }
+    }
+    
 }
