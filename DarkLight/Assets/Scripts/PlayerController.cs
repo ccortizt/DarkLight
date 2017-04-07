@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
             
             if (upButton.isPressed && isPlayerGrounded && canJump)
             {
-
+                ReproduceJumpEffect();
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpHeight, 0f);
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
 
@@ -154,6 +154,7 @@ public class PlayerController : MonoBehaviour
 
                     if (aux != Vector3.zero)
                     {
+                        ReproduceTeleportEffect();
                         rb.velocity = Vector3.zero;
                         canJump = false;
                         StartCoroutine(SetCanJump());
@@ -192,11 +193,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.UpArrow) && isPlayerGrounded && canJump)
             {
 
+                ReproduceJumpEffect();
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpHeight, 0f);
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
 
             }
-
 
             if (Input.GetKey(KeyCode.Space) && !isTeleportInCooldown)
             {
@@ -220,6 +221,7 @@ public class PlayerController : MonoBehaviour
 
                     if (aux != Vector3.zero)
                     {
+                        ReproduceTeleportEffect();
                         rb.velocity = Vector3.zero;
                         canJump = false;
                         StartCoroutine(SetCanJump());
@@ -353,6 +355,16 @@ public class PlayerController : MonoBehaviour
         {
         }
         
+    }
+
+    private void ReproduceJumpEffect()
+    {
+        GetComponentInChildren<VFXController>().PlayEffect();
+    }
+
+    private void ReproduceTeleportEffect()
+    {
+        transform.FindChild("LightningHit").GetComponent<VFXController>().PlayEffect();
     }
 
 }
