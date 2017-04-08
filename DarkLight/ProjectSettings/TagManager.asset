@@ -16,6 +16,7 @@ TagManager:
   - RightButton
   - UpButton
   - EscapeButton
+  - Damage
   layers:
   - Default
   - TransparentFX

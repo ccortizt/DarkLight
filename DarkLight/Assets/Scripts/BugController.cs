@@ -51,7 +51,7 @@ public class BugController: MonoBehaviour{
         {
             coll.gameObject.GetComponent<PlayerEnergyController>().DecreaseEnergy(energyDrainAmount);          
             coll.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 8f, 0);
-          
+            GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
         }
 
         if (coll.gameObject.name.Contains("left"))
@@ -68,7 +68,7 @@ public class BugController: MonoBehaviour{
 
         if (coll.gameObject.name.Contains("Platform"))
         {
-            Debug.Log(coll.impulse);
+            
             if (coll.impulse.x != 0)
             {                               
                 //GetComponent<Rigidbody>().velocity = ((new Vector3(Random.Range(3, 6), Random.Range(6, 10), 0)) * moveSpeed);

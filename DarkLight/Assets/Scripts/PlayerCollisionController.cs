@@ -27,6 +27,7 @@ public class PlayerCollisionController: MonoBehaviour{
         if (CheckCrushed())
         {
             dontCheck = true;
+            GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
             EndGame("Fuiste Aplastado");
             //Debug.Log("APLASTADO");
         }
