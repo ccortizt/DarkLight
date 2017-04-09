@@ -2,7 +2,12 @@
 using UnityEngine;
 public class ColorController: MonoBehaviour{
     
-    public Material mat;
+    [SerializeField]
+    Material ambientColor;
+
+    [SerializeField]
+    Material trailMaterial;
+
     private int currentH;
     private float auxH;
     void Start()
@@ -26,9 +31,16 @@ public class ColorController: MonoBehaviour{
 
     public void ModifyMaterial(float h, float s)
     {
-        Color test = mat.color;
+        Color test = ambientColor.color;
         test = Color.HSVToRGB(h, s, 0.5f);
-        mat.SetColor("_Color", test);
+        ambientColor.SetColor("_Color", test);
+
+        //For Trail
+        float emission = Mathf.PingPong(Time.time, 1.0f);        
+        Color finalColor = test * Mathf.LinearToGammaSpace(emission);
+        trailMaterial.SetColor("_EmissionColor", finalColor);
+       
+        
     }
 
 }

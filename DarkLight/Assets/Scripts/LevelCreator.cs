@@ -10,7 +10,6 @@ public class LevelCreator: MonoBehaviour {
     public GameObject prefabEnergy;
     public GameObject prefabEnemyBug;
     public GameObject prefabDoor;
-
    
 
     private int levelYSize = 52;
@@ -64,7 +63,7 @@ public class LevelCreator: MonoBehaviour {
     {
         for (int i = 0; i < numberOfEnemyBugs; i++)
         {    
-            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-4,4), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 15), 0), Quaternion.identity);
+            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-4,4), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 10), 0), Quaternion.identity);
             b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
             b.GetComponent<BugController>().SetEnergyDrain(enemyBugVelocity);
             b.name = b.name + " " + i;
@@ -92,6 +91,7 @@ public class LevelCreator: MonoBehaviour {
                 yield return new WaitForSeconds(waitDestroyTime * destroyWallPercentage);
                 var p = (GameObject)Instantiate(prefabDestroyPlatform, new Vector3(RandomDestroyPlatformSide() * 10, i , 0), Quaternion.identity);
                 p.GetComponent<PlatformDestroyController>().SetProportion(destroyWallPercentage);
+                
             }
         }
         
@@ -109,7 +109,7 @@ public class LevelCreator: MonoBehaviour {
             {
                 if(Random.Range(0,10) < numberPlatformsY)
                     if(RandomPlatformSize())
-                        Instantiate(prefabPlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
+                         Instantiate(prefabPlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);                        
                     else
                         Instantiate(prefabDoublePlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
             }

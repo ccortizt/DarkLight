@@ -29,7 +29,7 @@ public class PlayerCollisionController: MonoBehaviour{
             dontCheck = true;
             GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
             EndGame("Fuiste Aplastado");
-            //Debug.Log("APLASTADO");
+            
         }
     }
    
