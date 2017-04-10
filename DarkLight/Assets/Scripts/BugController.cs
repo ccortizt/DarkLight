@@ -79,7 +79,8 @@ public class BugController: MonoBehaviour{
             
             if (coll.impulse.x != 0)
             {                               
-                rb.velocity = ((new Vector3(-(rb.velocity.x + 5), Random.Range(-5, 12), 0)) * moveSpeed);
+                //rb.velocity = ((new Vector3(-(rb.velocity.x + 5), Random.Range(-5, 12), 0)) * moveSpeed);
+                GetComponent<Rigidbody>().velocity = ((new Vector3(-(5), Random.Range(-5, 12), 0)) * moveSpeed);
             }
 
             if (coll.impulse.x > 0 && coll.impulse.y == 0)

@@ -10,6 +10,7 @@ public class LevelCreator: MonoBehaviour {
     public GameObject prefabEnergy;
     public GameObject prefabEnemyBug;
     public GameObject prefabDoor;
+    public GameObject prefabCannon;
    
 
     private int levelYSize = 52;
@@ -30,6 +31,7 @@ public class LevelCreator: MonoBehaviour {
 
     private float waitDestroyTime = 3;
 
+
     int minEnergyRange;
     int maxEnergyRange;
     int minPlatformRange;
@@ -39,6 +41,9 @@ public class LevelCreator: MonoBehaviour {
     int numberOfEnemyBugs;
     float enemyBugVelocity;
     float enemyBugDrain;
+    float cannonsProbability;
+    float arrowfrequency;
+    float arrowForce;
 
     void Start()
     {        
@@ -50,10 +55,14 @@ public class LevelCreator: MonoBehaviour {
         platformSizePercentageChooser = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().PlatformSizePercentage;
         numberOfEnemyBugs = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugProportion;
         enemyBugVelocity = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugVelocity;
-        enemyBugDrain = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugEnergyDrain;  
+        enemyBugDrain = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugEnergyDrain;
+        cannonsProbability = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().CannonPercentage;
+        arrowfrequency = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinArrowFrequencyTime;
+        arrowForce = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().ArrowForce;  
 
         FillMap();
         AddEnergyPrefabs();
+        AddCannons();
         StartCoroutine(AddEnemyBugs());
         PutDoor();
         StartCoroutine(DestroyMap());
@@ -114,6 +123,28 @@ public class LevelCreator: MonoBehaviour {
                         Instantiate(prefabDoublePlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
             }
             
+        }
+    }
+
+    private void AddCannons()
+    {
+        for (int i = 1; i < levelYSize; i += 2)
+        {
+            GameObject rightCanon;
+            GameObject leftCanon;
+            if (Random.Range(0, 10) < cannonsProbability)
+            {
+                rightCanon = Instantiate(prefabCannon, new Vector3(-5.2f, i + RandomPositionY(), 0), Quaternion.identity);
+                rightCanon.GetComponent<ArrowShooter>().SetArrowFrequency(arrowfrequency);
+                rightCanon.GetComponent<ArrowShooter>().SetArrowForce(arrowForce);
+            }
+
+            if (Random.Range(0, 10) < cannonsProbability)
+            {
+                leftCanon = Instantiate(prefabCannon, new Vector3(5.2f, i + RandomPositionY(), 0), Quaternion.Euler(0, 180, 0));
+                leftCanon.GetComponent<ArrowShooter>().SetArrowFrequency(arrowfrequency);
+                leftCanon.GetComponent<ArrowShooter>().SetArrowForce(arrowForce);
+            }
         }
     }
 

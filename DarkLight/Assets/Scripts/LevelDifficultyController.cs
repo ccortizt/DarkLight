@@ -58,8 +58,34 @@ public class LevelDifficultyController : MonoBehaviour
         set { destroyWallVelocityProportion = value; }
     }
 
+    float cannonPercentage;
 
+    public float CannonPercentage
+    {
+        get { return cannonPercentage; }
+        set { cannonPercentage = value; }
 
+    }
+
+    
+    float minArrowFrequencyTime;
+
+    public float MinArrowFrequencyTime
+    {
+        get { return minArrowFrequencyTime; }
+        set { minArrowFrequencyTime = value; }
+    }
+
+    float arrowForce;
+
+    public float ArrowForce
+    {
+        get { return arrowForce; }
+        set { arrowForce = value; }
+    }
+
+   
+    
     float platformSizePercentage;
 
     public float PlatformSizePercentage
@@ -91,6 +117,8 @@ public class LevelDifficultyController : MonoBehaviour
     }
 
 
+
+
     void Start()
     {
         SetDifficultyProportions(GetComponent<LevelProgressController>().GetLevel());
@@ -110,6 +138,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(1);
                 SetVelocityOfEnemyBug(-1);
                 SetDrainEnergyOfEnemyBug(-1);
+                SetCannonProportion(-1);
+                SetMinArrowFrequency(-1);
+                SetArrowForce(1);
 
                 break;
             case 2:
@@ -122,6 +153,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
                 SetDrainEnergyOfEnemyBug(-1);
+                SetCannonProportion(-1);
+                SetMinArrowFrequency(-1);
+                SetArrowForce(2);
                 break;
             case 3:
                 SetEnergyRange(1);
@@ -133,6 +167,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
                 SetDrainEnergyOfEnemyBug(-1);
+                SetCannonProportion(-1);
+                SetMinArrowFrequency(-1);
+                SetArrowForce(2);
                 break;
             case 4:
                 SetEnergyRange(1);
@@ -144,6 +181,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
                 SetDrainEnergyOfEnemyBug(-1);
+                SetCannonProportion(1);
+                SetMinArrowFrequency(-1);
+                SetArrowForce(2);
                 break;
             case 5:
                 SetEnergyRange(0);
@@ -155,6 +195,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(1);
                 SetDrainEnergyOfEnemyBug(1);
+                SetCannonProportion(1);
+                SetMinArrowFrequency(1);
+                SetArrowForce(3);
                 break;
             case 6:
                 SetEnergyRange(1);
@@ -166,7 +209,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(2);
                 SetDrainEnergyOfEnemyBug(1);
-
+                SetCannonProportion(2);
+                SetMinArrowFrequency(1);
+                SetArrowForce(3);
                 break;
             case 7:
                 SetEnergyRange(0);
@@ -178,7 +223,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(2);
                 SetDrainEnergyOfEnemyBug(2);
-                
+                SetCannonProportion(2);
+                SetMinArrowFrequency(2);
+                SetArrowForce(3);
                 break;
             case 8:
                 SetEnergyRange(0);
@@ -190,7 +237,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(2);
                 SetDrainEnergyOfEnemyBug(2);
-                
+                SetCannonProportion(2);
+                SetMinArrowFrequency(2);
+                SetArrowForce(4);
                 break;
             case 9:
                 SetEnergyRange(0);
@@ -202,6 +251,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(3);
+                SetCannonProportion(3);
+                SetMinArrowFrequency(3);
+                SetArrowForce(4);
                 break;
             case 10:
                 SetEnergyRange(0);
@@ -213,6 +265,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(3);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(3);
+                SetCannonProportion(3);
+                SetMinArrowFrequency(3);
+                SetArrowForce(4);
                 
                 break;
             case 11:
@@ -225,6 +280,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(3);
+                SetCannonProportion(4);
+                SetMinArrowFrequency(3);
+                SetArrowForce(4);
                 
                 break;
             case 12:
@@ -236,6 +294,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(3);
+                SetCannonProportion(4);
+                SetMinArrowFrequency(3);
+                SetArrowForce(5);
                 
                 break;
             case 13:
@@ -248,6 +309,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(4);
+                SetCannonProportion(4);
+                SetMinArrowFrequency(4);
+                SetArrowForce(5);
                 
                 break;
             case 14:
@@ -260,6 +324,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(4);
                 SetDrainEnergyOfEnemyBug(4);
+                SetCannonProportion(4);
+                SetMinArrowFrequency(4);
+                SetArrowForce(5);
                 
                 break;
             case 15:
@@ -272,6 +339,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(4);
                 SetVelocityOfEnemyBug(4);
                 SetDrainEnergyOfEnemyBug(4);
+                SetCannonProportion(4);
+                SetMinArrowFrequency(4);
+                SetArrowForce(5);
                 
                 break;
             default:
@@ -284,6 +354,9 @@ public class LevelDifficultyController : MonoBehaviour
                 SetNumberOfBugEnemy(1);
                 SetVelocityOfEnemyBug(-1);
                 SetDrainEnergyOfEnemyBug(-1);
+                SetCannonProportion(-1);
+                SetMinArrowFrequency(-1);
+                SetArrowForce(-1);
                 break;
         }
 
@@ -514,4 +587,78 @@ public class LevelDifficultyController : MonoBehaviour
         }
     }
     
+    private void SetCannonProportion(int percentage)
+    {
+
+        switch (percentage)
+        {
+
+            case 1:
+                cannonPercentage = 6;
+                break;
+            case 2:
+                cannonPercentage = 7.5f;
+                break;
+            case 3:
+                cannonPercentage = 8.2f;
+                break;
+            case 4:
+                cannonPercentage = 9f;
+                break;
+            default:
+                cannonPercentage = 3;
+                break;
+        }
+    }
+
+    private void SetMinArrowFrequency (int opt)
+    {
+
+        switch (opt)
+        {
+
+            case 1:
+                minArrowFrequencyTime = 4.8f;
+                break;
+            case 2:
+                minArrowFrequencyTime = 3.7f;
+                break;
+            case 3:
+                minArrowFrequencyTime = 2.5f;
+                break;
+            case 4:
+                minArrowFrequencyTime = 1.8f;
+                break;
+            default:
+                minArrowFrequencyTime = 5.2f;
+                break;
+        }
+    }
+
+    private void SetArrowForce(int opt)
+    {
+        switch (opt)
+        {
+
+            case 1:
+                arrowForce = 2.5f;
+                break;
+            case 2:
+                arrowForce = 3;
+                break;
+            case 3:
+                arrowForce = 3.5f;
+                break;
+            case 4:
+                arrowForce = 4f;
+                break;
+            case 5:
+                arrowForce = 5f;
+                break;
+
+            default:
+                arrowForce = 2f;
+                break;
+        }
+    }
 }
