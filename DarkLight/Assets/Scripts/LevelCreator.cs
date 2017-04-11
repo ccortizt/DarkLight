@@ -39,6 +39,7 @@ public class LevelCreator: MonoBehaviour {
     int destroyWallPercentage;
     float destroyWallVelocityProportion;
     int numberOfEnemyBugs;
+    bool isBugAtackEnabled;
     float enemyBugVelocity;
     float enemyBugDrain;
     float cannonsProbability;
@@ -52,13 +53,16 @@ public class LevelCreator: MonoBehaviour {
         minPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinPlatformRange;
         maxPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxPlatformRange;
         destroyWallPercentage = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallPercentage;
+        waitDestroyTime = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallWaitTime;
         platformSizePercentageChooser = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().PlatformSizePercentage;
         numberOfEnemyBugs = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugProportion;
+        isBugAtackEnabled = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnableBugAtack;
         enemyBugVelocity = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugVelocity;
         enemyBugDrain = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugEnergyDrain;
         cannonsProbability = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().CannonPercentage;
         arrowfrequency = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinArrowFrequencyTime;
-        arrowForce = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().ArrowForce;  
+        arrowForce = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().ArrowForce;
+         
 
         FillMap();
         AddEnergyPrefabs();
@@ -71,12 +75,15 @@ public class LevelCreator: MonoBehaviour {
     private IEnumerator AddEnemyBugs()
     {
         for (int i = 0; i < numberOfEnemyBugs; i++)
-        {    
-            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-4,4), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 10), 0), Quaternion.identity);
+        {
+            yield return new WaitForSeconds(6);
+            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f,3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 10), 0), Quaternion.identity);
             b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
             b.GetComponent<BugController>().SetEnergyDrain(enemyBugVelocity);
+            
+            b.GetComponent<BugController>().SetCanHit(isBugAtackEnabled);
             b.name = b.name + " " + i;
-            yield return new WaitForSeconds(6);
+           
         }
     }
     

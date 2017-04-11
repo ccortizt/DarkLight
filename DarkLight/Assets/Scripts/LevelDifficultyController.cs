@@ -58,6 +58,7 @@ public class LevelDifficultyController : MonoBehaviour
         set { destroyWallVelocityProportion = value; }
     }
 
+
     float cannonPercentage;
 
     public float CannonPercentage
@@ -102,7 +103,17 @@ public class LevelDifficultyController : MonoBehaviour
         set { enemyBugQuantity = value; }
     }
 
+
+    bool enableBugAtack;
+
+    public bool EnableBugAtack
+    {
+        get { return enableBugAtack; }
+        set { enableBugAtack = value; }
+    }
+    
     float enemyBugVelocity;
+    
     public float EnemyBugVelocity
     {
         get { return enemyBugVelocity; }
@@ -137,10 +148,12 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(1);
                 SetNumberOfBugEnemy(1);
                 SetVelocityOfEnemyBug(-1);
+                SetEnableBugEnemy(0);
                 SetDrainEnergyOfEnemyBug(-1);
                 SetCannonProportion(-1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(1);
+                
 
                 break;
             case 2:
@@ -152,10 +165,12 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(-1);
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
+                SetEnableBugEnemy(0);
                 SetDrainEnergyOfEnemyBug(-1);
                 SetCannonProportion(-1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(2);
+                
                 break;
             case 3:
                 SetEnergyRange(1);
@@ -166,10 +181,12 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(2);
                 SetNumberOfBugEnemy(2);
                 SetVelocityOfEnemyBug(-1);
+                SetEnableBugEnemy(0);
                 SetDrainEnergyOfEnemyBug(-1);
                 SetCannonProportion(-1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(2);
+                
                 break;
             case 4:
                 SetEnergyRange(1);
@@ -179,11 +196,13 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(1);
                 SetPlatformSizePercentage(2);
                 SetNumberOfBugEnemy(2);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(-1);
                 SetDrainEnergyOfEnemyBug(-1);
                 SetCannonProportion(1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(2);
+                
                 break;
             case 5:
                 SetEnergyRange(0);
@@ -193,6 +212,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(2);
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(2);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(1);
                 SetDrainEnergyOfEnemyBug(1);
                 SetCannonProportion(1);
@@ -207,6 +227,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(2);
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(2);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(2);
                 SetDrainEnergyOfEnemyBug(1);
                 SetCannonProportion(2);
@@ -221,6 +242,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(2);
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(3);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(2);
                 SetDrainEnergyOfEnemyBug(2);
                 SetCannonProportion(2);
@@ -235,6 +257,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(3);
                 SetPlatformSizePercentage(3);
                 SetNumberOfBugEnemy(3);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(2);
                 SetDrainEnergyOfEnemyBug(2);
                 SetCannonProportion(2);
@@ -249,6 +272,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(3);
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(3);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(3);
                 SetCannonProportion(3);
@@ -263,6 +287,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(4);
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(3);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(3);
                 SetCannonProportion(3);
@@ -278,6 +303,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(4);
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(3);
                 SetCannonProportion(4);
@@ -293,6 +319,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(5);
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(3);
                 SetCannonProportion(4);
                 SetMinArrowFrequency(3);
@@ -307,6 +334,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(5);
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(3);
                 SetDrainEnergyOfEnemyBug(4);
                 SetCannonProportion(4);
@@ -322,6 +350,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(6);
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(4);
                 SetDrainEnergyOfEnemyBug(4);
                 SetCannonProportion(4);
@@ -337,6 +366,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetDestroyWallVelocityProp(7);
                 SetPlatformSizePercentage(4);
                 SetNumberOfBugEnemy(4);
+                SetEnableBugEnemy(1);
                 SetVelocityOfEnemyBug(4);
                 SetDrainEnergyOfEnemyBug(4);
                 SetCannonProportion(4);
@@ -353,6 +383,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetPlatformSizePercentage(-1);
                 SetNumberOfBugEnemy(1);
                 SetVelocityOfEnemyBug(-1);
+                SetEnableBugEnemy(-1);
                 SetDrainEnergyOfEnemyBug(-1);
                 SetCannonProportion(-1);
                 SetMinArrowFrequency(-1);
@@ -370,16 +401,16 @@ public class LevelDifficultyController : MonoBehaviour
         {
             case 1:
                 minEnergyRange = 3;
-                maxEnergyRange = 6;
+                maxEnergyRange = 7;
                 break;
             case 2:
 
                 minEnergyRange = 3;
-                maxEnergyRange = 5;
+                maxEnergyRange = 6;
                 break;
             default:
                 minEnergyRange = 2;
-                maxEnergyRange = 5;
+                maxEnergyRange = 6;
                 break;
         }
     }
@@ -438,25 +469,25 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                destroyWallVelocityProportion = 0.25f;
+                destroyWallVelocityProportion = 0.4f;
                 break;
             case 2:
-                destroyWallVelocityProportion = 0.5f;
-                break;
-            case 3:
-                destroyWallVelocityProportion = 0.6f;
-                break;
-            case 4:
                 destroyWallVelocityProportion = 0.7f;
                 break;
+            case 3:
+                destroyWallVelocityProportion = 0.9f;
+                break;
+            case 4:
+                destroyWallVelocityProportion = 1.2f;
+                break;
             case 5:
-                destroyWallVelocityProportion = 1f;
+                destroyWallVelocityProportion = 1.6f;
                 break;
             case 6:
-                destroyWallVelocityProportion = 1.5f;
+                destroyWallVelocityProportion = 1.85f;
                 break;
             case 7:
-                destroyWallVelocityProportion = 1.8f;
+                destroyWallVelocityProportion = 2.1f;
                 break;
             default:
                 destroyWallVelocityProportion = 0;
@@ -477,13 +508,13 @@ public class LevelDifficultyController : MonoBehaviour
                 destroyWallWaitTime = 2.8f;
                 break;
             case 3:
-                destroyWallWaitTime = 2.4f;
+                destroyWallWaitTime = 2.2f;
                 break;
             case 4:
-                destroyWallWaitTime = 2f;
+                destroyWallWaitTime = 1.7f;
                 break;
             case 5:
-                destroyWallWaitTime = 2.5f;
+                destroyWallWaitTime = 1.1f;
                 break;
 
             default:
@@ -522,21 +553,27 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                enemyBugQuantity = 6;//3
+                enemyBugQuantity = 10;//6
                 break;
             case 2:
-                enemyBugQuantity = 9;
+                enemyBugQuantity = 8;
                 break;
             case 3:
-                enemyBugQuantity = 12;
+                enemyBugQuantity = 11;
                 break;
             case 4:
-                enemyBugQuantity = 17;
+                enemyBugQuantity = 15;
                 break;
             default:
                 enemyBugQuantity = 6;
                 break;
         }
+    }
+
+    private void SetEnableBugEnemy(int dificulty)
+    {
+        if (dificulty > 0)
+            enableBugAtack = true;
     }
 
     private void SetVelocityOfEnemyBug(int percentage)
@@ -546,19 +583,19 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                enemyBugVelocity = 1.5f;
+                enemyBugVelocity = 0.9f;
                 break;
             case 2:
-                enemyBugVelocity = 2;
+                enemyBugVelocity = 1f;
                 break;
             case 3:
-                enemyBugVelocity = 3.5f;
+                enemyBugVelocity = 1.1f;
                 break;
             case 4:
-                enemyBugVelocity = 5;
+                enemyBugVelocity = 1.2f;
                 break;
             default:
-                enemyBugVelocity = 1;
+                enemyBugVelocity = 0.7f;
                 break;
         }
     }
@@ -618,19 +655,19 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                minArrowFrequencyTime = 4.8f;
+                minArrowFrequencyTime = 5.3f;
                 break;
             case 2:
-                minArrowFrequencyTime = 3.7f;
+                minArrowFrequencyTime = 4.8f;
                 break;
             case 3:
-                minArrowFrequencyTime = 2.5f;
+                minArrowFrequencyTime = 3.7f;
                 break;
             case 4:
-                minArrowFrequencyTime = 1.8f;
+                minArrowFrequencyTime = 2.5f;
                 break;
             default:
-                minArrowFrequencyTime = 5.2f;
+                minArrowFrequencyTime = 6.5f;
                 break;
         }
     }
@@ -641,13 +678,13 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                arrowForce = 2.5f;
+                arrowForce = 1.8f;
                 break;
             case 2:
-                arrowForce = 3;
+                arrowForce = 2.6f;
                 break;
             case 3:
-                arrowForce = 3.5f;
+                arrowForce = 3.3f;
                 break;
             case 4:
                 arrowForce = 4f;

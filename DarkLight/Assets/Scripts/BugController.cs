@@ -5,7 +5,7 @@ public class BugController: MonoBehaviour{
 
     private float energyDefaultDrainAmount = 2.1f;
     private float energyDrainAmount = 2.1f;
-    private float moveSpeed = 1f;
+    private float moveSpeed = 0.8f;
     
     private bool canHit;
 
@@ -14,7 +14,6 @@ public class BugController: MonoBehaviour{
     void Start()
     {
        
-        canHit = true;
         rb = GetComponent<Rigidbody>();
 
         if (Random.Range(0, 10) > 5)
@@ -115,9 +114,11 @@ public class BugController: MonoBehaviour{
 
     void OnTriggerEnter(Collider coll)
     {
+        
         if (coll.gameObject.name.Contains("Player") && canHit)
         {
             canHit = false;
+            
             transform.Translate(0, 2, 0);
             //Debug.Log("init: "+transform.position);
             Vector3 dif = transform.position - coll.transform.position;
@@ -127,14 +128,21 @@ public class BugController: MonoBehaviour{
             //dif.x = (dif.y > 0) ? dif.y - 0.0005f : dif.y + 0.0005f;
             //transform.position = new Vector3(x,y,0f);
             transform.Translate(-dif.x , -dif.y,0,Space.World);
+            StartCoroutine(CanHitAgain());
             //Debug.Log("fin: "+transform.position);
 
         }
     }
 
+    public void SetCanHit(bool can)
+    {
+        this.canHit = can;
+    }
+
     IEnumerator CanHitAgain()
     {
         yield return new WaitForSeconds(2f);
+        
         canHit = true;
     }
 }

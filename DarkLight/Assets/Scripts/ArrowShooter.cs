@@ -7,12 +7,10 @@ public class ArrowShooter : MonoBehaviour {
     [SerializeField]
     GameObject arrowPrefab;
 
-    private
-    float timeInterval = 5f;
-    private
-    int burstCounter = 10;
-    private
-    float magnitude = 4f;
+    private float timeInterval = 5f;
+    private int burstCounter = 10;
+    private float magnitude = 4f;
+    private float maxIntervalFrequency = 7.5f;
 
 	void Start () {
         StartCoroutine(ShootArrows());	
@@ -25,8 +23,9 @@ public class ArrowShooter : MonoBehaviour {
 
             for (int j = 0; j <= burstCounter; j++)
             {
+                yield return new WaitForSeconds(Random.Range(timeInterval, maxIntervalFrequency));
                 Shoot();
-                yield return new WaitForSeconds(Random.Range(timeInterval, 5.5f));
+               
             }
 
             yield return new WaitForSeconds(Random.Range(1, 4));

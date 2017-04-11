@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArrowCollisionController : MonoBehaviour {
 
 
-    float energyToDecrease = 1.5f;
+    float energyToDecrease = 1.2f;
     void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.name.Contains("Player"))

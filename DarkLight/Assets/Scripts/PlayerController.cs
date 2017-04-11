@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     private float moveVelocity;
 
     public float teleportDistance;
-    float teleportCoolDown = 4;
-    float teleportSparkCoolDown = 30;
+    float teleportCoolDown = 3.8f;
+    
     bool isTeleportInCooldown;
     float teleportCooldownCount;
+
+    float teleportSparkCoolDown = 30;
     bool isSparkInCooldown;
     float sparkCooldownCount;
 
@@ -30,10 +32,10 @@ public class PlayerController : MonoBehaviour
     public float groundedHeight = 0.26f; //0.5f
 
 
-    private float teleportEnergy = 3.8f;
-    private float sparkEscapeEnergy = 15f;
+    private float teleportEnergy = 3.6f;
+    private float sparkEscapeEnergy = 14.5f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.095f;
+    private float defaultEnergyConsume = 0.085f;
     //private float debuffEnergyConsume = 0.8f;
 
     public VirtualButton teleportButton;
@@ -42,11 +44,9 @@ public class PlayerController : MonoBehaviour
     public VirtualButton leftButton;
     public VirtualButton upButton;
     
-
-
+    
     Rigidbody rb;
-
-
+    
     void Start()
     {
 
@@ -209,8 +209,8 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log("initial: "+transform.position);                    
                     if (rb.velocity.normalized.y < 0)
                     {
-                        aux = new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;     
-                        transform.position += new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;                        
+                        aux = new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;     
+                        transform.position += new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;                        
                     }
                     else
                     {
