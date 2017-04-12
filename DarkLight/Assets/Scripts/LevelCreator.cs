@@ -140,14 +140,14 @@ public class LevelCreator: MonoBehaviour {
             GameObject leftCanon;
             if (Random.Range(0, 10) < cannonsProbability)
             {
-                rightCanon = Instantiate(prefabCannon, new Vector3(-5.2f, i + RandomPositionY(), 0), Quaternion.identity);
+                rightCanon = Instantiate(prefabCannon, new Vector3(-5.5f, i + RandomPositionY(), 0), Quaternion.identity);
                 rightCanon.GetComponent<ArrowShooter>().SetArrowFrequency(arrowfrequency);
                 rightCanon.GetComponent<ArrowShooter>().SetArrowForce(arrowForce);
             }
 
             if (Random.Range(0, 10) < cannonsProbability)
             {
-                leftCanon = Instantiate(prefabCannon, new Vector3(5.2f, i + RandomPositionY(), 0), Quaternion.Euler(0, 180, 0));
+                leftCanon = Instantiate(prefabCannon, new Vector3(5.5f, i + RandomPositionY(), 0), Quaternion.Euler(0, 180, 0));
                 leftCanon.GetComponent<ArrowShooter>().SetArrowFrequency(arrowfrequency);
                 leftCanon.GetComponent<ArrowShooter>().SetArrowForce(arrowForce);
             }

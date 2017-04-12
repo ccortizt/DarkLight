@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArrowCollisionController : MonoBehaviour {
 
 
-    float energyToDecrease = 1.2f;
+    float energyToDecrease = 1.5f;
     
 
     void OnTriggerEnter(Collider coll)

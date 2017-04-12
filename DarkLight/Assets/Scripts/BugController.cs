@@ -9,6 +9,8 @@ public class BugController: MonoBehaviour{
     
     private Rigidbody rb;
 
+    public bool debugEnabled;
+
     void Start()
     {
        
@@ -57,6 +59,8 @@ public class BugController: MonoBehaviour{
     void OnCollisionEnter(Collision coll)
     {
 
+       
+
         if (coll.gameObject.name.Contains("left"))
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
@@ -69,12 +73,28 @@ public class BugController: MonoBehaviour{
             rb.velocity = new Vector3(-5f, GetComponent<Rigidbody>().velocity.y, 0);
         }
 
+        if (coll.impulse == Vector3.zero)
+        {
+            GetComponent<Rigidbody>().velocity = (new Vector3(Random.Range(-5, 5), Random.Range(-5, 12), 0) * moveSpeed);
+        }
+
         if (coll.gameObject.name.Contains("Platform"))
         {
+            if (debugEnabled)
+            {
+                Debug.Log(coll.impulse + gameObject.name);
+            }
+
             
             if (coll.impulse.x != 0)
-            {                               
+            {
+                if (debugEnabled)
+                    Debug.Log("1"+coll.impulse + gameObject.name);
+                
                 GetComponent<Rigidbody>().velocity = ((new Vector3(-(5), Random.Range(-5, 12), 0)) * moveSpeed);
+                
+                if (debugEnabled)
+                    Debug.Log("2"+coll.impulse + gameObject.name);
             }
 
             if (coll.impulse.x > 0 && coll.impulse.y == 0)

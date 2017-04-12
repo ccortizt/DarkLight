@@ -82,10 +82,10 @@ public class PlayerCollisionController: MonoBehaviour{
 
     public void EndGame(string endGameText)
     {
-        string continuar = "Sin vidas restantes";
-        GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().ChangeLives(-1);
+        //canDie = false;
+        string continuar = "Sin vidas restantes";       
         
-        if(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives() <= 0){
+        if(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives() <= 1){
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText + " " + continuar;
             
@@ -93,8 +93,14 @@ public class PlayerCollisionController: MonoBehaviour{
         }
         else
         {
-            continuar = "Continuar x " + GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives();
-            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
+            if (GameObject.FindGameObjectWithTag("Restart").GetComponent<Restart>().canDie)
+            {
+                GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().ChangeLives(-1);
+                continuar = "Continuar x " + GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives();
+                GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
+                GameObject.FindGameObjectWithTag("Restart").GetComponent<Restart>().SetCanDie(false);
+            }            
+
         }
         GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText +" "+continuar  ;
         

@@ -6,7 +6,6 @@ TagManager:
   tags:
   - EnergyBar
   - Teleport
-  - Multiple
   - Spark
   - Message
   - Restart
@@ -17,6 +16,8 @@ TagManager:
   - UpButton
   - EscapeButton
   - Damage
+  - Shield
+  - ShieldButton
   layers:
   - Default
   - TransparentFX

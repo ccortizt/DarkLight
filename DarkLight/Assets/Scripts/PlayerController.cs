@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     
-    public float moveSpeed = 6;
+    public float moveSpeed = 4.5f;
     private float moveVelocity;
 
     public float teleportDistance;
@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     float teleportSparkCoolDown = 30;
     bool isSparkInCooldown;
     float sparkCooldownCount;
+
+    float shieldCoolDown = 8.5f;
+
+    bool isShieldInCooldown;
+    float shieldCooldownCount;
 
     float maxDistanceTeleportedX = 4.75f;
 
@@ -33,14 +38,14 @@ public class PlayerController : MonoBehaviour
 
 
     private float teleportEnergy = 3.6f;
-    private float sparkEscapeEnergy = 14.5f;
+    private float sparkEscapeEnergy = 15f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.085f;
-    //private float debuffEnergyConsume = 0.8f;
+    private float defaultEnergyConsume = 0.08f;
 
-    private float shieldEnergy = 2f;
+    private float shieldEnergy = 3f;
 
     public VirtualButton teleportButton;
+    public VirtualButton shieldButton;
     public VirtualButton escapeJumpButton;
     public VirtualButton rightButton;
     public VirtualButton leftButton;
@@ -59,8 +64,10 @@ public class PlayerController : MonoBehaviour
         canJump = true;
         teleportCooldownCount = 0;
         sparkCooldownCount = 0;
+        shieldCooldownCount = 0;
         isTeleportInCooldown = false;
         isSparkInCooldown = false;
+        isShieldInCooldown = false;
         AccessToJoyPad();      
 
     }
@@ -70,6 +77,7 @@ public class PlayerController : MonoBehaviour
         try
         {
             teleportButton = GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>();
+            shieldButton = GameObject.FindGameObjectWithTag("ShieldButton").GetComponent<VirtualButton>();
             escapeJumpButton = GameObject.FindGameObjectWithTag("EscapeButton").GetComponent<VirtualButton>();
             rightButton = GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>();
             leftButton = GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>();
@@ -101,9 +109,11 @@ public class PlayerController : MonoBehaviour
         moveVelocity = 0f;
 
         SetTeleportCooldownIndicator();
+        SetShieldCooldownIndicator();
         SetSparkCooldownIndicator();
         
         UpdateTeleportCooldown();
+        UpdateShieldCooldown();
         UpdateSparkCooldown();
 
         if (PlayerHasEnoughEnergy())
@@ -142,10 +152,10 @@ public class PlayerController : MonoBehaviour
                 if (!PlayerExceedLimits())
                 {
                     //Debug.Log("initial: "+transform.position);                    
-                    if (rb.velocity.normalized.y < 0)
+                    if (rb.velocity.normalized.y <= 0)
                     {
-                        aux = new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;
-                        transform.position += new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;
+                        aux = new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;
+                        transform.position += new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;
                     }
                     else
                     {
@@ -175,20 +185,42 @@ public class PlayerController : MonoBehaviour
                 transform.position += new Vector3(0, escapeJumpHeight, 0);
                 SetSparkCoolDown();
             }
+           
+            if (shieldButton.isPressed && !isShieldInCooldown)
+            {
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
+                GetComponent<SphereCollider>().enabled = true;
+                transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                SetShieldCoolDown();
+                StartCoroutine(DeactivateShield());
+                
+            }
 
 #else
 
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetAxisRaw("Horizontal") > 0.2f)
             {
-                moveVelocity = moveSpeed;
+                moveVelocity = moveSpeed * Input.GetAxisRaw("Horizontal");
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetAxisRaw("Horizontal") < -0.2f)
             {
-                moveVelocity = -moveSpeed;
-                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+                moveVelocity = moveSpeed * Input.GetAxisRaw("Horizontal");
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);               
             }
+
+            //if (Input.GetKey(KeyCode.RightArrow))
+            //{
+            //    moveVelocity = moveSpeed;
+            //    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+            //}
+
+            //if (Input.GetKey(KeyCode.LeftArrow))
+            //{
+            //    moveVelocity = -moveSpeed;
+            //    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
+            //}
 
             GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
             
@@ -209,10 +241,10 @@ public class PlayerController : MonoBehaviour
                 if (!PlayerExceedLimits())
                 {
                     //Debug.Log("initial: "+transform.position);                    
-                    if (rb.velocity.normalized.y < 0)
+                    if (rb.velocity.normalized.y <= 0)
                     {
-                        aux = new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;     
-                        transform.position += new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;                        
+                        aux = new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;     
+                        transform.position += new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;                        
                     }
                     else
                     {
@@ -242,13 +274,14 @@ public class PlayerController : MonoBehaviour
                 transform.position += new Vector3(0, escapeJumpHeight, 0);
                 SetSparkCoolDown();
             }
-
-            if (Input.GetKeyDown(KeyCode.C))
+            
+            if (Input.GetKeyDown(KeyCode.C) && !isShieldInCooldown)
             {
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
                 GetComponent<SphereCollider>().enabled = true;
                 transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                 StartCoroutine(DeactivateShield());
+                SetShieldCoolDown();
             }
 #endif
 
@@ -272,9 +305,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    private void SetShieldCoolDown()
+    {
+        shieldCooldownCount = shieldCoolDown;
+        isShieldInCooldown = true;
+    }
     private void SetSparkCoolDown()
     {
+        
         sparkCooldownCount = teleportSparkCoolDown;
         isSparkInCooldown = true;
     }
@@ -283,6 +321,18 @@ public class PlayerController : MonoBehaviour
     {
         teleportCooldownCount = teleportCoolDown;
         isTeleportInCooldown = true;
+    }
+
+    private void UpdateShieldCooldown()
+    {
+        if (shieldCooldownCount > 0 && isShieldInCooldown)
+        {
+            shieldCooldownCount -= Time.deltaTime;
+        }
+        else if (shieldCooldownCount <= 0)
+        {
+            isShieldInCooldown = false;
+        }
     }
     
     private void UpdateTeleportCooldown()
@@ -303,6 +353,14 @@ public class PlayerController : MonoBehaviour
             GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.gray;
         else
             GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.green;
+    }
+
+    private void SetShieldCooldownIndicator()
+    {
+        if (isShieldInCooldown)
+            GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = Color.gray;
+        else
+            GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = Color.blue;
     }
 
     private void SetSparkCooldownIndicator()
@@ -337,8 +395,8 @@ public class PlayerController : MonoBehaviour
     public bool CheckPlayerIsGrounded()
     {
 
-        Vector3 leftSide = new Vector3(transform.position.x - 0.3f, transform.position.y + heightOffset, transform.position.z);
-        Vector3 rightSide = new Vector3(transform.position.x + 0.3f, transform.position.y + heightOffset, transform.position.z);
+        Vector3 leftSide = new Vector3(transform.position.x - 0.2f, transform.position.y + heightOffset, transform.position.z);
+        Vector3 rightSide = new Vector3(transform.position.x + 0.2f, transform.position.y + heightOffset, transform.position.z);
         Vector3 midSide = new Vector3(transform.position.x , transform.position.y + heightOffset, transform.position.z);
 
         if (Physics.Raycast(leftSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(rightSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(midSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(leftSide, Vector3.down, groundedHeight + heightOffset, destroyWall) || Physics.Raycast(rightSide, Vector3.down, groundedHeight + heightOffset, destroyWall) || Physics.Raycast(midSide, Vector3.down, groundedHeight + heightOffset, destroyWall))
@@ -360,6 +418,7 @@ public class PlayerController : MonoBehaviour
             GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>().ButtonOff();
             GameObject.FindGameObjectWithTag("UpButton").GetComponent<VirtualButton>().ButtonOff();
             GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>().ButtonOff();
+            GameObject.FindGameObjectWithTag("ShieldButton").GetComponent<VirtualButton>().ButtonOff();
         }
         catch (System.Exception e)
         {
