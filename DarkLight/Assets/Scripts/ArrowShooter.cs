@@ -33,8 +33,7 @@ public class ArrowShooter : MonoBehaviour {
 
     }
       public void Shoot(){
-
-
+          
           Vector3 dir = transform.FindChild("SpawnPoint").right;
 
           int angle = -90;
@@ -46,7 +45,9 @@ public class ArrowShooter : MonoBehaviour {
           
           GameObject projectile = Instantiate(arrowPrefab, transform.FindChild("SpawnPoint").position, Quaternion.Euler(0,-angle,0));
           
+          
           projectile.GetComponent<Rigidbody>().velocity = dir * magnitude;
+          
           Destroy(projectile, 5f);
 
       }

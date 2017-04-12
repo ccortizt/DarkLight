@@ -6,6 +6,16 @@ public class ArrowCollisionController : MonoBehaviour {
 
 
     float energyToDecrease = 1.2f;
+    
+
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.name.Contains("Player"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.name.Contains("Player"))

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class PlayerCollisionController: MonoBehaviour{
 
     
-
     public bool playerIsCrushed;
 
     private bool staticWallChecked;
@@ -108,4 +107,25 @@ public class PlayerCollisionController: MonoBehaviour{
         GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "";
         GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);            
     }
+
+    void OnCollisionEnter(Collision coll)
+    {
+
+        if (coll.collider.gameObject.name.Contains("Bug"))
+        {
+            GetComponent<PlayerEnergyController>().DecreaseEnergy(coll.gameObject.GetComponent<BugController>().GetEnergyDrain());
+            GetComponent<Rigidbody>().velocity = new Vector3(0, 8f, 0);
+            GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
+        }
+    }
+
+    void OnTriggerEnter(Collider coll)
+    {
+
+        if (coll.gameObject.name.Contains("Bug"))
+        {
+            Destroy(coll.gameObject);
+        }
+    }
+   
 }

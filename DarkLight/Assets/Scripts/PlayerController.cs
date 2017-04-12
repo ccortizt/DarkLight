@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private float defaultEnergyConsume = 0.085f;
     //private float debuffEnergyConsume = 0.8f;
 
+    private float shieldEnergy = 2f;
+
     public VirtualButton teleportButton;
     public VirtualButton escapeJumpButton;
     public VirtualButton rightButton;
@@ -142,8 +144,8 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log("initial: "+transform.position);                    
                     if (rb.velocity.normalized.y < 0)
                     {
-                        aux = new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;
-                        transform.position += new Vector3(rb.velocity.normalized.x, 0f, 0f) * teleportDistance;
+                        aux = new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;
+                        transform.position += new Vector3(rb.velocity.normalized.x, 0.5f, 0f) * teleportDistance;
                     }
                     else
                     {
@@ -239,6 +241,14 @@ public class PlayerController : MonoBehaviour
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(sparkEscapeEnergy);
                 transform.position += new Vector3(0, escapeJumpHeight, 0);
                 SetSparkCoolDown();
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
+                GetComponent<SphereCollider>().enabled = true;
+                transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                StartCoroutine(DeactivateShield());
             }
 #endif
 
@@ -367,6 +377,10 @@ public class PlayerController : MonoBehaviour
         transform.FindChild("LightningHit").GetComponent<VFXController>().PlayEffect();
     }
 
+    IEnumerator DeactivateShield()
+    {
+        yield return new WaitForSeconds(5);
+        GetComponent<SphereCollider>().enabled = false;
+    }
+
 }
-
-

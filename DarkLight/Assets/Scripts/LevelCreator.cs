@@ -80,8 +80,7 @@ public class LevelCreator: MonoBehaviour {
             var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f,3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 10), 0), Quaternion.identity);
             b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
             b.GetComponent<BugController>().SetEnergyDrain(enemyBugVelocity);
-            
-            b.GetComponent<BugController>().SetCanHit(isBugAtackEnabled);
+            b.transform.GetChild(0).gameObject.GetComponent<ProximityController>().SetCanHit(isBugAtackEnabled);
             b.name = b.name + " " + i;
            
         }

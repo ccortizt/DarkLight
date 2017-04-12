@@ -7,8 +7,6 @@ public class BugController: MonoBehaviour{
     private float energyDrainAmount = 2.1f;
     private float moveSpeed = 0.8f;
     
-    private bool canHit;
-
     private Rigidbody rb;
 
     void Start()
@@ -39,7 +37,11 @@ public class BugController: MonoBehaviour{
         energyDrainAmount = energyDefaultDrainAmount + energyDefaultDrainAmount * energyPercentage;
     }
 
-
+    public float GetEnergyDrain()
+    {
+        return energyDefaultDrainAmount;
+    }
+    
     private IEnumerator RandomJump()
     {
         for (int i = 0; i < 100; i++)
@@ -54,12 +56,6 @@ public class BugController: MonoBehaviour{
     }
     void OnCollisionEnter(Collision coll)
     {
-        if (coll.gameObject.name.Contains("Player"))
-        {
-            coll.gameObject.GetComponent<PlayerEnergyController>().DecreaseEnergy(energyDrainAmount);          
-            coll.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 8f, 0);
-            GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
-        }
 
         if (coll.gameObject.name.Contains("left"))
         {
@@ -78,7 +74,6 @@ public class BugController: MonoBehaviour{
             
             if (coll.impulse.x != 0)
             {                               
-                //rb.velocity = ((new Vector3(-(rb.velocity.x + 5), Random.Range(-5, 12), 0)) * moveSpeed);
                 GetComponent<Rigidbody>().velocity = ((new Vector3(-(5), Random.Range(-5, 12), 0)) * moveSpeed);
             }
 
@@ -111,38 +106,4 @@ public class BugController: MonoBehaviour{
         }
     }
 
-
-    void OnTriggerEnter(Collider coll)
-    {
-        
-        if (coll.gameObject.name.Contains("Player") && canHit)
-        {
-            canHit = false;
-            
-            transform.Translate(0, 2, 0);
-            //Debug.Log("init: "+transform.position);
-            Vector3 dif = transform.position - coll.transform.position;
-            //Debug.Log("dif "+dif);
-          
-            dif.x = (dif.x > 0) ? dif.x - 0.6f : dif.x + 0.6f;
-            //dif.x = (dif.y > 0) ? dif.y - 0.0005f : dif.y + 0.0005f;
-            //transform.position = new Vector3(x,y,0f);
-            transform.Translate(-dif.x , -dif.y,0,Space.World);
-            StartCoroutine(CanHitAgain());
-            //Debug.Log("fin: "+transform.position);
-
-        }
-    }
-
-    public void SetCanHit(bool can)
-    {
-        this.canHit = can;
-    }
-
-    IEnumerator CanHitAgain()
-    {
-        yield return new WaitForSeconds(2f);
-        
-        canHit = true;
-    }
 }
