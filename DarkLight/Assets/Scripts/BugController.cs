@@ -58,9 +58,7 @@ public class BugController: MonoBehaviour{
     }
     void OnCollisionEnter(Collision coll)
     {
-
-       
-
+             
         if (coll.gameObject.name.Contains("left"))
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);

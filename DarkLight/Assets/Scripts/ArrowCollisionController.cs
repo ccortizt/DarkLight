@@ -6,6 +6,7 @@ public class ArrowCollisionController : MonoBehaviour {
 
 
     float energyToDecrease = 1.5f;
+    float energyToIncrease = 0.6f;
     
 
     void OnTriggerEnter(Collider coll)
@@ -13,6 +14,7 @@ public class ArrowCollisionController : MonoBehaviour {
         if (coll.gameObject.name.Contains("Player"))
         {
             Destroy(gameObject);
+            coll.gameObject.GetComponent<PlayerEnergyController>().AddEnergy(energyToIncrease);
         }
     }
 

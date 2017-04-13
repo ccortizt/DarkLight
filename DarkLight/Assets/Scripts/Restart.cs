@@ -20,8 +20,8 @@ public class Restart: MonoBehaviour{
     public void RestartAllGame()
     {
         GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().RestartAllGame();
+        GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().SetDifficultyProportions(1);
         SceneManager.LoadScene(0);
-
     }
 
     public void SetCanDie(bool can)

@@ -15,6 +15,8 @@ public class PlayerCollisionController: MonoBehaviour{
     private int staticWallLayer = 10;
     private int staticGroundLayer = 8;
 
+    private float energyPercentageIncrease = 0.4f;
+
     float timeStaying;
 
     private bool dontCheck;
@@ -46,7 +48,7 @@ public class PlayerCollisionController: MonoBehaviour{
             
             if (coll.impulse.x != 0)
             {
-                //Debug.Log(coll.impulse+ " s");
+                Debug.Log(coll.impulse+ " s");
                 staticWallChecked = true;
                 timeStaying += Time.deltaTime;
             }          
@@ -57,6 +59,7 @@ public class PlayerCollisionController: MonoBehaviour{
         {
             if (coll.impulse.x != 0)
             {
+                
                 //Debug.Log(coll.impulse+ " d");
                 dynamicWallChecked = true;
                 
@@ -66,7 +69,7 @@ public class PlayerCollisionController: MonoBehaviour{
             
         }
 
-        if (timeStaying > 6f && coll.impulse != Vector3.zero)
+        if (timeStaying > 6f && coll.impulse != Vector3.zero && dynamicWallChecked)
         {
             EndGame("Fuiste Aplastado");
         }
@@ -75,8 +78,8 @@ public class PlayerCollisionController: MonoBehaviour{
 
     void OnCollisionExit(Collision coll)
     {
-        
-        if (coll.gameObject.layer == staticWallLayer)
+
+        if (coll.gameObject.layer == staticWallLayer || coll.gameObject.layer == staticGroundLayer)
         {   
             staticWallChecked = false;
             timeStaying = 0 ;
@@ -101,9 +104,10 @@ public class PlayerCollisionController: MonoBehaviour{
     public void EndGame(string endGameText)
     {
         //canDie = false;
-        string continuar = "Sin vidas restantes";       
+        string continuar = "";       
         
         if(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLives() <= 1){
+            continuar = "Sin vidas restantes";       
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText + " " + continuar;
             
@@ -151,6 +155,7 @@ public class PlayerCollisionController: MonoBehaviour{
         if (coll.gameObject.name.Contains("Bug"))
         {
             Destroy(coll.gameObject);
+            GetComponent<PlayerEnergyController>().AddEnergy(coll.gameObject.GetComponent<BugController>().GetEnergyDrain() * energyPercentageIncrease);
         }
     }
    IEnumerator TurnLightOff(){

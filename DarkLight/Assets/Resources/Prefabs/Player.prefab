@@ -368,7 +368,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942985068590736}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 14384f324830e04469bcf7aae74dc10a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -559,7 +559,7 @@ MonoBehaviour:
   moveSpeed: 6
   teleportDistance: 2.5
   jumpHeight: 6.7
-  escapeJumpHeight: 15
+  escapeJumpHeight: 16
   canJump: 0
   whatIsGround:
     serializedVersion: 2

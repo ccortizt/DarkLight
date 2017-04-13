@@ -137,6 +137,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23659754825873186
 MeshRenderer:
@@ -168,6 +169,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23723779132375552
 MeshRenderer:
@@ -199,6 +201,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33041858703892840
 MeshFilter:
@@ -227,7 +230,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1311259946679498}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 14384f324830e04469bcf7aae74dc10a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -239,7 +242,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812515698487688}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 14384f324830e04469bcf7aae74dc10a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

@@ -38,11 +38,11 @@ public class PlayerController : MonoBehaviour
 
 
     private float teleportEnergy = 3.6f;
-    private float sparkEscapeEnergy = 15f;
+    private float sparkEscapeEnergy = 18f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.078f;
+    private float defaultEnergyConsume = 0.082f;
 
-    private float shieldEnergy = 3f;
+    private float shieldEnergy = 4f;
 
     public VirtualButton teleportButton;
     public VirtualButton shieldButton;
