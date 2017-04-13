@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private float teleportEnergy = 3.6f;
     private float sparkEscapeEnergy = 15f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.08f;
+    private float defaultEnergyConsume = 0.078f;
 
     private float shieldEnergy = 3f;
 
@@ -198,29 +198,18 @@ public class PlayerController : MonoBehaviour
 
 #else
 
-            if (Input.GetAxisRaw("Horizontal") > 0.2f)
+            if (Input.GetAxisRaw("Horizontal") > 0.05f)
             {
                 moveVelocity = moveSpeed * Input.GetAxisRaw("Horizontal");
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
             }
 
-            if (Input.GetAxisRaw("Horizontal") < -0.2f)
+            if (Input.GetAxisRaw("Horizontal") < -0.05f)
             {
                 moveVelocity = moveSpeed * Input.GetAxisRaw("Horizontal");
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);               
             }
 
-            //if (Input.GetKey(KeyCode.RightArrow))
-            //{
-            //    moveVelocity = moveSpeed;
-            //    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
-            //}
-
-            //if (Input.GetKey(KeyCode.LeftArrow))
-            //{
-            //    moveVelocity = -moveSpeed;
-            //    GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
-            //}
 
             GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
             

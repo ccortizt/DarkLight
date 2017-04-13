@@ -8,15 +8,20 @@ public class PlayerCollisionController: MonoBehaviour{
     public bool playerIsCrushed;
 
     private bool staticWallChecked;
+
     private bool dynamicWallChecked;
 
     private int dynamicWallLayer = 9;
     private int staticWallLayer = 10;
+    private int staticGroundLayer = 8;
+
+    float timeStaying;
 
     private bool dontCheck;
 
     void Start()
     {
+        timeStaying = 0 ;
         dontCheck = false;
         staticWallChecked = false;
         dynamicWallChecked = false;
@@ -35,14 +40,17 @@ public class PlayerCollisionController: MonoBehaviour{
 
     public void OnCollisionStay(Collision coll)
     {
-        if (coll.gameObject.layer == staticWallLayer)
+
+        if (coll.gameObject.layer == staticWallLayer || coll.gameObject.layer == staticGroundLayer)
         {
+            
             if (coll.impulse.x != 0)
             {
                 //Debug.Log(coll.impulse+ " s");
                 staticWallChecked = true;
+                timeStaying += Time.deltaTime;
             }          
-
+            
         }
 
         if (coll.gameObject.layer == dynamicWallLayer)
@@ -51,8 +59,16 @@ public class PlayerCollisionController: MonoBehaviour{
             {
                 //Debug.Log(coll.impulse+ " d");
                 dynamicWallChecked = true;
+                
             }
+
+            timeStaying += Time.deltaTime;           
             
+        }
+
+        if (timeStaying > 6f && coll.impulse != Vector3.zero)
+        {
+            EndGame("Fuiste Aplastado");
         }
 
     }
@@ -63,11 +79,13 @@ public class PlayerCollisionController: MonoBehaviour{
         if (coll.gameObject.layer == staticWallLayer)
         {   
             staticWallChecked = false;
+            timeStaying = 0 ;
         }
 
         if (coll.gameObject.layer == dynamicWallLayer)
         {
             dynamicWallChecked = false;
+            timeStaying = 0;
         }
 
     }
@@ -105,6 +123,8 @@ public class PlayerCollisionController: MonoBehaviour{
         GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = endGameText +" "+continuar  ;
         
         GetComponent<PlayerController>().enabled = false;
+        StartCoroutine(TurnLightOff());
+        
     }
 
     private IEnumerator ShowFullLose()
@@ -133,5 +153,9 @@ public class PlayerCollisionController: MonoBehaviour{
             Destroy(coll.gameObject);
         }
     }
-   
+   IEnumerator TurnLightOff(){
+       yield return new WaitForSeconds(3);
+       transform.FindChild("LightObject").gameObject.GetComponent<Light>().enabled = false;
+   }
+    
 }

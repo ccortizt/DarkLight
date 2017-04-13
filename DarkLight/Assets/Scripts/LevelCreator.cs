@@ -39,6 +39,7 @@ public class LevelCreator: MonoBehaviour {
     int destroyWallPercentage;
     float destroyWallVelocityProportion;
     int numberOfEnemyBugs;
+    float enemyBugInstanceTime;
     bool isBugAtackEnabled;
     float enemyBugVelocity;
     float enemyBugDrain;
@@ -56,13 +57,14 @@ public class LevelCreator: MonoBehaviour {
         waitDestroyTime = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallWaitTime;
         platformSizePercentageChooser = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().PlatformSizePercentage;
         numberOfEnemyBugs = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugProportion;
+        enemyBugInstanceTime = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugInstanceTime;
         isBugAtackEnabled = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnableBugAtack;
         enemyBugVelocity = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugVelocity;
         enemyBugDrain = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugEnergyDrain;
         cannonsProbability = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().CannonPercentage;
         arrowfrequency = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinArrowFrequencyTime;
         arrowForce = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().ArrowForce;
-         
+        
 
         FillMap();
         AddEnergyPrefabs();
@@ -76,8 +78,8 @@ public class LevelCreator: MonoBehaviour {
     {
         for (int i = 0; i < numberOfEnemyBugs; i++)
         {
-            yield return new WaitForSeconds(6);
-            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f,3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 5, 10), 0), Quaternion.identity);
+            yield return new WaitForSeconds(enemyBugInstanceTime);
+            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f,3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 4, 8f), 0), Quaternion.identity);
             b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
             b.GetComponent<BugController>().SetEnergyDrain(enemyBugVelocity);
             b.transform.GetChild(0).gameObject.GetComponent<ProximityController>().SetCanHit(isBugAtackEnabled);
@@ -140,14 +142,14 @@ public class LevelCreator: MonoBehaviour {
             GameObject leftCanon;
             if (Random.Range(0, 10) < cannonsProbability)
             {
-                rightCanon = Instantiate(prefabCannon, new Vector3(-5.5f, i + RandomPositionY(), 0), Quaternion.identity);
+                rightCanon = Instantiate(prefabCannon, new Vector3(-5.505f, i + RandomPositionY(), 0), Quaternion.identity);
                 rightCanon.GetComponent<ArrowShooter>().SetArrowFrequency(arrowfrequency);
                 rightCanon.GetComponent<ArrowShooter>().SetArrowForce(arrowForce);
             }
 
             if (Random.Range(0, 10) < cannonsProbability)
             {
-                leftCanon = Instantiate(prefabCannon, new Vector3(5.5f, i + RandomPositionY(), 0), Quaternion.Euler(0, 180, 0));
+                leftCanon = Instantiate(prefabCannon, new Vector3(5.505f, i + RandomPositionY(), 0), Quaternion.Euler(0, 180, 0));
                 leftCanon.GetComponent<ArrowShooter>().SetArrowFrequency(arrowfrequency);
                 leftCanon.GetComponent<ArrowShooter>().SetArrowForce(arrowForce);
             }

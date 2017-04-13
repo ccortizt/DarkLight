@@ -35,7 +35,8 @@ public class LevelProgressController: MonoBehaviour{
         }
         else
         {
-            GameObject.Find("BigMessageCanvas").SetActive(true);
+            this.levelCount++;
+            GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);    
             GameObject.Find("BigMessageCanvas").transform.FindChild("Panel/VictoryText").gameObject.SetActive(true);
             GameObject.Find("BigMessageCanvas").transform.FindChild("Panel/DefeatText").gameObject.SetActive(false);
         }
