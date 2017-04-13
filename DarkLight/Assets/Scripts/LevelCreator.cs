@@ -9,6 +9,7 @@ public class LevelCreator: MonoBehaviour {
     public GameObject prefabDoubleDestroyPlatform;
     public GameObject prefabEnergy;
     public GameObject prefabEnemyBug;
+    public GameObject prefabEnemyFire;
     public GameObject prefabDoor;
     public GameObject prefabCannon;
    
@@ -34,6 +35,8 @@ public class LevelCreator: MonoBehaviour {
 
     int minEnergyRange;
     int maxEnergyRange;
+    int minFireRange;
+    int maxFireRange;
     int minPlatformRange;
     int maxPlatformRange;
     int destroyWallPercentage;
@@ -51,6 +54,8 @@ public class LevelCreator: MonoBehaviour {
     {        
         minEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinEnergyRange;
         maxEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxEnergyRange;
+        minFireRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinEnergyRange;
+        maxFireRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxEnergyRange;
         minPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinPlatformRange;
         maxPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxPlatformRange;
         destroyWallPercentage = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallPercentage;
@@ -67,8 +72,9 @@ public class LevelCreator: MonoBehaviour {
         
 
         FillMap();
-        AddEnergyPrefabs();
+        AddEnergyPrefabs();       
         AddCannons();
+        AddFirePrefabs();
         StartCoroutine(AddEnemyBugs());
         PutDoor();
         StartCoroutine(DestroyMap());
@@ -93,9 +99,19 @@ public class LevelCreator: MonoBehaviour {
     {
         int basePosY = 7;
 
-        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minEnergyRange,maxEnergyRange) * 2)
+        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minEnergyRange,maxEnergyRange) * 3)
         {
             Instantiate(prefabEnergy, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), i + RandomPositionY(), 0f), Quaternion.identity);
+        }
+    }
+
+    private void AddFirePrefabs()
+    {
+        int basePosY = 7;
+
+        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minFireRange, maxFireRange) * 2)
+        {
+            Instantiate(prefabEnemyFire, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), i + RandomPositionY(), 0f), Quaternion.identity);
         }
     }
 

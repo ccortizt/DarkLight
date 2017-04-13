@@ -11,6 +11,7 @@ public class LevelDifficultyController : MonoBehaviour
         get { return minEnergyRange; }
         set { minEnergyRange = value; }
     }
+   
     int maxEnergyRange;
 
     public int MaxEnergyRange
@@ -19,8 +20,24 @@ public class LevelDifficultyController : MonoBehaviour
         set { maxEnergyRange = value; }
     }
 
-    int minPlatformRange;
+    int minFireRange;
 
+    public int MinFireRange
+    {
+        get { return minFireRange; }
+        set { minFireRange = value; }
+    }
+
+    int maxFireRange;
+
+    public int MaxFireRange
+    {
+        get { return maxFireRange; }
+        set { maxFireRange = value; }
+    }
+
+    int minPlatformRange;
+    
     public int MinPlatformRange
     {
         get { return minPlatformRange; }
@@ -148,6 +165,7 @@ public class LevelDifficultyController : MonoBehaviour
         {
             case 1:
                 SetEnergyRange(0);
+                SetFireRange(0);
                 SetPlatformRange(2);
                 SetDestroyWallProportion(0);
                 SetDestroyWallWaitTime(1);
@@ -166,6 +184,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 2:
                 SetEnergyRange(1);
+                SetFireRange(1);
                 SetPlatformRange(2);
                 SetDestroyWallProportion(0);
                 SetDestroyWallWaitTime(1);
@@ -183,6 +202,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 3:
                 SetEnergyRange(1);
+                SetFireRange(1);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(0);
                 SetDestroyWallWaitTime(-1);
@@ -200,6 +220,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 4:
                 SetEnergyRange(1);
+                SetFireRange(1);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(1);
                 SetDestroyWallWaitTime(-1);
@@ -217,6 +238,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 5:
                 SetEnergyRange(0);
+                SetFireRange(2);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(1);
                 SetDestroyWallWaitTime(2);
@@ -233,6 +255,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 6:
                 SetEnergyRange(1);
+                SetFireRange(2);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(2);
@@ -249,6 +272,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 7:
                 SetEnergyRange(0);
+                SetFireRange(2);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(3);
@@ -265,6 +289,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 8:
                 SetEnergyRange(0);
+                SetFireRange(2);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(3);
@@ -280,7 +305,8 @@ public class LevelDifficultyController : MonoBehaviour
                 SetArrowForce(4);
                 break;
             case 9:
-                SetEnergyRange(0);
+                SetEnergyRange(1);
+                SetFireRange(2);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(3);
@@ -297,6 +323,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 10:
                 SetEnergyRange(0);
+                SetFireRange(3);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(4);
@@ -314,6 +341,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 11:
                 SetEnergyRange(0);
+                SetFireRange(3);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(4);
@@ -331,6 +359,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             case 12:
                 SetEnergyRange(0);
+                SetFireRange(3);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(4);
@@ -346,7 +375,8 @@ public class LevelDifficultyController : MonoBehaviour
                 
                 break;
             case 13:
-                SetEnergyRange(0);
+                SetEnergyRange(2);
+                SetFireRange(3);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(4);
@@ -363,7 +393,8 @@ public class LevelDifficultyController : MonoBehaviour
                 
                 break;
             case 14:
-                SetEnergyRange(0);
+                SetEnergyRange(2);
+                SetFireRange(3);
                 SetPlatformRange(1);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(5);
@@ -380,7 +411,8 @@ public class LevelDifficultyController : MonoBehaviour
                 
                 break;
             case 15:
-                SetEnergyRange(0);
+                SetEnergyRange(2);
+                SetFireRange(3);
                 SetPlatformRange(2);
                 SetDestroyWallProportion(4);
                 SetDestroyWallWaitTime(5);
@@ -398,6 +430,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             default:
                 SetEnergyRange(0);
+                SetFireRange(0);
                 SetPlatformRange(0);
                 SetDestroyWallProportion(-1);
                 SetDestroyWallWaitTime(-1);
@@ -433,6 +466,33 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
             default:
                 minEnergyRange = 2;
+                maxEnergyRange = 6;
+                break;
+        }
+    }
+
+    private void SetFireRange(int proportion)
+    {
+        
+        switch (proportion)
+        {
+            case 1:
+                minEnergyRange = 4;
+                maxEnergyRange = 7;
+                break;
+            case 2:
+
+                minEnergyRange = 4;
+                maxEnergyRange = 6;
+                break;
+            case 3:
+
+                minEnergyRange = 4;
+                maxEnergyRange = 8;
+                break;
+
+            default:
+                minEnergyRange = 3;
                 maxEnergyRange = 6;
                 break;
         }
