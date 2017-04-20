@@ -277,7 +277,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GetComponent<PlayerCollisionController>().EndGame("Sin energía");
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().EndGame("Sin energía");
+            
         }
 
     }

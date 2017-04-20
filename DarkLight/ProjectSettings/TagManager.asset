@@ -18,6 +18,7 @@ TagManager:
   - Damage
   - Shield
   - ShieldButton
+  - GameManager
   layers:
   - Default
   - TransparentFX

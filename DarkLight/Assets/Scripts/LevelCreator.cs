@@ -51,24 +51,27 @@ public class LevelCreator: MonoBehaviour {
     float arrowForce;
 
     void Start()
-    {        
-        minEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinEnergyRange;
-        maxEnergyRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxEnergyRange;
-        minFireRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinEnergyRange;
-        maxFireRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxEnergyRange;
-        minPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinPlatformRange;
-        maxPlatformRange = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MaxPlatformRange;
-        destroyWallPercentage = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallPercentage;
-        waitDestroyTime = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().DestroyWallWaitTime;
-        platformSizePercentageChooser = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().PlatformSizePercentage;
-        numberOfEnemyBugs = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugProportion;
-        enemyBugInstanceTime = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugInstanceTime;
-        isBugAtackEnabled = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnableBugAtack;
-        enemyBugVelocity = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugVelocity;
-        enemyBugDrain = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().EnemyBugEnergyDrain;
-        cannonsProbability = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().CannonPercentage;
-        arrowfrequency = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().MinArrowFrequencyTime;
-        arrowForce = GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().ArrowForce;
+    {
+
+        GameObject manager = GameObject.FindGameObjectWithTag("GameManager");
+
+        minEnergyRange = manager.GetComponent<LevelDifficultyController>().MinEnergyRange;
+        maxEnergyRange = manager.GetComponent<LevelDifficultyController>().MaxEnergyRange;
+        minFireRange = manager.GetComponent<LevelDifficultyController>().MinEnergyRange;
+        maxFireRange = manager.GetComponent<LevelDifficultyController>().MaxEnergyRange;
+        minPlatformRange = manager.GetComponent<LevelDifficultyController>().MinPlatformRange;
+        maxPlatformRange = manager.GetComponent<LevelDifficultyController>().MaxPlatformRange;
+        destroyWallPercentage = manager.GetComponent<LevelDifficultyController>().DestroyWallPercentage;
+        waitDestroyTime = manager.GetComponent<LevelDifficultyController>().DestroyWallWaitTime;
+        platformSizePercentageChooser = manager.GetComponent<LevelDifficultyController>().PlatformSizePercentage;
+        numberOfEnemyBugs = manager.GetComponent<LevelDifficultyController>().EnemyBugProportion;
+        enemyBugInstanceTime = manager.GetComponent<LevelDifficultyController>().EnemyBugInstanceTime;
+        isBugAtackEnabled = manager.GetComponent<LevelDifficultyController>().EnableBugAtack;
+        enemyBugVelocity = manager.GetComponent<LevelDifficultyController>().EnemyBugVelocity;
+        enemyBugDrain = manager.GetComponent<LevelDifficultyController>().EnemyBugEnergyDrain;
+        cannonsProbability = manager.GetComponent<LevelDifficultyController>().CannonPercentage;
+        arrowfrequency = manager.GetComponent<LevelDifficultyController>().MinArrowFrequencyTime;
+        arrowForce = manager.GetComponent<LevelDifficultyController>().ArrowForce;
         
 
         FillMap();
@@ -99,7 +102,7 @@ public class LevelCreator: MonoBehaviour {
     {
         int basePosY = 7;
 
-        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minEnergyRange,maxEnergyRange) * 3)
+        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minEnergyRange,maxEnergyRange) * 4)
         {
             Instantiate(prefabEnergy, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), i + RandomPositionY(), 0f), Quaternion.identity);
         }

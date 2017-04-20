@@ -3,29 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Restart: MonoBehaviour{
-
-
-    public bool canDie;
-
-    void Start()
-    {
-        canDie = true;
-    }
+    
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
-        canDie = true;
+        GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().SetHUDMessage("");
+        Time.timeScale = 1;
     }
 
     public void RestartAllGame()
     {
-        GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().RestartAllGame();
-        GameObject.Find("LevelProgressManager").GetComponent<LevelDifficultyController>().SetDifficultyProportions(1);
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelProgressController>().RestartAllGame();
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelDifficultyController>().SetDifficultyProportions(1);
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 
-    public void SetCanDie(bool can)
-    {
-        canDie = can;
-    }
 }
