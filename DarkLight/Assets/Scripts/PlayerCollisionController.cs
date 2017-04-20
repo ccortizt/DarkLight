@@ -23,6 +23,8 @@ public class PlayerCollisionController: MonoBehaviour{
 
     GameObject gameManager;
 
+    GameObject currentCrushWall;
+
     void Start()
     {
         timeStaying = 0 ;
@@ -35,11 +37,16 @@ public class PlayerCollisionController: MonoBehaviour{
     {
         if (CheckCrushed())
         {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             dontCheck = true;
             GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
+            if (currentCrushWall != null)
+            {
+                currentCrushWall.GetComponent<PlatformDestroyController>().enabled = false;
+            }
             gameManager.GetComponent<DeathController>().EndGame("Fuiste Aplastado");
-            //StartCoroutine(TurnLightOff());
             
+            //StartCoroutine(TurnLightOff());            
         }
     }
    
@@ -64,7 +71,8 @@ public class PlayerCollisionController: MonoBehaviour{
             if (coll.impulse.x != 0)
             {                
                 //Debug.Log(coll.impulse+ " d");
-                dynamicWallChecked = true;                
+                dynamicWallChecked = true;
+                currentCrushWall = coll.gameObject;
             }
 
             timeStaying += Time.deltaTime;           
@@ -91,6 +99,7 @@ public class PlayerCollisionController: MonoBehaviour{
         if (coll.gameObject.layer == dynamicWallLayer)
         {
             dynamicWallChecked = false;
+            currentCrushWall = null;
             timeStaying = 0;
         }
 

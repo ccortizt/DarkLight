@@ -12,7 +12,7 @@ public class DeathController : MonoBehaviour
 
     void Start()
     {
-        playerLives = 1;
+        playerLives = 3 ;
     }
 
     public void DecreaseLives()

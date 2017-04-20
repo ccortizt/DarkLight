@@ -6,7 +6,6 @@ public class LevelProgressController: MonoBehaviour{
 
     private int levelCount;
     private static bool levelProgressExists;
-    //private int playerContinues = 3;
 
     void Awake()
     {

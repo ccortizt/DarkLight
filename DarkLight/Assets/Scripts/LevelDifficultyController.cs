@@ -670,8 +670,7 @@ public class LevelDifficultyController : MonoBehaviour
 
     private void SetEnableBugEnemy(int dificulty)
     {
-        if (dificulty > 0)
-            enableBugAtack = true;
+        enableBugAtack = (dificulty > 0) ? true : false;
     }
     
     private void SetVelocityOfEnemyBug(int percentage)
