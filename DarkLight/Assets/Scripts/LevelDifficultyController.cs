@@ -680,19 +680,19 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                enemyBugVelocity = 0.9f;
+                enemyBugVelocity = 0.85f;
                 break;
             case 2:
-                enemyBugVelocity = 1f;
+                enemyBugVelocity = 0.95f;
                 break;
             case 3:
-                enemyBugVelocity = 1.1f;
+                enemyBugVelocity = 1.05f;
                 break;
             case 4:
                 enemyBugVelocity = 1.2f;
                 break;
             default:
-                enemyBugVelocity = 0.7f;
+                enemyBugVelocity = 0.75f;
                 break;
         }
     }
@@ -704,16 +704,16 @@ public class LevelDifficultyController : MonoBehaviour
         {
 
             case 1:
-                enemyBugEnergyDrain = 0.5f;
+                enemyBugEnergyDrain = 0.35f;
                 break;
             case 2:
-                enemyBugEnergyDrain = 1;
+                enemyBugEnergyDrain = 0.75f;
                 break;
             case 3:
-                enemyBugEnergyDrain = 1.5f;
+                enemyBugEnergyDrain = 1.2f;
                 break;
             case 4:
-                enemyBugEnergyDrain = 2.5f;
+                enemyBugEnergyDrain = 2f;
                 break;
             default:
                 enemyBugEnergyDrain = 0;

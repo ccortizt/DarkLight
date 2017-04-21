@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireController : MonoBehaviour
 {
 
-    private float energyToDecrease = 3f;
+    private float energyToDecrease = 2.5f;
 
     void OnCollisionEnter(Collision coll)
     {

@@ -36,6 +36,7 @@ public class DeathController : MonoBehaviour
         if (playerLives > 1)
         {
             DecreaseLives();
+            
             deathMessage = "Continuar: " + playerLives;
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
             Time.timeScale = 0;

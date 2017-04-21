@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     
-    public float moveSpeed = 4.5f;
+    private float moveSpeed = 4.5f;
     private float moveVelocity;
 
-    public float teleportDistance;
-    float teleportCoolDown = 3.8f;
+    private float teleportDistance = 3f;
+    float teleportCoolDown = 3.6f;
     
     bool isTeleportInCooldown;
     float teleportCooldownCount;
@@ -19,14 +19,14 @@ public class PlayerController : MonoBehaviour
     bool isSparkInCooldown;
     float sparkCooldownCount;
 
-    float shieldCoolDown = 8.5f;
+    float shieldCoolDown = 8f;
 
     bool isShieldInCooldown;
     float shieldCooldownCount;
 
     float maxDistanceTeleportedX = 4.75f;
 
-    public float jumpHeight;
+    private float jumpHeight = 6.8f;
     public float escapeJumpHeight;
     public bool canJump;
 
@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour
     public float groundedHeight = 0.26f; //0.5f
 
 
-    private float teleportEnergy = 3.6f;
+    private float teleportEnergy = 3.5f;
     private float sparkEscapeEnergy = 18f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.082f;
+    private float defaultEnergyConsume = 0.068f;
 
     private float shieldEnergy = 4f;
 
@@ -277,6 +277,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            GetComponent<Collider>().enabled = false;
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().EndGame("Sin energía");
             
         }

@@ -41,7 +41,7 @@ public class BugController: MonoBehaviour{
 
     public float GetEnergyDrain()
     {
-        return energyDefaultDrainAmount;
+        return energyDrainAmount;
     }
     
     private IEnumerator RandomJump()

@@ -5,7 +5,7 @@ public class EnergyController: MonoBehaviour{
 
     public GameObject effect;
     private float particleEffectDuration = 1.5f;
-    float energy = 12;
+    float energy = 15;
 
     public void OnCollisionEnter(Collision coll)
     {
