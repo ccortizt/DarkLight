@@ -17,11 +17,9 @@ public class DarkPlayerController : MonoBehaviour
 
     private float energyConsume;
     private float defaultEnergyConsume = 0.08f;
-    private float debuffEnergyConsume = 0.8f;
-
+    //private float debuffEnergyConsume = 0.8f;
 
     Rigidbody rb;
-
 
     void Start()
     {

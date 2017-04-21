@@ -11,7 +11,7 @@ public class LevelDifficultyController : MonoBehaviour
         get { return minEnergyRange; }
         set { minEnergyRange = value; }
     }
-   
+
     int maxEnergyRange;
 
     public int MaxEnergyRange
@@ -37,7 +37,7 @@ public class LevelDifficultyController : MonoBehaviour
     }
 
     int minPlatformRange;
-    
+
     public int MinPlatformRange
     {
         get { return minPlatformRange; }
@@ -85,7 +85,7 @@ public class LevelDifficultyController : MonoBehaviour
 
     }
 
-    
+
     float minArrowFrequencyTime;
 
     public float MinArrowFrequencyTime
@@ -101,8 +101,8 @@ public class LevelDifficultyController : MonoBehaviour
         get { return arrowForce; }
         set { arrowForce = value; }
     }
-      
-    
+
+
     float platformSizePercentage;
 
     public float PlatformSizePercentage
@@ -123,10 +123,10 @@ public class LevelDifficultyController : MonoBehaviour
 
     public float EnemyBugInstanceTime
     {
-        get { return enemyBugInstanceTime ; }
+        get { return enemyBugInstanceTime; }
         set { enemyBugInstanceTime = value; }
     }
-    
+
 
     bool enableBugAtack;
 
@@ -135,9 +135,9 @@ public class LevelDifficultyController : MonoBehaviour
         get { return enableBugAtack; }
         set { enableBugAtack = value; }
     }
-    
+
     float enemyBugVelocity;
-    
+
     public float EnemyBugVelocity
     {
         get { return enemyBugVelocity; }
@@ -179,7 +179,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(-1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(1);
-                
+
 
                 break;
             case 2:
@@ -198,7 +198,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(-1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(2);
-                
+
                 break;
             case 3:
                 SetEnergyRange(1);
@@ -216,7 +216,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(-1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(2);
-                
+
                 break;
             case 4:
                 SetEnergyRange(1);
@@ -234,7 +234,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(1);
                 SetMinArrowFrequency(-1);
                 SetArrowForce(2);
-                
+
                 break;
             case 5:
                 SetEnergyRange(0);
@@ -337,7 +337,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(3);
                 SetMinArrowFrequency(3);
                 SetArrowForce(4);
-                
+
                 break;
             case 11:
                 SetEnergyRange(0);
@@ -355,7 +355,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(4);
                 SetMinArrowFrequency(4);
                 SetArrowForce(4);
-                
+
                 break;
             case 12:
                 SetEnergyRange(0);
@@ -372,7 +372,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(4);
                 SetMinArrowFrequency(3);
                 SetArrowForce(5);
-                
+
                 break;
             case 13:
                 SetEnergyRange(2);
@@ -390,7 +390,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(4);
                 SetMinArrowFrequency(4);
                 SetArrowForce(5);
-                
+
                 break;
             case 14:
                 SetEnergyRange(2);
@@ -408,7 +408,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(5);
                 SetMinArrowFrequency(4);
                 SetArrowForce(5);
-                
+
                 break;
             case 15:
                 SetEnergyRange(2);
@@ -426,7 +426,7 @@ public class LevelDifficultyController : MonoBehaviour
                 SetCannonProportion(5);
                 SetMinArrowFrequency(4);
                 SetArrowForce(5);
-                
+
                 break;
             default:
                 SetEnergyRange(0);
@@ -473,7 +473,7 @@ public class LevelDifficultyController : MonoBehaviour
 
     private void SetFireRange(int proportion)
     {
-        
+
         switch (proportion)
         {
             case 1:
@@ -530,7 +530,7 @@ public class LevelDifficultyController : MonoBehaviour
             case 1:
                 destroyWallPercentage = 1;
                 break;
-           
+
             default:
                 destroyWallPercentage = 1;
                 break;
@@ -672,7 +672,7 @@ public class LevelDifficultyController : MonoBehaviour
     {
         enableBugAtack = (dificulty > 0) ? true : false;
     }
-    
+
     private void SetVelocityOfEnemyBug(int percentage)
     {
 
@@ -720,7 +720,7 @@ public class LevelDifficultyController : MonoBehaviour
                 break;
         }
     }
-    
+
     private void SetCannonProportion(int percentage)
     {
 
@@ -748,7 +748,7 @@ public class LevelDifficultyController : MonoBehaviour
         }
     }
 
-    private void SetMinArrowFrequency (int opt)
+    private void SetMinArrowFrequency(int opt)
     {
 
         switch (opt)

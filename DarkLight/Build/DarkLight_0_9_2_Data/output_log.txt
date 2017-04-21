@@ -15,68 +15,237 @@ Platform assembly: C:\Users\Public\Documents\Unity Projects\DarkLightProject\Dar
 Loading C:\Users\Public\Documents\Unity Projects\DarkLightProject\DarkLight\Build\DarkLight_0_9_2_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Public\Documents\Unity Projects\DarkLightProject\DarkLight\Build\DarkLight_0_9_2_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\Public\Documents\Unity Projects\DarkLightProject\DarkLight\Build\DarkLight_0_9_2_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.228 seconds
+- Completed reload, in  0.152 seconds
 Platform assembly: C:\Users\Public\Documents\Unity Projects\DarkLightProject\DarkLight\Build\DarkLight_0_9_2_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Public\Documents\Unity Projects\DarkLightProject\DarkLight\Build\DarkLight_0_9_2_Data\Managed\System.dll (this message is harmless)
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.682064 ms
+UnloadTime: 1.752726 ms
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 19c0 -> priority: 1 
-  Thread -> id: 2e38 -> priority: 1 
+  Thread -> id: 2ae8 -> priority: 1 
+  Thread -> id: 2268 -> priority: 1 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.582748 ms
+UnloadTime: 3.584010 ms
 
-Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 0.783595 ms (FindLiveObjects: 0.076188 ms CreateObjectMapping: 0.058424 ms MarkObjects: 0.624507 ms  DeleteObjects: 0.024080 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.783200 ms (FindLiveObjects: 0.076188 ms CreateObjectMapping: 0.058818 ms MarkObjects: 0.625297 ms  DeleteObjects: 0.021711 ms)
 
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.120331 ms
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 2.591982 ms (FindLiveObjects: 1.551794 ms CreateObjectMapping: 0.403837 ms MarkObjects: 0.620165 ms  DeleteObjects: 0.015790 ms)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.863576 ms
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 0.805306 ms (FindLiveObjects: 0.106584 ms CreateObjectMapping: 0.062371 ms MarkObjects: 0.610296 ms  DeleteObjects: 0.024869 ms)
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 7.304211 ms
+UnloadTime: 2.187355 ms
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 1.379285 ms (FindLiveObjects: 0.455156 ms CreateObjectMapping: 0.095926 ms MarkObjects: 0.808070 ms  DeleteObjects: 0.018948 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.783595 ms (FindLiveObjects: 0.070661 ms CreateObjectMapping: 0.052897 ms MarkObjects: 0.637929 ms  DeleteObjects: 0.021316 ms)
 
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.910157 ms
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 1.099401 ms (FindLiveObjects: 0.095136 ms CreateObjectMapping: 0.070266 ms MarkObjects: 0.915444 ms  DeleteObjects: 0.017764 ms)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.423420 ms
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 0.788726 ms (FindLiveObjects: 0.063161 ms CreateObjectMapping: 0.052502 ms MarkObjects: 0.658851 ms  DeleteObjects: 0.013421 ms)
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.217674 ms
+UnloadTime: 2.401314 ms
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 0.810833 ms (FindLiveObjects: 0.066319 ms CreateObjectMapping: 0.054476 ms MarkObjects: 0.673457 ms  DeleteObjects: 0.015790 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.750830 ms (FindLiveObjects: 0.078162 ms CreateObjectMapping: 0.053687 ms MarkObjects: 0.596084 ms  DeleteObjects: 0.022106 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 7.032618 ms
+UnloadTime: 2.321573 ms
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 0.716486 ms (FindLiveObjects: 0.045791 ms CreateObjectMapping: 0.045791 ms MarkObjects: 0.612270 ms  DeleteObjects: 0.012632 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.758330 ms (FindLiveObjects: 0.075793 ms CreateObjectMapping: 0.058818 ms MarkObjects: 0.601216 ms  DeleteObjects: 0.021711 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.568297 ms
+UnloadTime: 2.235910 ms
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1196.
-Total: 0.799385 ms (FindLiveObjects: 0.073425 ms CreateObjectMapping: 0.059213 ms MarkObjects: 0.641087 ms  DeleteObjects: 0.024869 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.751224 ms (FindLiveObjects: 0.073819 ms CreateObjectMapping: 0.054871 ms MarkObjects: 0.600822 ms  DeleteObjects: 0.020527 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 13.766009 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.831360 ms (FindLiveObjects: 0.091978 ms CreateObjectMapping: 0.054871 ms MarkObjects: 0.670299 ms  DeleteObjects: 0.013421 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.508293 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.761883 ms (FindLiveObjects: 0.067503 ms CreateObjectMapping: 0.058424 ms MarkObjects: 0.613849 ms  DeleteObjects: 0.020922 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.573831 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 1.194538 ms (FindLiveObjects: 0.410153 ms CreateObjectMapping: 0.058818 ms MarkObjects: 0.711749 ms  DeleteObjects: 0.013421 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.443158 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.788332 ms (FindLiveObjects: 0.098294 ms CreateObjectMapping: 0.044212 ms MarkObjects: 0.631218 ms  DeleteObjects: 0.013027 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 8.363348 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 1.252962 ms (FindLiveObjects: 0.503711 ms CreateObjectMapping: 0.049739 ms MarkObjects: 0.685300 ms  DeleteObjects: 0.011842 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerCollisionController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.786203 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.814781 ms (FindLiveObjects: 0.065135 ms CreateObjectMapping: 0.053687 ms MarkObjects: 0.673457 ms  DeleteObjects: 0.021711 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.674881 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.792279 ms (FindLiveObjects: 0.077372 ms CreateObjectMapping: 0.058029 ms MarkObjects: 0.636350 ms  DeleteObjects: 0.020132 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.464080 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1204.
+Total: 0.763462 ms (FindLiveObjects: 0.102242 ms CreateObjectMapping: 0.045002 ms MarkObjects: 0.593321 ms  DeleteObjects: 0.022106 ms)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.ResetButtons () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.AccessToJoyPad () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 

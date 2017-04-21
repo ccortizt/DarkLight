@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
     private float moveSpeed = 4.5f;
     private float moveVelocity;
 
     private float teleportDistance = 3f;
     float teleportCoolDown = 3.6f;
-    
+
     bool isTeleportInCooldown;
     float teleportCooldownCount;
 
@@ -40,9 +40,9 @@ public class PlayerController : MonoBehaviour
     private float teleportEnergy = 3.5f;
     private float sparkEscapeEnergy = 18f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.068f;
+    private float defaultEnergyConsume = 0.065f;
 
-    private float shieldEnergy = 4f;
+    private float shieldEnergy = 3f;
 
     public VirtualButton teleportButton;
     public VirtualButton shieldButton;
@@ -50,10 +50,10 @@ public class PlayerController : MonoBehaviour
     public VirtualButton rightButton;
     public VirtualButton leftButton;
     public VirtualButton upButton;
-    
-    
+
+
     Rigidbody rb;
-    
+
     void Start()
     {
 
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         isTeleportInCooldown = false;
         isSparkInCooldown = false;
         isShieldInCooldown = false;
-        AccessToJoyPad();      
+        AccessToJoyPad();
 
     }
 
@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
         }
         catch (System.Exception e)
         {
+            Debug.Log(e);
             //GameObject.FindGameObjectWithTag("Message").GetComponent<Text>().text = "cant load joypad";
         }
     }
@@ -111,7 +112,7 @@ public class PlayerController : MonoBehaviour
         SetTeleportCooldownIndicator();
         SetShieldCooldownIndicator();
         SetSparkCooldownIndicator();
-        
+
         UpdateTeleportCooldown();
         UpdateShieldCooldown();
         UpdateSparkCooldown();
@@ -207,12 +208,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") < -0.05f)
             {
                 moveVelocity = moveSpeed * Input.GetAxisRaw("Horizontal");
-                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);               
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(energyConsume);
             }
 
 
             GetComponent<Rigidbody>().velocity = new Vector3(moveVelocity, GetComponent<Rigidbody>().velocity.y, 0f);
-            
+
             if (Input.GetKey(KeyCode.UpArrow) && isPlayerGrounded && canJump)
             {
 
@@ -224,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space) && !isTeleportInCooldown)
             {
-                
+
                 Vector3 aux;
 
                 if (!PlayerExceedLimits())
@@ -232,8 +233,8 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log("initial: "+transform.position);                    
                     if (rb.velocity.normalized.y <= 0)
                     {
-                        aux = new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;     
-                        transform.position += new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;                        
+                        aux = new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;
+                        transform.position += new Vector3(rb.velocity.normalized.x, 1f, 0f) * teleportDistance;
                     }
                     else
                     {
@@ -251,7 +252,7 @@ public class PlayerController : MonoBehaviour
 
                         GetComponent<PlayerEnergyController>().DecreaseEnergy(teleportEnergy);
                         SetCoolDown();
-                    }                    
+                    }
 
                 }
 
@@ -263,7 +264,7 @@ public class PlayerController : MonoBehaviour
                 transform.position += new Vector3(0, escapeJumpHeight, 0);
                 SetSparkCoolDown();
             }
-            
+
             if (Input.GetKeyDown(KeyCode.C) && !isShieldInCooldown)
             {
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
@@ -279,7 +280,7 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().EndGame("Sin energía");
-            
+
         }
 
     }
@@ -303,7 +304,7 @@ public class PlayerController : MonoBehaviour
     }
     private void SetSparkCoolDown()
     {
-        
+
         sparkCooldownCount = teleportSparkCoolDown;
         isSparkInCooldown = true;
     }
@@ -325,7 +326,7 @@ public class PlayerController : MonoBehaviour
             isShieldInCooldown = false;
         }
     }
-    
+
     private void UpdateTeleportCooldown()
     {
         if (teleportCooldownCount > 0 && isTeleportInCooldown)
@@ -341,25 +342,25 @@ public class PlayerController : MonoBehaviour
     private void SetTeleportCooldownIndicator()
     {
         if (isTeleportInCooldown)
-            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.gray;
+            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = new Color32(96, 96, 96, 255);
         else
-            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = Color.green;
+            GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = new Color32(255, 255, 0, 255);
     }
 
     private void SetShieldCooldownIndicator()
     {
         if (isShieldInCooldown)
-            GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = Color.gray;
+            GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = new Color32(98, 98, 98, 255);
         else
-            GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = Color.blue;
+            GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = new Color32(255, 255, 0, 255);
     }
 
     private void SetSparkCooldownIndicator()
     {
         if (HasEnoughSparkEnergy() && !isSparkInCooldown)
-            GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = Color.yellow;
+            GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = new Color32(255, 230, 0, 255);
         else
-            GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = Color.grey;
+            GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = new Color32(98, 98, 98, 255);
     }
 
     private bool HasEnoughSparkEnergy()
@@ -388,7 +389,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 leftSide = new Vector3(transform.position.x - 0.2f, transform.position.y + heightOffset, transform.position.z);
         Vector3 rightSide = new Vector3(transform.position.x + 0.2f, transform.position.y + heightOffset, transform.position.z);
-        Vector3 midSide = new Vector3(transform.position.x , transform.position.y + heightOffset, transform.position.z);
+        Vector3 midSide = new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z);
 
         if (Physics.Raycast(leftSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(rightSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(midSide, Vector3.down, groundedHeight + heightOffset, whatIsGround) || Physics.Raycast(leftSide, Vector3.down, groundedHeight + heightOffset, destroyWall) || Physics.Raycast(rightSide, Vector3.down, groundedHeight + heightOffset, destroyWall) || Physics.Raycast(midSide, Vector3.down, groundedHeight + heightOffset, destroyWall))
         {
@@ -413,8 +414,9 @@ public class PlayerController : MonoBehaviour
         }
         catch (System.Exception e)
         {
+            Debug.Log(e);
         }
-        
+
     }
 
     private void ReproduceJumpEffect()
