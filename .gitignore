@@ -3,6 +3,8 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uild/
+/DarkLight/Build/
+/DarkLight/Library/
 /DarkLight/Library/il2cpp_cache*
 /Assets/AssetStoreTools*
 
