@@ -15,9 +15,11 @@ public class Restart: MonoBehaviour{
     public void RestartAllGame()
     {
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelProgressController>().RestartAllGame();
+
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelDifficultyController>().SetDifficultyProportions(1);
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
+        GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(false);
     }
 
 }

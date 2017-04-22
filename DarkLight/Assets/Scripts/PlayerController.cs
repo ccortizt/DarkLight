@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     bool isSparkInCooldown;
     float sparkCooldownCount;
 
-    float shieldCoolDown = 8f;
+    float shieldCoolDown = 10f;
 
     bool isShieldInCooldown;
     float shieldCooldownCount;
@@ -192,6 +192,7 @@ public class PlayerController : MonoBehaviour
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
                 GetComponent<SphereCollider>().enabled = true;
                 transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                transform.FindChild("LightObject").gameObject.transform.Translate(new Vector3(0, 0, -2.9f));
                 SetShieldCoolDown();
                 StartCoroutine(DeactivateShield());
                 
@@ -269,6 +270,7 @@ public class PlayerController : MonoBehaviour
             {
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
                 GetComponent<SphereCollider>().enabled = true;
+                transform.FindChild("LightObject").gameObject.transform.Translate(new Vector3(0, 0, -2.9f));
                 transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                 StartCoroutine(DeactivateShield());
                 SetShieldCoolDown();
@@ -432,6 +434,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator DeactivateShield()
     {
         yield return new WaitForSeconds(5);
+        transform.FindChild("LightObject").gameObject.transform.Translate(new Vector3(0, 0, 2.9f));
         GetComponent<SphereCollider>().enabled = false;
     }
 
