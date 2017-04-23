@@ -31,7 +31,7 @@ public class DeathController : MonoBehaviour
 
         string deathMessage = "";        
         
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false;        
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false;        
 
         if (playerLives > 1)
         {
@@ -39,13 +39,14 @@ public class DeathController : MonoBehaviour
             
             deathMessage = "Continuar: " + playerLives;
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false; 
             Time.timeScale = 0;
         }
         else
         {
             deathMessage = "Sin vidas restantes";
-            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);           
-
+            GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false; 
             StartCoroutine(ShowFullLose());
         }
         

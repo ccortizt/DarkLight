@@ -19,6 +19,8 @@ TagManager:
   - Shield
   - ShieldButton
   - GameManager
+  - Projectile
+  - ProjectileButton
   layers:
   - Default
   - TransparentFX
@@ -38,7 +40,7 @@ TagManager:
   - Proximity
   - Shield
   - Player
-  - 
+  - Projectile
   - 
   - 
   - 

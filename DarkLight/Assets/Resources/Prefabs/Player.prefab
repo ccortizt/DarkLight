@@ -557,6 +557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c7d67802ef59344a81a4213e30d0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1641522167336552, guid: 9af6a091deef5b542904a9468c9b70b6,
+    type: 2}
   escapeJumpHeight: 16
   canJump: 0
   whatIsGround:
@@ -573,6 +575,7 @@ MonoBehaviour:
   rightButton: {fileID: 0}
   leftButton: {fileID: 0}
   upButton: {fileID: 0}
+  projectileButton: {fileID: 0}
 --- !u!114 &114827051386645118
 MonoBehaviour:
   m_ObjectHideFlags: 1

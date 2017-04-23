@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject projectilePrefab;
 
     private float moveSpeed = 4.5f;
     private float moveVelocity;
@@ -24,6 +26,11 @@ public class PlayerController : MonoBehaviour
     bool isShieldInCooldown;
     float shieldCooldownCount;
 
+    float projectileCoolDown = 3f;
+
+    bool isProjectileInCooldown;
+    float projectileCooldownCount;
+
     float maxDistanceTeleportedX = 4.75f;
 
     private float jumpHeight = 6.8f;
@@ -39,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private float teleportEnergy = 3.5f;
     private float sparkEscapeEnergy = 18f;
+    private float projectileEnergy = 2f;
     private float energyConsume;
     private float defaultEnergyConsume = 0.065f;
 
@@ -50,6 +58,7 @@ public class PlayerController : MonoBehaviour
     public VirtualButton rightButton;
     public VirtualButton leftButton;
     public VirtualButton upButton;
+    public VirtualButton projectileButton;
 
 
     Rigidbody rb;
@@ -62,12 +71,17 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         energyConsume = defaultEnergyConsume;
         canJump = true;
+
         teleportCooldownCount = 0;
         sparkCooldownCount = 0;
         shieldCooldownCount = 0;
+        projectileCooldownCount = 0;
+
         isTeleportInCooldown = false;
         isSparkInCooldown = false;
         isShieldInCooldown = false;
+        isProjectileInCooldown = false;
+
         AccessToJoyPad();
 
     }
@@ -79,6 +93,7 @@ public class PlayerController : MonoBehaviour
             teleportButton = GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>();
             shieldButton = GameObject.FindGameObjectWithTag("ShieldButton").GetComponent<VirtualButton>();
             escapeJumpButton = GameObject.FindGameObjectWithTag("EscapeButton").GetComponent<VirtualButton>();
+            projectileButton = GameObject.FindGameObjectWithTag("ProjectileButton").GetComponent<VirtualButton>();
             rightButton = GameObject.FindGameObjectWithTag("RightButton").GetComponent<VirtualButton>();
             leftButton = GameObject.FindGameObjectWithTag("LeftButton").GetComponent<VirtualButton>();
             upButton = GameObject.FindGameObjectWithTag("UpButton").GetComponent<VirtualButton>();
@@ -112,10 +127,12 @@ public class PlayerController : MonoBehaviour
         SetTeleportCooldownIndicator();
         SetShieldCooldownIndicator();
         SetSparkCooldownIndicator();
+        SetProjectileIndicator();
 
         UpdateTeleportCooldown();
         UpdateShieldCooldown();
         UpdateSparkCooldown();
+        UpdateProjectileCooldown();
 
         if (PlayerHasEnoughEnergy())
         {
@@ -198,6 +215,17 @@ public class PlayerController : MonoBehaviour
                 
             }
 
+            if (projectileButton.isPressed && !isProjectileInCooldown)
+            {
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(projectileEnergy);
+
+                GameObject projectile = Instantiate(projectilePrefab, new Vector3(transform.position.x,transform.position.y + 0.5f,0), Quaternion.Euler(45, 0, -45));
+
+                projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * 2f;
+
+                SetProjectileCoolDown();
+            }
+
 #else
 
             if (Input.GetAxisRaw("Horizontal") > 0.05f)
@@ -275,6 +303,17 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(DeactivateShield());
                 SetShieldCoolDown();
             }
+
+            if (Input.GetKeyDown(KeyCode.B) && !isProjectileInCooldown)
+            {
+                GetComponent<PlayerEnergyController>().DecreaseEnergy(projectileEnergy);
+
+                GameObject projectile = Instantiate(projectilePrefab, new Vector3(transform.position.x,transform.position.y + 0.5f,0), Quaternion.Euler(45, 0, -45));
+
+                projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * 2f;
+
+                SetProjectileCoolDown();
+            }
 #endif
 
         }
@@ -299,6 +338,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
+
     private void SetShieldCoolDown()
     {
         shieldCooldownCount = shieldCoolDown;
@@ -309,6 +350,12 @@ public class PlayerController : MonoBehaviour
 
         sparkCooldownCount = teleportSparkCoolDown;
         isSparkInCooldown = true;
+    }
+
+    private void SetProjectileCoolDown()
+    {
+        projectileCooldownCount = projectileCoolDown;
+        isProjectileInCooldown = true;
     }
 
     private void SetCoolDown()
@@ -341,6 +388,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void UpdateProjectileCooldown()
+    {
+        
+        if (projectileCooldownCount > 0 && isProjectileInCooldown)
+        {
+            projectileCooldownCount -= Time.deltaTime;
+        }
+        else if (projectileCooldownCount <= 0)
+        {
+            isProjectileInCooldown = false;
+        }
+    }
+
     private void SetTeleportCooldownIndicator()
     {
         if (isTeleportInCooldown)
@@ -363,6 +423,14 @@ public class PlayerController : MonoBehaviour
             GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = new Color32(255, 230, 0, 255);
         else
             GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = new Color32(98, 98, 98, 255);
+    }
+
+    private void SetProjectileIndicator()
+    {
+        if (isProjectileInCooldown)
+            GameObject.FindGameObjectWithTag("Projectile").GetComponent<Image>().color = new Color32(98, 98, 98, 255);
+        else
+            GameObject.FindGameObjectWithTag("Projectile").GetComponent<Image>().color = new Color32(255, 255, 0, 255);
     }
 
     private bool HasEnoughSparkEnergy()
@@ -413,6 +481,7 @@ public class PlayerController : MonoBehaviour
             GameObject.FindGameObjectWithTag("UpButton").GetComponent<VirtualButton>().ButtonOff();
             GameObject.FindGameObjectWithTag("TeleportButton").GetComponent<VirtualButton>().ButtonOff();
             GameObject.FindGameObjectWithTag("ShieldButton").GetComponent<VirtualButton>().ButtonOff();
+            GameObject.FindGameObjectWithTag("ProjectileButton").GetComponent<VirtualButton>().ButtonOff();
         }
         catch (System.Exception e)
         {
