@@ -403,34 +403,61 @@ public class PlayerController : MonoBehaviour
 
     private void SetTeleportCooldownIndicator()
     {
-        if (isTeleportInCooldown)
+        if (isTeleportInCooldown){
             GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = new Color32(96, 96, 96, 255);
+            GameObject.FindGameObjectWithTag("Teleport").transform.parent.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+        }
+
         else
+        {
             GameObject.FindGameObjectWithTag("Teleport").GetComponent<Image>().color = new Color32(255, 255, 0, 255);
+            GameObject.FindGameObjectWithTag("Teleport").transform.parent.GetComponent<Image>().color = new Color32(51, 255, 0, 255);
+        }
+            
     }
 
     private void SetShieldCooldownIndicator()
     {
-        if (isShieldInCooldown)
+        if (isShieldInCooldown){
             GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = new Color32(98, 98, 98, 255);
-        else
+            GameObject.FindGameObjectWithTag("Shield").transform.parent.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+        }
+            
+        else {
             GameObject.FindGameObjectWithTag("Shield").GetComponent<Image>().color = new Color32(255, 255, 0, 255);
+            GameObject.FindGameObjectWithTag("Shield").transform.parent.GetComponent<Image>().color = new Color32(51, 255, 0, 255);
+        }
+            
     }
 
     private void SetSparkCooldownIndicator()
     {
-        if (HasEnoughSparkEnergy() && !isSparkInCooldown)
+        if (HasEnoughSparkEnergy() && !isSparkInCooldown){
             GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = new Color32(255, 230, 0, 255);
+            GameObject.FindGameObjectWithTag("Spark").transform.parent.GetComponent<Image>().color = new Color32(51, 255, 0, 255);
+        }
+
         else
+        {
             GameObject.FindGameObjectWithTag("Spark").GetComponent<Image>().color = new Color32(98, 98, 98, 255);
+            GameObject.FindGameObjectWithTag("Spark").transform.parent.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+        }
+            
     }
 
     private void SetProjectileIndicator()
     {
-        if (isProjectileInCooldown)
+        if (isProjectileInCooldown){
             GameObject.FindGameObjectWithTag("Projectile").GetComponent<Image>().color = new Color32(98, 98, 98, 255);
+            GameObject.FindGameObjectWithTag("Projectile").transform.parent.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+        }
+
         else
+        {
             GameObject.FindGameObjectWithTag("Projectile").GetComponent<Image>().color = new Color32(255, 255, 0, 255);
+            GameObject.FindGameObjectWithTag("Projectile").transform.parent.GetComponent<Image>().color = new Color32(51, 255, 0, 255);
+        }
+            
     }
 
     private bool HasEnoughSparkEnergy()

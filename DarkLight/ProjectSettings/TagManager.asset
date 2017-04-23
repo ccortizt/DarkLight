@@ -21,6 +21,7 @@ TagManager:
   - GameManager
   - Projectile
   - ProjectileButton
+  - TeleportContainer
   layers:
   - Default
   - TransparentFX
