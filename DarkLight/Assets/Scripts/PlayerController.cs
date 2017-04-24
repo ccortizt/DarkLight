@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     bool isShieldInCooldown;
     float shieldCooldownCount;
 
+    float projectileMagnitude = 4f; 
     float projectileCoolDown = 3f;
 
     bool isProjectileInCooldown;
@@ -221,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
                 GameObject projectile = Instantiate(projectilePrefab, new Vector3(transform.position.x,transform.position.y + 0.5f,0), Quaternion.Euler(45, 0, -45));
 
-                projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * 2f;
+                projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * projectileMagnitude;
 
                 SetProjectileCoolDown();
             }
@@ -310,7 +311,7 @@ public class PlayerController : MonoBehaviour
 
                 GameObject projectile = Instantiate(projectilePrefab, new Vector3(transform.position.x,transform.position.y + 0.5f,0), Quaternion.Euler(45, 0, -45));
 
-                projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * 2f;
+                projectile.GetComponent<Rigidbody>().velocity = projectile.transform.up * projectileMagnitude;
 
                 SetProjectileCoolDown();
             }

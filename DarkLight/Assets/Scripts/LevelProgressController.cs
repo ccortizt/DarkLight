@@ -27,7 +27,7 @@ public class LevelProgressController: MonoBehaviour{
 
     public void LevelUp()
     {
-        if (levelCount <= 15)
+        if (levelCount < 15)
         {
             this.levelCount++;
             UpdateLevelIndicator();

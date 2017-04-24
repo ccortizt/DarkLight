@@ -39,6 +39,7 @@ public class DeathController : MonoBehaviour
             
             deathMessage = "Continuar: " + playerLives;
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
+            Debug.LogError("MUERTO " + endGameText + " "+playerLives);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false; 
             Time.timeScale = 0;
         }

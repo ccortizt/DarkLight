@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerCollisionController : MonoBehaviour
 {
+    public bool debug;
+
     public GameObject effect;
     private float particleEffectDuration = 1.2f;
 
@@ -16,6 +18,7 @@ public class PlayerCollisionController : MonoBehaviour
     private int dynamicWallLayer = 9;
     private int staticWallLayer = 10;
     private int staticGroundLayer = 8;
+    private int staticGroundCanonLayer = 13;
 
     private float energyPercentageIncrease = 0.65f;
 
@@ -42,12 +45,13 @@ public class PlayerCollisionController : MonoBehaviour
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             dontCheck = true;
             GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
-            
-            if (currentCrushWall != null)
+
+            if (currentCrushWall != null && currentCrushWall.GetComponent<PlatformDestroyController>() != null)
             {
                 currentCrushWall.GetComponent<PlatformDestroyController>().enabled = false;
             }
 
+            Debug.LogError("CRUSHED!");
             gameManager.GetComponent<DeathController>().EndGame("Fuiste Aplastado");
 
             //StartCoroutine(TurnLightOff());            
@@ -57,15 +61,19 @@ public class PlayerCollisionController : MonoBehaviour
 
     public void OnCollisionStay(Collision coll)
     {
-
-        if (coll.gameObject.layer == staticWallLayer || coll.gameObject.layer == staticGroundLayer)
+        if (debug)
         {
+            Debug.LogError("time " + timeStaying + " dwc: " + dynamicWallChecked + " swc: " + staticWallChecked + " imp: " + coll.impulse);
+        }
 
+        if (coll.gameObject.layer == staticWallLayer || coll.gameObject.layer == staticGroundLayer || coll.gameObject.layer == staticGroundCanonLayer)
+        {
+            
             if (coll.impulse.x != 0)
             {
                 //Debug.Log(coll.impulse+ " s");
                 staticWallChecked = true;
-                timeStaying += Time.deltaTime;
+                //timeStaying += Time.deltaTime;
             }
 
         }
@@ -77,24 +85,33 @@ public class PlayerCollisionController : MonoBehaviour
                 //Debug.Log(coll.impulse+ " d");
                 dynamicWallChecked = true;
                 currentCrushWall = coll.gameObject;
-            }
+            }          
 
             timeStaying += Time.deltaTime;
 
         }
 
-        if (timeStaying > 6f && coll.impulse != Vector3.zero && dynamicWallChecked)
+        //if (timeStaying > 5f && coll.impulse != Vector3.zero && dynamicWallChecked )
+        //{
+        //    Debug.LogError("time " + timeStaying + " dwc: " + dynamicWallChecked + " swc: " + staticWallChecked + " imp: " + coll.impulse);
+        //    gameManager.GetComponent<DeathController>().EndGame("Fuiste Aplastado");
+        //    //StartCoroutine(TurnLightOff());
+        //}
+
+        if (timeStaying > 5f)
+       
         {
+            Debug.LogError("ENTRE PARED");
+            Debug.LogError("time " + timeStaying + " dwc: " + dynamicWallChecked + " swc: " + staticWallChecked + " imp: " + coll.impulse);
             gameManager.GetComponent<DeathController>().EndGame("Fuiste Aplastado");
-            //StartCoroutine(TurnLightOff());
-        }
+        }        
 
     }
 
     void OnCollisionExit(Collision coll)
     {
 
-        if (coll.gameObject.layer == staticWallLayer || coll.gameObject.layer == staticGroundLayer)
+        if (coll.gameObject.layer == staticWallLayer || coll.gameObject.layer == staticGroundLayer || coll.gameObject.layer == staticGroundCanonLayer)
         {
             staticWallChecked = false;
             timeStaying = 0;
