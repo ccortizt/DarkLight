@@ -6,7 +6,7 @@ public class Restart: MonoBehaviour{
     
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
         GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().SetHUDMessage("");
         Time.timeScale = 1;

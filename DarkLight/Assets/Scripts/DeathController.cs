@@ -37,7 +37,7 @@ public class DeathController : MonoBehaviour
         {
             DecreaseLives();
             
-            deathMessage = "Continuar: " + playerLives;
+            deathMessage = "Continue: " + playerLives;
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(true);
             Debug.LogError("MUERTO " + endGameText + " "+playerLives);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false; 
@@ -45,9 +45,10 @@ public class DeathController : MonoBehaviour
         }
         else
         {
-            deathMessage = "Sin vidas restantes";
+            deathMessage = "No lives remaining";
             GameObject.FindGameObjectWithTag("Restart").transform.Find("Button").gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false; 
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
             StartCoroutine(ShowFullLose());
         }
         
@@ -62,7 +63,7 @@ public class DeathController : MonoBehaviour
         yield return new WaitForSeconds(2);
         SetHUDMessage("");
         GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     public void SetHUDMessage(string message)

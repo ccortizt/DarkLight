@@ -52,7 +52,7 @@ public class PlayerCollisionController : MonoBehaviour
             }
 
             Debug.LogError("CRUSHED!");
-            gameManager.GetComponent<DeathController>().EndGame("Fuiste Aplastado");
+            gameManager.GetComponent<DeathController>().EndGame("You were crushed");
 
             //StartCoroutine(TurnLightOff());            
         }
@@ -103,7 +103,7 @@ public class PlayerCollisionController : MonoBehaviour
         {
             Debug.LogError("ENTRE PARED");
             Debug.LogError("time " + timeStaying + " dwc: " + dynamicWallChecked + " swc: " + staticWallChecked + " imp: " + coll.impulse);
-            gameManager.GetComponent<DeathController>().EndGame("Fuiste Aplastado");
+            gameManager.GetComponent<DeathController>().EndGame("You were crushed");
         }        
 
     }

@@ -22,6 +22,10 @@ TagManager:
   - Projectile
   - ProjectileButton
   - TeleportContainer
+  - Menu1
+  - Menu2
+  - Menu3
+  - Menu4
   layers:
   - Default
   - TransparentFX

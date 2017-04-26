@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             GetComponent<Collider>().enabled = false;
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().EndGame("Sin energía");
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().EndGame("Out of energy");
 
         }
 
