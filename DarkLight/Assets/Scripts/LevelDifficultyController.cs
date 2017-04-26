@@ -159,6 +159,11 @@ public class LevelDifficultyController : MonoBehaviour
         SetDifficultyProportions(GetComponent<LevelProgressController>().GetLevel());
     }
 
+    public void SetDifficultyNotStart()
+    {
+        SetDifficultyProportions(GetComponent<LevelProgressController>().GetLevel());
+    }
+
     public void SetDifficultyProportions(int difficulty)
     {
         switch (difficulty)

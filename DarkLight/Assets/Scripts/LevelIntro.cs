@@ -9,7 +9,8 @@ public class LevelIntro: MonoBehaviour{
  
     void Start()
     {
-        transform.FindChild("Panel/LevelText").gameObject.GetComponent<Text>().text = GameObject.FindGameObjectWithTag("Level").GetComponent<Text>().text;
+        transform.FindChild("Panel/LevelText").gameObject.GetComponent<Text>().text = "Lvl. " +
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelProgressController>().GetLevel();
 
         im = transform.FindChild("Panel").gameObject.GetComponent<Image>();
         im.GetComponent<CanvasRenderer>().SetAlpha(1f);

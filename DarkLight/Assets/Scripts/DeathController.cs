@@ -62,6 +62,9 @@ public class DeathController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         SetHUDMessage("");
+        ResetLives();
+        GetComponent<LevelProgressController>().SetLevelOne();
+        GetComponent<LevelDifficultyController>().SetDifficultyNotStart();
         GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);
         //Time.timeScale = 0;
     }

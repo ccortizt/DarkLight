@@ -10,7 +10,7 @@ public class DoorController: MonoBehaviour{
          {
              GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().LevelUp();
              if (GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLevel() < 16)
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(2);
          }
      }
      

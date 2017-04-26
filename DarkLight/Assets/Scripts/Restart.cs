@@ -20,6 +20,7 @@ public class Restart: MonoBehaviour{
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
         GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(false);
+        
     }
 
 }

@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114659334474134676}
   - component: {fileID: 114157096112792806}
   - component: {fileID: 114233478461696560}
-  - component: {fileID: 114947519023796500}
+  - component: {fileID: 114706971877139416}
   m_Layer: 5
   m_Name: PlayerHUD 1
   m_TagString: Untagged
@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 224189264647554928}
   - component: {fileID: 222371858404244942}
   - component: {fileID: 114559672437135610}
+  - component: {fileID: 114414442248633948}
   m_Layer: 5
   m_Name: LevelText
   m_TagString: Level
@@ -2048,6 +2049,17 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &114414442248633948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1583893126787608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8dca9b44bc3814aa0ab5ae3c14f75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114415560955199034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2608,6 +2620,17 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
+--- !u!114 &114706971877139416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102723693624928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac6948d6ea5c1840a55e7dc42c8a592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114711865983411018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3147,17 +3170,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114947519023796500
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102723693624928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dadbfd3ea6af621448f8dd9c00d551d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114952685051983128
 MonoBehaviour:
   m_ObjectHideFlags: 1
