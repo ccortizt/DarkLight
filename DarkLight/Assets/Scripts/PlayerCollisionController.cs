@@ -166,10 +166,9 @@ public class PlayerCollisionController : MonoBehaviour
         }
     }
 
-    private void InstantiateTakenEnergyEffect()
+    public void InstantiateTakenEnergyEffect()
     {
-        var eff = (GameObject)Instantiate(effect, transform.position, Quaternion.Euler(-90, 0, 0));
-
+        var eff = (GameObject)Instantiate(effect, transform.position, Quaternion.Euler(0, 0, 0));
         Destroy(eff, particleEffectDuration);
         
     }

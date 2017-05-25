@@ -27,8 +27,8 @@ public class LevelProgressController: MonoBehaviour{
 
     public void LevelUp()
     {
-        Debug.Log(levelCount);
-        if (levelCount < 15)
+        //Debug.Log(levelCount);
+        if (levelCount < 12)
         {
             
             this.levelCount++;
@@ -56,7 +56,7 @@ public class LevelProgressController: MonoBehaviour{
 
     private void UpdateLevelIndicator()
     {
-        Debug.Log(levelCount+ "on update indicator");
+        //Debug.Log(levelCount+ "on update indicator");
         GetComponent<LevelDifficultyController>().SetDifficultyProportions(levelCount);
         GameObject.FindGameObjectWithTag("Level").GetComponent<Text>().text = "Lvl. " + levelCount;
     }

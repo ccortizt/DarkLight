@@ -1,8 +1,9 @@
 ﻿
 using System.Collections;
 using UnityEngine;
-public class LevelCreator: MonoBehaviour {
-    
+public class LevelCreator : MonoBehaviour
+{
+
     public GameObject prefabPlatform;
     public GameObject prefabDoublePlatform;
     public GameObject prefabDestroyPlatform;
@@ -12,7 +13,7 @@ public class LevelCreator: MonoBehaviour {
     public GameObject prefabEnemyFire;
     public GameObject prefabDoor;
     public GameObject prefabCannon;
-   
+
 
     private int levelYSize = 52;
     private int levelXSize = 10;
@@ -20,13 +21,10 @@ public class LevelCreator: MonoBehaviour {
     private float minBaseValueX = 4.35f;
     private float maxBaseValueX = 4.55f;
 
-    //private int minPlatformsPerY = 2;
-    //private int maxPlatformsPerY = 6;
-
     private float yAxisDoorPosition = 55.3f;
 
-    private float minBaseValueY = 0.4f;
-    private float maxBaseValueY = 0.7f;
+    private float minBaseValueY = 0.55f; //0.4f
+    private float maxBaseValueY = 1.2f; //0.7f
 
     private float platformSizePercentageChooser = 4;
 
@@ -37,6 +35,7 @@ public class LevelCreator: MonoBehaviour {
     int maxEnergyRange;
     int minFireRange;
     int maxFireRange;
+    float fireVelocity;
     int minPlatformRange;
     int maxPlatformRange;
     int destroyWallPercentage;
@@ -58,6 +57,7 @@ public class LevelCreator: MonoBehaviour {
         minEnergyRange = manager.GetComponent<LevelDifficultyController>().MinEnergyRange;
         maxEnergyRange = manager.GetComponent<LevelDifficultyController>().MaxEnergyRange;
         minFireRange = manager.GetComponent<LevelDifficultyController>().MinEnergyRange;
+        fireVelocity = manager.GetComponent<LevelDifficultyController>().FireVelocity;
         maxFireRange = manager.GetComponent<LevelDifficultyController>().MaxEnergyRange;
         minPlatformRange = manager.GetComponent<LevelDifficultyController>().MinPlatformRange;
         maxPlatformRange = manager.GetComponent<LevelDifficultyController>().MaxPlatformRange;
@@ -72,10 +72,10 @@ public class LevelCreator: MonoBehaviour {
         cannonsProbability = manager.GetComponent<LevelDifficultyController>().CannonPercentage;
         arrowfrequency = manager.GetComponent<LevelDifficultyController>().MinArrowFrequencyTime;
         arrowForce = manager.GetComponent<LevelDifficultyController>().ArrowForce;
-        
+
 
         FillMap();
-        AddEnergyPrefabs();       
+        AddEnergyPrefabs();
         AddCannons();
         AddFirePrefabs();
         StartCoroutine(AddEnemyBugs());
@@ -88,22 +88,21 @@ public class LevelCreator: MonoBehaviour {
         for (int i = 0; i < numberOfEnemyBugs; i++)
         {
             yield return new WaitForSeconds(enemyBugInstanceTime);
-            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f,3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 4, 8f), 0), Quaternion.identity);
-            
+            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 4, 8f), 0), Quaternion.identity);
+
             b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
             b.GetComponent<BugController>().SetEnergyDrain(enemyBugDrain);
-            b.transform.GetChild(0).gameObject.GetComponent<ProximityController>().SetCanHit(isBugAtackEnabled);
+            b.transform.GetChild(0).gameObject.GetComponent<BugProximityController>().SetCanHit(isBugAtackEnabled);
             b.name = b.name + " " + i;
-           
+
         }
     }
-    
 
     private void AddEnergyPrefabs()
     {
         int basePosY = 7;
 
-        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minEnergyRange,maxEnergyRange) * 4)
+        for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minEnergyRange, maxEnergyRange) * 4)
         {
             Instantiate(prefabEnergy, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), i + RandomPositionY(), 0f), Quaternion.identity);
         }
@@ -115,7 +114,9 @@ public class LevelCreator: MonoBehaviour {
 
         for (int i = basePosY; i < levelYSize; i += (int)Random.Range(minFireRange, maxFireRange) * 2)
         {
-            Instantiate(prefabEnemyFire, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), i + RandomPositionY(), 0f), Quaternion.identity);
+            var f = (GameObject)Instantiate(prefabEnemyFire, new Vector3(Random.Range(0, levelXSize) - RandomPositionX(), i + RandomPositionY(), 0f), Quaternion.identity);
+            f.gameObject.GetComponent<FireMovement>().SetVelocity(fireVelocity);
+            
         }
     }
 
@@ -126,31 +127,34 @@ public class LevelCreator: MonoBehaviour {
             for (int i = 0; i < levelYSize; i += (2 * destroyWallPercentage))
             {
                 yield return new WaitForSeconds(waitDestroyTime * destroyWallPercentage);
-                var p = (GameObject)Instantiate(prefabDestroyPlatform, new Vector3(RandomDestroyPlatformSide() * 10, i , 0), Quaternion.identity);
+                var p = (GameObject)Instantiate(prefabDestroyPlatform, new Vector3(RandomDestroyPlatformSide() * 10, i, 0), Quaternion.identity);
                 p.GetComponent<PlatformDestroyController>().SetProportion(destroyWallPercentage);
-                
+
             }
         }
-        
+
     }
 
     private void FillMap()
     {
         int numberPlatformsY;
-
-        for (int i = 0; i < levelYSize; i+=2)
+        
+        for (int i = 0; i < levelYSize; i += 2)
         {
-            numberPlatformsY = RandomNumberPlatformAxisY();
-            
+            numberPlatformsY = RandomNumberPlatformAxisY(); //2,6
+
             for (int j = 0; j < levelXSize; j++)
             {
-                if(Random.Range(0,10) < numberPlatformsY)
-                    if(RandomPlatformSize())
-                         Instantiate(prefabPlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);                        
+                if (Random.Range(0, 10) < numberPlatformsY)
+                {
+                    if (RandomPlatformSize())
+                        Instantiate(prefabPlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
                     else
-                        Instantiate(prefabDoublePlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
+                        Instantiate(prefabDoublePlatform, new Vector3(j - RandomPositionX(), i+ RandomPositionY(), 0), Quaternion.identity);
+                }
+
             }
-            
+
         }
     }
 
@@ -183,7 +187,7 @@ public class LevelCreator: MonoBehaviour {
 
     private float RandomPositionY()
     {
-        return Random.Range(minBaseValueY,maxBaseValueY);
+        return Random.Range(minBaseValueY, maxBaseValueY);
     }
 
     private float RandomPositionX()
@@ -206,8 +210,9 @@ public class LevelCreator: MonoBehaviour {
         if (Random.Range(0, 10) >= 5)
         {
             return -1;
-        } else 
+        }
+        else
             return 1;
-    }    
+    }
 
 }

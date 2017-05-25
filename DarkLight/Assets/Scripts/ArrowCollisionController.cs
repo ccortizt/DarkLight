@@ -5,7 +5,7 @@ public class ArrowCollisionController : MonoBehaviour
 {
 
     public GameObject effect;
-    private float particleEffectDuration = 1.2f;
+    //private float particleEffectDuration = 1.2f;
 
     float energyToDecrease = 1.5f;
     float energyToIncrease = 0.6f;
@@ -15,7 +15,7 @@ public class ArrowCollisionController : MonoBehaviour
     {
         if (coll.gameObject.name.Contains("Player"))
         {
-            InstantiateTakenEnergyEffect();
+            coll.gameObject.GetComponent<PlayerCollisionController>().InstantiateTakenEnergyEffect();
 
             Destroy(gameObject);
             coll.gameObject.GetComponent<PlayerEnergyController>().AddEnergy(energyToIncrease);
@@ -32,11 +32,4 @@ public class ArrowCollisionController : MonoBehaviour
         }
     }
 
-    private void InstantiateTakenEnergyEffect()
-    {
-        var eff = (GameObject)Instantiate(effect, transform.position, Quaternion.Euler(-90, 0, 0));
-
-        Destroy(eff, particleEffectDuration);
-
-    }
 }

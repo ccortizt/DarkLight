@@ -996,6 +996,7 @@ GameObject:
   - component: {fileID: 1461905589}
   - component: {fileID: 1461905588}
   - component: {fileID: 1461905590}
+  - component: {fileID: 1461905591}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1056,6 +1057,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ambientColor: {fileID: 2100000, guid: e8e8ef2244a2fe84f8c9173a1a657e0b, type: 2}
   trailMaterial: {fileID: 2100000, guid: 54381d21422fca1429bd3e92476fa142, type: 2}
+--- !u!114 &1461905591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1461905587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1067ef629b50a4289b9c73b5b3191e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabEffect: {fileID: 1683849577768868, guid: 2e79a1e7096405744b0d4fab4c60f7b9,
+    type: 2}
 --- !u!1001 &1505685111
 Prefab:
   m_ObjectHideFlags: 0

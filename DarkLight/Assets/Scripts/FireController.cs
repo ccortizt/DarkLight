@@ -5,13 +5,16 @@ using UnityEngine;
 public class FireController : MonoBehaviour
 {
     public GameObject effect;
-    private float particleEffectDuration = 1.2f;
+    [SerializeField] GameObject firePrefab;
+
+    private bool canGenerateFire = false;
+    //private float particleEffectDuration = 1.2f;
 
     private float energyToDecrease = 2.5f;
 
     void OnCollisionEnter(Collision coll)
     {
-        if (coll.gameObject.name.Contains("Player"))
+        if (coll.gameObject.name.Contains("Player") && canGenerateFire)
         {
             ParticleSystem p = this.gameObject.GetComponent<ParticleSystem>();
             var s = p.shape;
@@ -21,6 +24,8 @@ public class FireController : MonoBehaviour
             coll.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, -10f,0);
             coll.gameObject.GetComponent<PlayerEnergyController>().DecreaseEnergy(energyToDecrease);
             GameObject.FindGameObjectWithTag("Damage").GetComponent<FlashFade>().Flash();
+            GenerateFire();
+            canGenerateFire = false;
         }
     }
 
@@ -36,17 +41,22 @@ public class FireController : MonoBehaviour
     {
         if (coll.gameObject.name.Contains("Player"))
         {
-            InstantiateTakenEnergyEffect();
+           
+            coll.gameObject.GetComponent<PlayerCollisionController>().InstantiateTakenEnergyEffect();            
             Destroy(gameObject);
             coll.gameObject.GetComponent<PlayerEnergyController>().AddEnergy(energyToDecrease * 0.65f);
         }
     }
 
-    private void InstantiateTakenEnergyEffect()
+    private void GenerateFire()
     {
-        var eff = (GameObject)Instantiate(effect, transform.position, Quaternion.Euler(-90, 0, 0));
-
-        Destroy(eff, particleEffectDuration);
-
+        float newPosX = ( this.gameObject.transform.position.x >= 0 )? -2.5f : 2.5f;
+        var f = (GameObject)Instantiate(firePrefab, new Vector3(gameObject.transform.position.x + newPosX, transform.position.y + 3, 0), transform.rotation);
+        f.gameObject.GetComponent<FireMovement>().SetVelocity(gameObject.GetComponent<FireMovement>().GetVelocity());
     }
+
+    public void CanGenerateFire(bool canGenerate){
+        canGenerateFire = canGenerate;
+    }
+
 }
