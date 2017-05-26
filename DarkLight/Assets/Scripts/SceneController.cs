@@ -9,6 +9,9 @@ public class SceneController : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<DeathController>().ResetLives();
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelProgressController>().SetLevelOne();
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelDifficultyController>().SetDifficultyNotStart();
         SceneManager.LoadScene(0);
     }
 

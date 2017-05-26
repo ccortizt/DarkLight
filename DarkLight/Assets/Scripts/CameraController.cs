@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	void LateUpdate () {	
-		transform.position = GameObject.FindGameObjectWithTag("Player").transform.position + distance;
-		
+		transform.position = GameObject.FindGameObjectWithTag("Player").transform.position + distance;		
 	}
 }

@@ -31,8 +31,6 @@ public class DeathController : MonoBehaviour
 
         string deathMessage = "";        
         
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = false;        
-
         if (playerLives > 1)
         {
             DecreaseLives();
@@ -66,7 +64,7 @@ public class DeathController : MonoBehaviour
         GetComponent<LevelProgressController>().SetLevelOne();
         GetComponent<LevelDifficultyController>().SetDifficultyNotStart();
         GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);
-        //Time.timeScale = 0;
+        
     }
 
     public void SetHUDMessage(string message)

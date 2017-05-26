@@ -50,7 +50,7 @@ public class FireController : MonoBehaviour
 
     private void GenerateFire()
     {
-        Debug.Log("GENERATED NEW FIRE");
+        
         float newPosX = ( this.gameObject.transform.position.x >= 0 )? -2.5f : 2.5f;
         var f = (GameObject)Instantiate(firePrefab, new Vector3(gameObject.transform.position.x + newPosX, transform.position.y + 2, 0), transform.rotation);
         f.gameObject.GetComponent<FireMovement>().SetVelocity(gameObject.GetComponent<FireMovement>().GetVelocity());

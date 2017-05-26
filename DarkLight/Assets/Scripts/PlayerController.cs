@@ -45,13 +45,13 @@ public class PlayerController : MonoBehaviour
     public float groundedHeight = 0.26f; //0.5f
 
 
-    private float teleportEnergy = 3.5f;
-    private float sparkEscapeEnergy = 18f;
-    private float projectileEnergy = 2f;
+    private float teleportEnergy = 3.2f;
+    private float sparkEscapeEnergy = 15f;
+    private float projectileEnergy = 2.2f;
     private float energyConsume;
-    private float defaultEnergyConsume = 0.065f;
+    private float defaultEnergyConsume = 0.062f;
 
-    private float shieldEnergy = 3f;
+    private float shieldEnergy = 3.2f;
 
     public VirtualButton teleportButton;
     public VirtualButton shieldButton;
@@ -74,12 +74,12 @@ public class PlayerController : MonoBehaviour
         canJump = true;
 
         teleportCooldownCount = 0;
-        sparkCooldownCount = 0;
+        sparkCooldownCount = 3f;
         shieldCooldownCount = 0;
         projectileCooldownCount = 0;
 
         isTeleportInCooldown = false;
-        isSparkInCooldown = false;
+        isSparkInCooldown = true;
         isShieldInCooldown = false;
         isProjectileInCooldown = false;
 
@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
                 GetComponent<SphereCollider>().enabled = true;
                 transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                transform.FindChild("LightObject").gameObject.transform.Translate(new Vector3(0, 0, -2.9f));
+                transform.FindChild("LightObject").GetComponent<Light>().range = 5.5f;
                 SetShieldCoolDown();
                 StartCoroutine(DeactivateShield());
                 
@@ -299,7 +299,8 @@ public class PlayerController : MonoBehaviour
             {
                 GetComponent<PlayerEnergyController>().DecreaseEnergy(shieldEnergy);
                 GetComponent<SphereCollider>().enabled = true;
-                transform.FindChild("LightObject").gameObject.transform.Translate(new Vector3(0, 0, -2.9f));
+                
+                transform.FindChild("LightObject").GetComponent<Light>().range = 5.5f;
                 transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                 StartCoroutine(DeactivateShield());
                 SetShieldCoolDown();
@@ -531,7 +532,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator DeactivateShield()
     {
         yield return new WaitForSeconds(5);
-        transform.FindChild("LightObject").gameObject.transform.Translate(new Vector3(0, 0, 2.9f));
+        transform.FindChild("LightObject").GetComponent<Light>().range = 3f;
         GetComponent<SphereCollider>().enabled = false;
     }
 

@@ -13,10 +13,11 @@ public class BackEffectsCreator : MonoBehaviour
 
     private void AddEffects()
     {
-        int min = 2;
+        int min = 5;
+        int max = 35;
         for (int i = 0; i < 8; i++)
         {
-            var ef = (GameObject)Instantiate(prefabEffect, new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(min,50), 5), transform.rotation);
+            var ef = (GameObject)Instantiate(prefabEffect, new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(min,max), 5), transform.rotation);
             min += 8;
             float size = Random.Range(.01f,.05f);
             ef.transform.localScale += new Vector3(size,0,size);

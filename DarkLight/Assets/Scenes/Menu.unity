@@ -339,6 +339,10 @@ Prefab:
       propertyPath: m_Name
       value: Cannon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4063753871289182, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}
   m_IsPrefabParent: 0
@@ -949,6 +953,10 @@ Prefab:
     - target: {fileID: 4063753871289182, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063753871289182, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}
@@ -1569,6 +1577,10 @@ Prefab:
     - target: {fileID: 4063753871289182, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063753871289182, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1890aeb8d83dbb44097d6c5d98bffac1, type: 2}

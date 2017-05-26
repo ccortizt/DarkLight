@@ -31,9 +31,9 @@ public class FireMovement : MonoBehaviour
         {
             
             isMovementEnabled = false;
-            yield return new WaitForSeconds(Random.Range(1,4));
+            yield return new WaitForSeconds(Random.Range(0.5f,3));
             isMovementEnabled = true;            
-            yield return new WaitForSeconds(Random.Range(1,4));
+            yield return new WaitForSeconds(Random.Range(3,10));
 
             if (!isInRangeOfPlayer())
             {

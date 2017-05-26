@@ -23,8 +23,8 @@ public class LevelCreator : MonoBehaviour
 
     private float yAxisDoorPosition = 55.3f;
 
-    private float minBaseValueY = 0.55f; //0.4f
-    private float maxBaseValueY = 1.1f; //0.7f
+    private float minBaseValueY = 0.58f; //0.4f
+    private float maxBaseValueY = 1.15f; //0.7f
 
     private float platformSizePercentageChooser = 4;
 
@@ -148,9 +148,16 @@ public class LevelCreator : MonoBehaviour
                 if (Random.Range(0, 10) < numberPlatformsY)
                 {
                     if (RandomPlatformSize())
-                        Instantiate(prefabPlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
+                    {
+                        var p = (GameObject)Instantiate(prefabPlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
+                        p.transform.localScale = new Vector3(1, 0.5f, Random.Range(0.75f, 0.88f));
+                    }
+
                     else
-                        Instantiate(prefabDoublePlatform, new Vector3(j - RandomPositionX(), i+ RandomPositionY(), 0), Quaternion.identity);
+                    {
+                        var p = (GameObject)Instantiate(prefabDoublePlatform, new Vector3(j - RandomPositionX(), i + RandomPositionY(), 0), Quaternion.identity);
+                        p.transform.localScale = new Vector3(1, 0.5f, Random.Range(0.85f, 0.95f));
+                    }
                 }
 
             }

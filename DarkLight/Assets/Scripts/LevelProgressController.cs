@@ -29,18 +29,14 @@ public class LevelProgressController: MonoBehaviour{
     {
         //Debug.Log(levelCount);
         if (levelCount < 12)
-        {
-            
+        {            
             this.levelCount++;
             UpdateLevelIndicator();
         }
         else
         {
-            this.levelCount++;
-            GetComponent<DeathController>().ResetLives();
-            GetComponent<LevelProgressController>().SetLevelOne();
-            GetComponent<LevelDifficultyController>().SetDifficultyNotStart();
-            GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);    
+            this.levelCount++;            
+            GameObject.Find("BigMessageCanvas").transform.FindChild("Panel").gameObject.SetActive(true);
             GameObject.Find("BigMessageCanvas").transform.FindChild("Panel/VictoryText").gameObject.SetActive(true);
             GameObject.Find("BigMessageCanvas").transform.FindChild("Panel/DefeatText").gameObject.SetActive(false);
         }        
@@ -56,7 +52,6 @@ public class LevelProgressController: MonoBehaviour{
 
     private void UpdateLevelIndicator()
     {
-        //Debug.Log(levelCount+ "on update indicator");
         GetComponent<LevelDifficultyController>().SetDifficultyProportions(levelCount);
         GameObject.FindGameObjectWithTag("Level").GetComponent<Text>().text = "Lvl. " + levelCount;
     }
