@@ -7,7 +7,7 @@ public class FireController : MonoBehaviour
     public GameObject effect;
     [SerializeField] GameObject firePrefab;
 
-    private bool canGenerateFire = false;
+    private bool canGenerateFire = true;
     //private float particleEffectDuration = 1.2f;
 
     private float energyToDecrease = 2.5f;
@@ -50,8 +50,9 @@ public class FireController : MonoBehaviour
 
     private void GenerateFire()
     {
+        Debug.Log("GENERATED NEW FIRE");
         float newPosX = ( this.gameObject.transform.position.x >= 0 )? -2.5f : 2.5f;
-        var f = (GameObject)Instantiate(firePrefab, new Vector3(gameObject.transform.position.x + newPosX, transform.position.y + 3, 0), transform.rotation);
+        var f = (GameObject)Instantiate(firePrefab, new Vector3(gameObject.transform.position.x + newPosX, transform.position.y + 2, 0), transform.rotation);
         f.gameObject.GetComponent<FireMovement>().SetVelocity(gameObject.GetComponent<FireMovement>().GetVelocity());
     }
 

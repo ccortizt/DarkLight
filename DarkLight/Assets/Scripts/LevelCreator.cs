@@ -24,7 +24,7 @@ public class LevelCreator : MonoBehaviour
     private float yAxisDoorPosition = 55.3f;
 
     private float minBaseValueY = 0.55f; //0.4f
-    private float maxBaseValueY = 1.2f; //0.7f
+    private float maxBaseValueY = 1.1f; //0.7f
 
     private float platformSizePercentageChooser = 4;
 
@@ -88,7 +88,7 @@ public class LevelCreator : MonoBehaviour
         for (int i = 0; i < numberOfEnemyBugs; i++)
         {
             yield return new WaitForSeconds(enemyBugInstanceTime);
-            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 4, 8f), 0), Quaternion.identity);
+            var b = (GameObject)Instantiate(prefabEnemyBug, new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position.y + 3.5f, 5.5f), 0), Quaternion.identity);
 
             b.GetComponent<BugController>().SetVelocity(enemyBugVelocity);
             b.GetComponent<BugController>().SetEnergyDrain(enemyBugDrain);
