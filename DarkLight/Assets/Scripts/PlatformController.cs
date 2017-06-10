@@ -5,10 +5,37 @@ public class PlatformController: MonoBehaviour{
     private bool isStable;
     private float stabilityTime = 2.5f;
     public Material mat;
+    
+    float yPosPlus = 0;
+    float yPosMinus = 0;
 
     void Start()
     {
         SetStability(SetProbability(GameObject.Find("LevelProgressManager").GetComponent<LevelProgressController>().GetLevel()));
+        //StartCoroutine(WaitMovement());
+    }
+
+    void Update()
+    {
+        yPosPlus = Random.Range(0.1f,0.25f);
+        yPosMinus = Random.Range(0.1f,0.25f);
+
+
+        if(Mathf.Round(Time.time) % 2 == 0 )
+            transform.position = Vector3.Lerp(transform.position, transform.position - new Vector3(0,yPosMinus,0), 0.015f);
+        if (Mathf.Round(Time.time) % 2 == 1)
+            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0, yPosPlus, 0), 0.015f);
+       
+    }
+
+    private IEnumerator WaitMovement()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            transform.position = transform.position += new Vector3(0, yPosPlus, 0);
+            yield return new WaitForSeconds(1);
+            transform.position = transform.position -= new Vector3(0, yPosMinus, 0);
+        }        
     }
 
     private void SetStability(float prob)
